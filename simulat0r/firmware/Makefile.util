@@ -1,1 +1,0 @@
-include $(ROOT_PATH)/../../firmware/Makefile.util

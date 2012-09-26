@@ -1,6 +1,0 @@
-This directory contains some default files
-for the filesystem of your r0ket:
-
-pubx.key    - X component of the public key
-puby.key    - Y component of the public key
-priv.key    - Private key

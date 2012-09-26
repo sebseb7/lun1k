@@ -1,9 +1,0 @@
-firmware.bin
-firmware.elf
-lpc1xxx/memory.ld
-applications/wrapper.c
-lcd/allfonts.h
-Makefile.dep
-table.c
-table.h
-SECRETS.release
