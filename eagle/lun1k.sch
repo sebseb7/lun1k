@@ -19896,6 +19896,7 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 <junction x="53.34" y="68.58"/>
 <pinref part="Q1" gate="G$1" pin="2"/>
 <pinref part="C9" gate="G$1" pin="2"/>
+<pinref part="IC3" gate="G$1" pin="PH0"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -19905,6 +19906,7 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 <junction x="53.34" y="63.5"/>
 <pinref part="Q1" gate="G$1" pin="1"/>
 <pinref part="C10" gate="G$1" pin="2"/>
+<pinref part="IC3" gate="G$1" pin="PH1"/>
 </segment>
 </net>
 <net name="MISO" class="0">
