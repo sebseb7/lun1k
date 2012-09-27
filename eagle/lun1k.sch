@@ -83,16 +83,21 @@
 <layer number="109" name="fp9" color="7" fill="1" visible="no" active="yes"/>
 <layer number="110" name="fp0" color="7" fill="1" visible="no" active="yes"/>
 <layer number="111" name="LPC17xx" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="112" name="tSilk" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="116" name="Patch_BOT" color="9" fill="4" visible="yes" active="yes"/>
 <layer number="121" name="_tsilk" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="122" name="_bsilk" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="123" name="tTestmark" color="7" fill="1" visible="no" active="yes"/>
 <layer number="124" name="bTestmark" color="7" fill="1" visible="no" active="yes"/>
 <layer number="125" name="_tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="126" name="_bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="127" name="_tValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="128" name="_bValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="131" name="tAdjust" color="7" fill="1" visible="no" active="yes"/>
 <layer number="132" name="bAdjust" color="7" fill="1" visible="no" active="yes"/>
 <layer number="144" name="Drill_legend" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="151" name="HeatSink" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="152" name="_bDocu" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="199" name="Contour" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="200" name="200bmp" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="201" name="201bmp" color="2" fill="10" visible="yes" active="yes"/>
@@ -119,6 +124,8 @@
 <layer number="222" name="222bmp" color="23" fill="1" visible="no" active="no"/>
 <layer number="223" name="223bmp" color="24" fill="1" visible="no" active="no"/>
 <layer number="224" name="224bmp" color="25" fill="1" visible="no" active="no"/>
+<layer number="248" name="Housing" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="249" name="Edge" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="250" name="Descript" color="3" fill="1" visible="no" active="no"/>
 <layer number="251" name="SMDround" color="12" fill="11" visible="no" active="no"/>
 <layer number="254" name="cooling" color="7" fill="1" visible="yes" active="yes"/>
@@ -15766,6 +15773,17 @@ package type OT</description>
 <smd name="1" x="0.9" y="0.7" dx="1.3" dy="1.1" layer="1"/>
 <smd name="4" x="0.9" y="-0.7" dx="1.3" dy="1.1" layer="1"/>
 </package>
+<package name="SWITCH_MCTAEF">
+<wire x1="-3" y1="1.9" x2="-3" y2="0.9" width="0.127" layer="21"/>
+<wire x1="-3" y1="-0.9" x2="-3" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="3" y1="1.9" x2="3" y2="0.9" width="0.127" layer="21"/>
+<wire x1="3" y1="-0.9" x2="3" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="-3" y1="-1.9" x2="3" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="-3" y1="1.9" x2="3" y2="1.9" width="0.127" layer="21"/>
+<smd name="1" x="-3.25" y="0" dx="1.4" dy="1.5" layer="1" rot="R270"/>
+<smd name="2" x="3.25" y="0" dx="1.4" dy="1.5" layer="1" rot="R270"/>
+<text x="-3" y="2.3" size="0.8128" layer="25" font="vector">&gt;NAME</text>
+</package>
 </packages>
 <symbols>
 <symbol name="LM27313">
@@ -15794,6 +15812,23 @@ package type OT</description>
 <text x="1.524" y="-1.143" size="0.8636" layer="93">2</text>
 <pin name="2" x="2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
+</symbol>
+<symbol name="SWITCH">
+<wire x1="-3.175" y1="0" x2="-2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="3.175" y2="0" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="0" x2="0" y2="0.635" width="0.254" layer="94"/>
+<wire x1="1.905" y1="4.445" x2="1.905" y2="3.175" width="0.254" layer="94"/>
+<wire x1="-1.905" y1="4.445" x2="-1.905" y2="3.175" width="0.254" layer="94"/>
+<wire x1="1.905" y1="4.445" x2="0" y2="4.445" width="0.254" layer="94"/>
+<wire x1="0" y1="4.445" x2="-1.905" y2="4.445" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="0" y2="1.905" width="0.1524" layer="94"/>
+<wire x1="0" y1="1.27" x2="0" y2="0.635" width="0.1524" layer="94"/>
+<wire x1="0" y1="0.635" x2="2.54" y2="1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="4.445" x2="0" y2="3.175" width="0.1524" layer="94"/>
+<text x="-1.905" y="6.35" size="1.778" layer="95">&gt;NAME</text>
+<text x="3.175" y="3.81" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="1" x="-5.08" y="0" visible="pad" length="short" direction="pas"/>
+<pin name="2" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -15825,6 +15860,22 @@ package type OT</description>
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SWITCH_MCTAEF" prefix="SW">
+<gates>
+<gate name="G$1" symbol="SWITCH" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SWITCH_MCTAEF">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -18568,6 +18619,9 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <part name="GND48" library="SparkFun" deviceset="GND" device=""/>
 <part name="R28" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
 <part name="R29" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
+<part name="SW2" library="seb" deviceset="SWITCH_MCTAEF" device=""/>
+<part name="SW3" library="seb" deviceset="SWITCH_MCTAEF" device=""/>
+<part name="SW4" library="seb" deviceset="SWITCH_MCTAEF" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -18613,13 +18667,14 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <text x="325.12" y="259.08" size="2.54" layer="94">VOLATGE MONITOR</text>
 <text x="137.16" y="157.48" size="2.54" layer="94">LEDs</text>
 <text x="193.04" y="157.48" size="2.54" layer="94">(optional) SD CARD</text>
-<text x="345.44" y="157.48" size="2.54" layer="94">NAVIGATION BUTTON</text>
+<text x="345.44" y="157.48" size="2.54" layer="94">JOYSTICK</text>
 <text x="2.54" y="99.06" size="2.54" layer="94">CPU</text>
 <text x="180.34" y="114.3" size="2.54" layer="94">RADIO</text>
 <text x="289.56" y="27.94" size="6.4516" layer="94">CC-BY-3.0</text>
 <text x="233.68" y="157.48" size="2.54" layer="94">regulator for 12V</text>
 <text x="431.8" y="132.08" size="1.778" layer="91">Leave SJ1 open for I2C Addr 0x41</text>
 <text x="431.8" y="129.54" size="1.778" layer="91">Close SJ1 for I2C Addr 0x40</text>
+<text x="139.7" y="203.2" size="2.54" layer="94">BUTTONS</text>
 </plain>
 <instances>
 <instance part="LED1" gate="G$1" x="162.56" y="154.94"/>
@@ -18851,6 +18906,15 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <instance part="GND48" gate="1" x="459.74" y="137.16"/>
 <instance part="R28" gate="G$1" x="485.14" y="167.64" rot="R90"/>
 <instance part="R29" gate="G$1" x="495.3" y="167.64" rot="R90"/>
+<instance part="SW2" gate="G$1" x="157.48" y="172.72" smashed="yes" rot="MR0">
+<attribute name="NAME" x="149.225" y="168.91" size="1.778" layer="95" rot="MR0"/>
+</instance>
+<instance part="SW3" gate="G$1" x="157.48" y="180.34" smashed="yes" rot="MR0">
+<attribute name="NAME" x="149.225" y="176.53" size="1.778" layer="95" rot="MR0"/>
+</instance>
+<instance part="SW4" gate="G$1" x="157.48" y="187.96" smashed="yes" rot="MR0">
+<attribute name="NAME" x="149.225" y="184.15" size="1.778" layer="95" rot="MR0"/>
+</instance>
 </instances>
 <busses>
 </busses>
