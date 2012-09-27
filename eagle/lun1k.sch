@@ -16243,7 +16243,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <part name="GND41" library="supply1" deviceset="GND" device=""/>
 <part name="C41" library="SparkFun" deviceset="CAP" device="0805" value="2,2µF"/>
 <part name="GND42" library="supply1" deviceset="GND" device=""/>
-<part name="GND43" library="supply1" deviceset="GND" device=""/>
 <part name="GND44" library="supply1" deviceset="GND" device=""/>
 <part name="GND45" library="supply1" deviceset="GND" device=""/>
 <part name="GND46" library="supply1" deviceset="GND" device=""/>
@@ -16523,7 +16522,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <instance part="GND41" gate="1" x="114.3" y="12.7"/>
 <instance part="C41" gate="G$1" x="137.16" y="73.66" rot="R270"/>
 <instance part="GND42" gate="1" x="142.24" y="73.66" rot="R90"/>
-<instance part="GND43" gate="1" x="111.76" y="20.32"/>
 <instance part="GND44" gate="1" x="109.22" y="93.98" rot="R180"/>
 <instance part="GND45" gate="1" x="96.52" y="93.98" rot="R180"/>
 <instance part="GND46" gate="1" x="106.68" y="20.32"/>
@@ -16828,10 +16826,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <segment>
 <pinref part="IC3" gate="G$1" pin="PB5"/>
 <pinref part="GND45" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="IC3" gate="G$1" pin="PB11"/>
-<pinref part="GND43" gate="1" pin="GND"/>
 </segment>
 <segment>
 <pinref part="IC3" gate="G$1" pin="PB2"/>
@@ -17593,6 +17587,11 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <label x="66.04" y="134.62" size="1.778" layer="95"/>
 <pinref part="J2" gate="-10" pin="MS"/>
 </segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PC4"/>
+<wire x1="96.52" y1="22.86" x2="96.52" y2="7.62" width="0.1524" layer="91"/>
+<label x="96.52" y="7.62" size="1.778" layer="95" rot="R90"/>
+</segment>
 </net>
 <net name="D/C" class="0">
 <segment>
@@ -17601,6 +17600,11 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <label x="66.04" y="137.16" size="1.778" layer="95"/>
 <pinref part="J2" gate="-11" pin="MS"/>
 </segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PC5"/>
+<wire x1="99.06" y1="22.86" x2="99.06" y2="7.62" width="0.1524" layer="91"/>
+<label x="99.06" y="7.62" size="1.778" layer="95" rot="R90"/>
+</segment>
 </net>
 <net name="D1" class="0">
 <segment>
@@ -17608,6 +17612,11 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <wire x1="96.52" y1="154.94" x2="76.2" y2="154.94" width="0.1524" layer="91"/>
 <label x="66.04" y="154.94" size="1.778" layer="95"/>
 <pinref part="J2" gate="-18" pin="MS"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PB11"/>
+<wire x1="111.76" y1="22.86" x2="111.76" y2="7.62" width="0.1524" layer="91"/>
+<label x="111.76" y="7.62" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="VSL" class="0">
@@ -17678,6 +17687,11 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <wire x1="76.2" y1="152.4" x2="96.52" y2="152.4" width="0.1524" layer="91"/>
 <label x="66.04" y="152.4" size="1.778" layer="95"/>
 <pinref part="J2" gate="-17" pin="MS"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PB10"/>
+<wire x1="109.22" y1="22.86" x2="109.22" y2="7.62" width="0.1524" layer="91"/>
+<label x="109.22" y="7.62" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="N$19" class="0">
@@ -17955,12 +17969,22 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <wire x1="96.52" y1="157.48" x2="66.04" y2="157.48" width="0.1524" layer="91"/>
 <label x="66.04" y="157.48" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PC9"/>
+<wire x1="132.08" y1="55.88" x2="142.24" y2="55.88" width="0.1524" layer="91"/>
+<label x="137.16" y="55.88" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="D3" class="0">
 <segment>
 <pinref part="J2" gate="-20" pin="MS"/>
 <wire x1="96.52" y1="160.02" x2="66.04" y2="160.02" width="0.1524" layer="91"/>
 <label x="66.04" y="160.02" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PC8"/>
+<wire x1="132.08" y1="53.34" x2="142.24" y2="53.34" width="0.1524" layer="91"/>
+<label x="137.16" y="53.34" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D4" class="0">
@@ -17969,12 +17993,22 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <wire x1="96.52" y1="162.56" x2="66.04" y2="162.56" width="0.1524" layer="91"/>
 <label x="66.04" y="162.56" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PC7"/>
+<wire x1="132.08" y1="50.8" x2="142.24" y2="50.8" width="0.1524" layer="91"/>
+<label x="137.16" y="50.8" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="D5" class="0">
 <segment>
 <pinref part="J2" gate="-22" pin="MS"/>
 <wire x1="96.52" y1="165.1" x2="66.04" y2="165.1" width="0.1524" layer="91"/>
 <label x="66.04" y="165.1" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PB15"/>
+<wire x1="132.08" y1="45.72" x2="142.24" y2="45.72" width="0.1524" layer="91"/>
+<label x="137.16" y="45.72" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D6" class="0">
@@ -18019,12 +18053,22 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <label x="66.04" y="147.32" size="1.778" layer="95"/>
 <pinref part="J2" gate="-15" pin="MS"/>
 </segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PB0"/>
+<wire x1="101.6" y1="22.86" x2="101.6" y2="7.62" width="0.1524" layer="91"/>
+<label x="101.6" y="7.62" size="1.778" layer="95" rot="R90"/>
+</segment>
 </net>
 <net name="E" class="2">
 <segment>
 <wire x1="96.52" y1="149.86" x2="66.04" y2="149.86" width="0.1524" layer="91"/>
 <label x="66.04" y="149.86" size="1.778" layer="95"/>
 <pinref part="J2" gate="-16" pin="MS"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PB1"/>
+<wire x1="104.14" y1="22.86" x2="104.14" y2="7.62" width="0.1524" layer="91"/>
+<label x="104.14" y="7.62" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 </nets>
