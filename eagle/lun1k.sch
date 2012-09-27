@@ -18689,7 +18689,9 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <part name="GND17" library="supply1" deviceset="GND" device=""/>
 <part name="GND19" library="supply1" deviceset="GND" device=""/>
 <part name="GND20" library="supply1" deviceset="GND" device=""/>
-<part name="J2" library="con-omron" deviceset="XF2*-30?" device="15-1LW"/>
+<part name="J2" library="con-omron" deviceset="XF2*-30?" device="15-1LW">
+<attribute name="OC_FARNELL" value="1112560"/>
+</part>
 <part name="GND21" library="supply1" deviceset="GND" device=""/>
 <part name="GND30" library="supply1" deviceset="GND" device=""/>
 <part name="GND31" library="supply1" deviceset="GND" device=""/>
