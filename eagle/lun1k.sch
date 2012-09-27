@@ -17066,6 +17066,31 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <pinref part="C37" gate="G$1" pin="1"/>
 <pinref part="+3V10" gate="G$1" pin="+3V3"/>
 </segment>
+<segment>
+<wire x1="584.2" y1="71.12" x2="594.36" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="594.36" y1="71.12" x2="604.52" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="604.52" y1="71.12" x2="604.52" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="574.04" y1="71.12" x2="584.2" y2="71.12" width="0.1524" layer="91"/>
+<junction x="584.2" y="71.12"/>
+<junction x="594.36" y="71.12"/>
+<junction x="604.52" y="71.12"/>
+<pinref part="R32" gate="G$1" pin="2"/>
+<pinref part="C11" gate="G$1" pin="2"/>
+<pinref part="C12" gate="G$1" pin="2"/>
+<pinref part="L5" gate="G$1" pin="2"/>
+<pinref part="P+4" gate="G$1" pin="3.3V"/>
+</segment>
+<segment>
+<wire x1="342.9" y1="149.86" x2="342.9" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="342.9" y1="147.32" x2="347.98" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="347.98" y1="144.78" x2="342.9" y2="144.78" width="0.1524" layer="91"/>
+<wire x1="342.9" y1="144.78" x2="342.9" y2="147.32" width="0.1524" layer="91"/>
+<junction x="342.9" y="147.32"/>
+<label x="345.44" y="147.32" size="1.778" layer="95"/>
+<pinref part="P+8" gate="G$1" pin="3.3V"/>
+<pinref part="U1" gate="G$1" pin="VDDP"/>
+<pinref part="U1" gate="G$1" pin="VDD"/>
+</segment>
 </net>
 <net name="USB_VBUS" class="0">
 <segment>
@@ -17697,17 +17722,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 </net>
 <net name="3.3V" class="0">
 <segment>
-<wire x1="342.9" y1="149.86" x2="342.9" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="342.9" y1="147.32" x2="347.98" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="347.98" y1="144.78" x2="342.9" y2="144.78" width="0.1524" layer="91"/>
-<wire x1="342.9" y1="144.78" x2="342.9" y2="147.32" width="0.1524" layer="91"/>
-<junction x="342.9" y="147.32"/>
-<label x="345.44" y="147.32" size="1.778" layer="95"/>
-<pinref part="P+8" gate="G$1" pin="3.3V"/>
-<pinref part="U1" gate="G$1" pin="VDDP"/>
-<pinref part="U1" gate="G$1" pin="VDD"/>
-</segment>
-<segment>
 <wire x1="444.5" y1="177.8" x2="444.5" y2="175.26" width="0.1524" layer="91"/>
 <wire x1="444.5" y1="175.26" x2="444.5" y2="172.72" width="0.1524" layer="91"/>
 <wire x1="444.5" y1="175.26" x2="454.66" y2="175.26" width="0.1524" layer="91"/>
@@ -17735,20 +17749,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <segment>
 <wire x1="424.18" y1="116.84" x2="431.8" y2="116.84" width="0.1524" layer="91"/>
 <label x="426.72" y="116.84" size="1.778" layer="95" font="vector"/>
-</segment>
-<segment>
-<wire x1="584.2" y1="71.12" x2="594.36" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="594.36" y1="71.12" x2="604.52" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="604.52" y1="71.12" x2="604.52" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="574.04" y1="71.12" x2="584.2" y2="71.12" width="0.1524" layer="91"/>
-<junction x="584.2" y="71.12"/>
-<junction x="594.36" y="71.12"/>
-<junction x="604.52" y="71.12"/>
-<pinref part="R32" gate="G$1" pin="2"/>
-<pinref part="C11" gate="G$1" pin="2"/>
-<pinref part="C12" gate="G$1" pin="2"/>
-<pinref part="L5" gate="G$1" pin="2"/>
-<pinref part="P+4" gate="G$1" pin="3.3V"/>
 </segment>
 </net>
 <net name="SDA" class="0">
