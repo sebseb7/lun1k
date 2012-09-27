@@ -19058,7 +19058,7 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 <instance part="LED0" gate="G$1" x="162.56" y="132.08"/>
 <instance part="T1" gate="G$1" x="266.7" y="228.6" rot="MR90"/>
 <instance part="R14" gate="G$1" x="149.86" y="154.94"/>
-<instance part="C9" gate="G$1" x="17.78" y="43.18" rot="R90"/>
+<instance part="C9" gate="G$1" x="40.64" y="68.58" rot="R90"/>
 <instance part="R9" gate="G$1" x="304.8" y="223.52" rot="R180"/>
 <instance part="GND2" gate="1" x="309.88" y="215.9"/>
 <instance part="P+2" gate="1" x="297.18" y="236.22"/>
@@ -19090,9 +19090,9 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 <instance part="GND11" gate="1" x="180.34" y="124.46"/>
 <instance part="+3V2" gate="G$1" x="22.86" y="35.56"/>
 <instance part="GND12" gate="1" x="22.86" y="7.62"/>
-<instance part="Q1" gate="G$1" x="30.48" y="40.64" rot="R90"/>
-<instance part="C10" gate="G$1" x="17.78" y="38.1" rot="R90"/>
-<instance part="GND13" gate="1" x="5.08" y="35.56"/>
+<instance part="Q1" gate="G$1" x="53.34" y="66.04" rot="R90"/>
+<instance part="C10" gate="G$1" x="40.64" y="63.5" rot="R90"/>
+<instance part="GND13" gate="1" x="27.94" y="60.96"/>
 <instance part="U$1" gate="G$1" x="220.98" y="256.54"/>
 <instance part="R15" gate="G$1" x="149.86" y="147.32"/>
 <instance part="R16" gate="G$1" x="149.86" y="139.7"/>
@@ -19365,13 +19365,13 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 <pinref part="C7" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<wire x1="5.08" y1="38.1" x2="5.08" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="15.24" y1="43.18" x2="12.7" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="43.18" x2="12.7" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="40.64" x2="12.7" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="38.1" x2="15.24" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="5.08" y1="40.64" x2="12.7" y2="40.64" width="0.1524" layer="91"/>
-<junction x="12.7" y="40.64"/>
+<wire x1="27.94" y1="63.5" x2="27.94" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="68.58" x2="35.56" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="68.58" x2="35.56" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="66.04" x2="35.56" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="63.5" x2="38.1" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="66.04" x2="35.56" y2="66.04" width="0.1524" layer="91"/>
+<junction x="35.56" y="66.04"/>
 <pinref part="GND13" gate="1" pin="GND"/>
 <pinref part="C9" gate="G$1" pin="1"/>
 <pinref part="C10" gate="G$1" pin="1"/>
@@ -19889,28 +19889,28 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 </net>
 <net name="N$1" class="0">
 <segment>
-<wire x1="30.48" y1="43.18" x2="38.1" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="43.18" x2="38.1" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="40.64" x2="40.64" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="43.18" x2="30.48" y2="43.18" width="0.1524" layer="91"/>
-<junction x="30.48" y="43.18"/>
+<wire x1="53.34" y1="68.58" x2="60.96" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="68.58" x2="60.96" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="66.04" x2="63.5" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="68.58" x2="53.34" y2="68.58" width="0.1524" layer="91"/>
+<junction x="53.34" y="68.58"/>
 <pinref part="Q1" gate="G$1" pin="2"/>
 <pinref part="C9" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
-<wire x1="40.64" y1="38.1" x2="30.48" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="38.1" x2="30.48" y2="38.1" width="0.1524" layer="91"/>
-<junction x="30.48" y="38.1"/>
+<wire x1="63.5" y1="63.5" x2="53.34" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="63.5" x2="53.34" y2="63.5" width="0.1524" layer="91"/>
+<junction x="53.34" y="63.5"/>
 <pinref part="Q1" gate="G$1" pin="1"/>
 <pinref part="C10" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="MISO" class="0">
 <segment>
-<wire x1="40.64" y1="66.04" x2="22.86" y2="66.04" width="0.1524" layer="91"/>
-<label x="22.86" y="66.04" size="1.778" layer="95"/>
+<wire x1="22.86" y1="66.04" x2="5.08" y2="66.04" width="0.1524" layer="91"/>
+<label x="5.08" y="66.04" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="210.82" y1="134.62" x2="203.2" y2="134.62" width="0.1524" layer="91"/>
@@ -19925,8 +19925,8 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 </net>
 <net name="MOSI" class="0">
 <segment>
-<wire x1="40.64" y1="63.5" x2="22.86" y2="63.5" width="0.1524" layer="91"/>
-<label x="22.86" y="63.5" size="1.778" layer="95"/>
+<wire x1="22.86" y1="63.5" x2="5.08" y2="63.5" width="0.1524" layer="91"/>
+<label x="5.08" y="63.5" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="210.82" y1="144.78" x2="203.2" y2="144.78" width="0.1524" layer="91"/>
@@ -20022,8 +20022,8 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 <pinref part="R17" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<wire x1="40.64" y1="58.42" x2="22.86" y2="58.42" width="0.1524" layer="91"/>
-<label x="22.86" y="58.42" size="1.778" layer="95"/>
+<wire x1="22.86" y1="58.42" x2="5.08" y2="58.42" width="0.1524" layer="91"/>
+<label x="5.08" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="LED3" class="0">
@@ -20278,8 +20278,8 @@ ARM Cortex-M4 32b MCU+FPU, 210DMIPS, up to 1MB Flash/192+4KB RAM, USB OTG HS/FS,
 </net>
 <net name="IRQ" class="0">
 <segment>
-<wire x1="40.64" y1="68.58" x2="22.86" y2="68.58" width="0.1524" layer="91"/>
-<label x="22.86" y="68.58" size="1.778" layer="95"/>
+<wire x1="22.86" y1="68.58" x2="5.08" y2="68.58" width="0.1524" layer="91"/>
+<label x="5.08" y="68.58" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="210.82" y1="68.58" x2="198.12" y2="68.58" width="0.1524" layer="91"/>
