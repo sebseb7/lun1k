@@ -13763,6 +13763,26 @@ DIN A3, landscape with extra doc field</description>
 <smd name="P$3" x="-1.9" y="0" dx="0.9" dy="1.3" layer="1"/>
 <smd name="P$4" x="1.9" y="0" dx="0.9" dy="1.3" layer="1"/>
 </package>
+<package name="RECEPTABLE_1X4_HORIZ_SMT">
+<wire x1="-5.08" y1="3.81" x2="-4.318" y2="3.81" width="0.127" layer="21"/>
+<wire x1="-3.302" y1="3.81" x2="5.08" y2="3.81" width="0.127" layer="21"/>
+<wire x1="5.08" y1="3.81" x2="5.08" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="5.08" y1="-3.81" x2="-3.302" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="-4.318" y1="-3.81" x2="-5.08" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="-5.08" y1="-3.81" x2="-5.08" y2="3.81" width="0.127" layer="21"/>
+<wire x1="-3.302" y1="-3.81" x2="-3.81" y2="-2.54" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="-2.54" x2="-4.318" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="-3.302" y1="3.81" x2="-3.81" y2="2.54" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="2.54" x2="-4.318" y2="3.81" width="0.127" layer="21"/>
+<smd name="4@1" x="3.81" y="5.1435" dx="1.016" dy="1.905" layer="1"/>
+<smd name="3@1" x="1.27" y="5.1435" dx="1.016" dy="1.905" layer="1"/>
+<smd name="2@1" x="-1.27" y="5.1435" dx="1.016" dy="1.905" layer="1"/>
+<smd name="1@1" x="-3.81" y="5.1435" dx="1.016" dy="1.905" layer="1"/>
+<smd name="4" x="3.81" y="-5.1435" dx="1.016" dy="1.905" layer="1"/>
+<smd name="3" x="1.27" y="-5.1435" dx="1.016" dy="1.905" layer="1"/>
+<smd name="2" x="-1.27" y="-5.1435" dx="1.016" dy="1.905" layer="1"/>
+<smd name="1" x="-3.81" y="-5.1435" dx="1.016" dy="1.905" layer="1"/>
+</package>
 </packages>
 <symbols>
 <symbol name="Q">
@@ -13840,6 +13860,22 @@ DIN A3, landscape with extra doc field</description>
 <rectangle x1="-2.54" y1="-1.27" x2="2.54" y2="1.27" layer="94"/>
 <pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+<symbol name="PINHD_1X4">
+<wire x1="-3.81" y1="-5.08" x2="3.81" y2="-5.08" width="0.4064" layer="94"/>
+<wire x1="3.81" y1="-5.08" x2="3.81" y2="7.62" width="0.4064" layer="94"/>
+<wire x1="3.81" y1="7.62" x2="-3.81" y2="7.62" width="0.4064" layer="94"/>
+<wire x1="-3.81" y1="7.62" x2="-3.81" y2="-5.08" width="0.4064" layer="94"/>
+<text x="-3.81" y="8.255" size="1.778" layer="95">&gt;NAME</text>
+<text x="-3.81" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="1" x="0" y="5.08" visible="pad" length="short" direction="pwr" function="dot"/>
+<pin name="2" x="0" y="2.54" visible="pad" length="short" direction="pwr" function="dot"/>
+<pin name="3" x="0" y="0" visible="pad" length="short" direction="pwr" function="dot"/>
+<pin name="4" x="0" y="-2.54" visible="pad" length="short" direction="pwr" function="dot"/>
+<pin name="1@1" x="0" y="5.08" visible="off" length="short" direction="pwr" function="dot"/>
+<pin name="2@1" x="0" y="2.54" visible="off" length="short" direction="pwr" function="dot"/>
+<pin name="3@1" x="0" y="0" visible="off" length="short" direction="pwr" function="dot"/>
+<pin name="4@1" x="0" y="-2.54" visible="off" length="short" direction="pwr" function="dot"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -13935,6 +13971,28 @@ DIN A3, landscape with extra doc field</description>
 <connects>
 <connect gate="G$1" pin="1" pad="P$3"/>
 <connect gate="G$1" pin="2" pad="P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="RECEPTABLE_1X4_HORIZ_SMT">
+<gates>
+<gate name="G$1" symbol="PINHD_1X4" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="RECEPTABLE_1X4_HORIZ_SMT">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="1@1" pad="1@1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+<connect gate="G$1" pin="2@1" pad="2@1"/>
+<connect gate="G$1" pin="3" pad="3"/>
+<connect gate="G$1" pin="3@1" pad="3@1"/>
+<connect gate="G$1" pin="4" pad="4"/>
+<connect gate="G$1" pin="4@1" pad="4@1"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -16296,6 +16354,8 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 </part>
 <part name="P+4" library="SparkFun" deviceset="3.3V" device=""/>
 <part name="P+2" library="supply1" deviceset="+5V" device=""/>
+<part name="U$1" library="seb" deviceset="RECEPTABLE_1X4_HORIZ_SMT" device=""/>
+<part name="U$2" library="seb" deviceset="RECEPTABLE_1X4_HORIZ_SMT" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16580,6 +16640,8 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 </instance>
 <instance part="P+4" gate="G$1" x="604.52" y="76.2"/>
 <instance part="P+2" gate="1" x="469.9" y="93.98"/>
+<instance part="U$1" gate="G$1" x="157.48" y="-68.58"/>
+<instance part="U$2" gate="G$1" x="203.2" y="-68.58"/>
 </instances>
 <busses>
 </busses>
