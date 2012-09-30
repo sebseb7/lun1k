@@ -1586,7 +1586,7 @@ design rules under a new name.</description>
 <via x="70" y="-8" extent="1-16" drill="0.4" shape="octagon"/>
 <via x="70" y="-10" extent="1-16" drill="0.4" shape="octagon"/>
 <via x="54" y="-10" extent="1-16" drill="0.4" shape="octagon"/>
-<via x="54" y="10" extent="1-16" drill="0.4" shape="octagon"/>
+<via x="57.4" y="10.7" extent="1-16" drill="0.4" shape="octagon"/>
 <via x="42" y="-10" extent="1-16" drill="0.4" shape="octagon"/>
 <via x="42" y="10" extent="1-16" drill="0.4" shape="octagon"/>
 <via x="46.2" y="8" extent="1-16" drill="0.4" shape="octagon"/>
@@ -1991,24 +1991,37 @@ design rules under a new name.</description>
 <via x="21.1" y="15.2" extent="1-16" drill="0.4"/>
 <wire x1="21.1" y1="15.2" x2="21.7" y2="15.2" width="0.2286" layer="16"/>
 <wire x1="21.7" y1="15.2" x2="26.4" y2="10.5" width="0.2286" layer="16"/>
-<wire x1="26.4" y1="10.5" x2="52.6" y2="10.5" width="0.2286" layer="16"/>
-<wire x1="52.6" y1="10.5" x2="53" y2="10.1" width="0.2286" layer="16"/>
-<via x="53" y="10.1" extent="1-16" drill="0.4"/>
-<wire x1="53" y1="10.1" x2="62.1" y2="1" width="0.2286" layer="1"/>
-<wire x1="62.1" y1="1" x2="64.4" y2="1" width="0.2286" layer="1"/>
+<wire x1="26.4" y1="10.5" x2="54.1" y2="10.5" width="0.2286" layer="16"/>
+<wire x1="54.1" y1="10.5" x2="54.5" y2="10.1" width="0.2286" layer="16"/>
+<via x="54.5" y="10.1" extent="1-16" drill="0.4"/>
+<wire x1="54.5" y1="10.1" x2="63.6" y2="1" width="0.2286" layer="1"/>
+<wire x1="63.6" y1="1" x2="64.4" y2="1" width="0.2286" layer="1"/>
 </signal>
 <signal name="CSN">
 <contactref element="IC4" pad="2"/>
 <contactref element="R22" pad="1"/>
-<wire x1="64.9" y1="0.5" x2="77.246" y2="0.5" width="0.2" layer="1"/>
 <wire x1="75.7" y1="10.8" x2="77.15" y2="10.8" width="0.2" layer="1"/>
 <wire x1="73.5" y1="13" x2="75.7" y2="10.8" width="0.2" layer="1"/>
 <wire x1="63.6" y1="13" x2="73.5" y2="13" width="0.2" layer="1"/>
 <wire x1="62.8" y1="12.2" x2="63.6" y2="13" width="0.2" layer="1"/>
 <via x="62.8" y="12.2" extent="1-16" drill="0.4" shape="octagon"/>
 <contactref element="IC3" pad="50"/>
-<wire x1="77.246" y1="0.5" x2="77.15" y2="10.8" width="0" layer="19" extent="1-1"/>
-<wire x1="19.6644" y1="15.2062" x2="62.8" y2="12.2" width="0" layer="19" extent="1-1"/>
+<wire x1="19.6644" y1="15.2062" x2="19.6644" y2="13.5644" width="0.2286" layer="1"/>
+<wire x1="19.6644" y1="13.5644" x2="19.4" y2="13.3" width="0.2286" layer="1"/>
+<via x="19.4" y="13.3" extent="1-16" drill="0.4"/>
+<wire x1="19.4" y1="13.3" x2="20.2" y2="12.5" width="0.2286" layer="16"/>
+<wire x1="20.2" y1="12.5" x2="22.1" y2="12.5" width="0.2286" layer="16"/>
+<wire x1="22.1" y1="12.5" x2="25.9" y2="8.7" width="0.2286" layer="16"/>
+<wire x1="25.9" y1="8.7" x2="52.8" y2="8.7" width="0.2286" layer="16"/>
+<wire x1="52.8" y1="8.7" x2="54.2" y2="8.7" width="0.2286" layer="16"/>
+<wire x1="54.2" y1="8.7" x2="59.3" y2="8.7" width="0.2286" layer="16"/>
+<wire x1="59.3" y1="8.7" x2="62.8" y2="12.2" width="0.2286" layer="16"/>
+<wire x1="77.246" y1="0.5" x2="62.5" y2="0.5" width="0.2286" layer="1"/>
+<wire x1="62.5" y1="0.5" x2="61.2" y2="1.8" width="0.2286" layer="1"/>
+<wire x1="61.2" y1="1.8" x2="54.3" y2="8.7" width="0.2286" layer="1"/>
+<wire x1="54.3" y1="8.7" x2="54.2" y2="8.7" width="0.2286" layer="1"/>
+<via x="54.2" y="8.7" extent="1-16" drill="0.4"/>
+<wire x1="54.2" y1="8.7" x2="52.8" y2="8.7" width="0.2286" layer="16"/>
 </signal>
 <signal name="N$70">
 <contactref element="IC4" pad="19"/>
