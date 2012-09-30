@@ -1078,7 +1078,7 @@ chip</description>
 <class number="2" name="GND/3V3" width="0.2" drill="0.4">
 </class>
 </classes>
-<designrules name="default *">
+<designrules>
 <description language="de">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 Die Standard-Design-Rules sind so gewählt, dass sie für 
@@ -1985,6 +1985,17 @@ design rules under a new name.</description>
 <signal name="CE">
 <contactref element="IC4" pad="1"/>
 <wire x1="64.4" y1="1" x2="77.246" y2="1" width="0.2" layer="1"/>
+<contactref element="IC3" pad="49"/>
+<wire x1="20.1644" y1="15.2062" x2="21.0938" y2="15.2062" width="0.2286" layer="1"/>
+<wire x1="21.0938" y1="15.2062" x2="21.1" y2="15.2" width="0.2286" layer="1"/>
+<via x="21.1" y="15.2" extent="1-16" drill="0.4"/>
+<wire x1="21.1" y1="15.2" x2="21.7" y2="15.2" width="0.2286" layer="16"/>
+<wire x1="21.7" y1="15.2" x2="26.4" y2="10.5" width="0.2286" layer="16"/>
+<wire x1="26.4" y1="10.5" x2="52.6" y2="10.5" width="0.2286" layer="16"/>
+<wire x1="52.6" y1="10.5" x2="53" y2="10.1" width="0.2286" layer="16"/>
+<via x="53" y="10.1" extent="1-16" drill="0.4"/>
+<wire x1="53" y1="10.1" x2="62.1" y2="1" width="0.2286" layer="1"/>
+<wire x1="62.1" y1="1" x2="64.4" y2="1" width="0.2286" layer="1"/>
 </signal>
 <signal name="CSN">
 <contactref element="IC4" pad="2"/>
@@ -1995,7 +2006,9 @@ design rules under a new name.</description>
 <wire x1="63.6" y1="13" x2="73.5" y2="13" width="0.2" layer="1"/>
 <wire x1="62.8" y1="12.2" x2="63.6" y2="13" width="0.2" layer="1"/>
 <via x="62.8" y="12.2" extent="1-16" drill="0.4" shape="octagon"/>
+<contactref element="IC3" pad="50"/>
 <wire x1="77.246" y1="0.5" x2="77.15" y2="10.8" width="0" layer="19" extent="1-1"/>
+<wire x1="19.6644" y1="15.2062" x2="62.8" y2="12.2" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$70">
 <contactref element="IC4" pad="19"/>
@@ -2104,6 +2117,8 @@ design rules under a new name.</description>
 <wire x1="76.2" y1="-1.7" x2="78.3" y2="-1.7" width="0.2" layer="1"/>
 <wire x1="78.3" y1="-1.7" x2="78.4" y2="-1.8" width="0.2" layer="1"/>
 <wire x1="78.4" y1="-1.8" x2="78.4" y2="-2.154" width="0.2" layer="1"/>
+<contactref element="IC3" pad="46"/>
+<wire x1="22.4144" y1="11.9562" x2="65.2" y2="-1.8" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$10">
 <contactref element="Q2" pad="1"/>
