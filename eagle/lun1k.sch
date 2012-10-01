@@ -21064,6 +21064,12 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <wire x1="187.96" y1="-48.26" x2="193.04" y2="-43.18" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="/SHDN"/>
 <pinref part="R11" gate="G$1" pin="1"/>
+<label x="182.88" y="-50.8" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="PA1"/>
+<wire x1="63.5" y1="40.64" x2="53.34" y2="40.64" width="0.1524" layer="91"/>
+<label x="53.34" y="40.64" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
