@@ -16082,7 +16082,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <part name="U1" library="miscellany" deviceset="N35P112" device="" value="N35P112"/>
 <part name="P+8" library="SparkFun" deviceset="3.3V" device=""/>
 <part name="GND12" library="SparkFun" deviceset="GND" device=""/>
-<part name="R21" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
 <part name="R26" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
 <part name="R27" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
 <part name="P+9" library="SparkFun" deviceset="3.3V" device=""/>
@@ -16341,7 +16340,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <instance part="U1" gate="G$1" x="454.66" y="213.36"/>
 <instance part="P+8" gate="G$1" x="444.5" y="233.68"/>
 <instance part="GND12" gate="1" x="485.14" y="208.28"/>
-<instance part="R21" gate="G$1" x="454.66" y="167.64" rot="R90"/>
 <instance part="R26" gate="G$1" x="464.82" y="167.64" rot="R90"/>
 <instance part="R27" gate="G$1" x="474.98" y="167.64" rot="R90"/>
 <instance part="P+9" gate="G$1" x="444.5" y="177.8"/>
@@ -17470,7 +17468,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <junction x="444.5" y="175.26"/>
 <junction x="474.98" y="175.26"/>
 <pinref part="P+9" gate="G$1" pin="3.3V"/>
-<pinref part="R21" gate="G$1" pin="2"/>
 <pinref part="R26" gate="G$1" pin="2"/>
 <pinref part="R27" gate="G$1" pin="2"/>
 <pinref part="R28" gate="G$1" pin="2"/>
@@ -17546,10 +17543,9 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <pinref part="U1" gate="G$1" pin="SWITCHN"/>
 </segment>
 <segment>
-<wire x1="424.18" y1="154.94" x2="454.66" y2="154.94" width="0.1524" layer="91"/>
-<wire x1="454.66" y1="154.94" x2="454.66" y2="162.56" width="0.1524" layer="91"/>
-<label x="426.72" y="154.94" size="1.778" layer="95" font="vector"/>
-<pinref part="R21" gate="G$1" pin="1"/>
+<pinref part="IC3" gate="G$1" pin="PC13"/>
+<wire x1="63.5" y1="73.66" x2="55.88" y2="73.66" width="0.1524" layer="91"/>
+<label x="55.88" y="73.66" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$21" class="1">
