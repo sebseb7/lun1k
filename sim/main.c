@@ -186,8 +186,8 @@ int main(int argc, char *argv[]) {
 
 		startTime+=interval;
 		int delay = startTime-get_clock();
-		if(delay > 0)
-			usleep(delay);
+//		if(delay > 0)
+//			usleep(delay);
 		
 		SDL_Flip(screen);
 	}

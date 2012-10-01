@@ -29,11 +29,14 @@ BINARIES=$(SOURCES:../firmware/animations/%.c=%$(BINEXT))
 LIB_SOURCES=$(wildcard ../firmware/libs/*.c)
 LIB_HEADERS=$(wildcard ../firmware/libs/*.g)
 
-all: $(BINARIES)
+all: $(BINARIES) _full
 
 clean:
 	rm -f ${BINARIES}
 
 %$(BINEXT): ../firmware/animations/%.c $(LIB_SOURCES) $(LIB_HEADERS) main.c main.h Makefile 
 	$(COMPILER) $(FLAGS) main.c $(LIB_SOURCES) $(LDFLAGS) $< -o $@ -I. 
+
+_full: $(SOURCES) $(LIB_SOURCES) $(LIB_HEADERS) main.c main.h Makefile 
+	$(COMPILER) -DFULL=1 $(FLAGS) $(LIB_SOURCES) $(SOURCES) $(LDFLAGS) main.c -o _full -I. 
 
