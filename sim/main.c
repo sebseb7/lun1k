@@ -39,6 +39,15 @@ void setLedXY(uint8_t x, uint8_t y, uint8_t red,uint8_t green, uint8_t blue) {
 	leds[y][x][2] = blue;
 	leds[y][x][3] = 1;
 }
+
+void invLedXY(uint8_t x, uint8_t y) {
+	if (x >= LED_WIDTH) return;
+	if (y >= LED_HEIGHT) return;
+	leds[y][x][0] = 255 - leds[y][x][0];
+	leds[y][x][1] = 255 - leds[y][x][1];
+	leds[y][x][2] = 255 - leds[y][x][2];
+	leds[y][x][3] = 1;
+}
 void getLedXY(uint8_t x, uint8_t y, uint8_t* red,uint8_t* green, uint8_t* blue) {
 	if (x >= LED_WIDTH) return;
 	if (y >= LED_HEIGHT) return;
@@ -76,7 +85,7 @@ int main(int argc, char *argv[]) {
 	}
 
 
-	char nick[] = "myNick";
+	char nick[] = "lun1k";
 
 	srand(time(NULL));
 
