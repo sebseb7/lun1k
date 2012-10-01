@@ -16984,8 +16984,9 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 </net>
 <net name="LED1" class="0">
 <segment>
-<wire x1="152.4" y1="73.66" x2="162.56" y2="73.66" width="0.1524" layer="91"/>
-<label x="160.02" y="73.66" size="1.778" layer="95"/>
+<wire x1="104.14" y1="91.44" x2="104.14" y2="101.6" width="0.1524" layer="91"/>
+<label x="104.14" y="93.98" size="1.778" layer="95" rot="R90"/>
+<pinref part="IC3" gate="G$1" pin="PD2"/>
 </segment>
 <segment>
 <wire x1="144.78" y1="154.94" x2="137.16" y2="154.94" width="0.1524" layer="91"/>
@@ -17012,8 +17013,9 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <pinref part="R15" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<wire x1="152.4" y1="63.5" x2="162.56" y2="63.5" width="0.1524" layer="91"/>
-<label x="160.02" y="63.5" size="1.778" layer="95"/>
+<wire x1="101.6" y1="91.44" x2="101.6" y2="101.6" width="0.1524" layer="91"/>
+<label x="101.6" y="93.98" size="1.778" layer="95" rot="R90"/>
+<pinref part="IC3" gate="G$1" pin="PB3"/>
 </segment>
 </net>
 <net name="N$4" class="0">
