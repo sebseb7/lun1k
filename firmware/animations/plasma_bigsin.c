@@ -31,7 +31,7 @@ static double pythagoras( double side1, double side2 )
 }
 
 
-static uint8_t tick(void) {
+static uint8_t tick(char* nick) {
 
 	static uint16_t a = 0;
 	
@@ -72,13 +72,14 @@ static uint8_t tick(void) {
 	}
 	return 0;
 }
-static void key(uint8_t key) {
-}
+/*static void key(uint8_t key) {
+}*/
 
 static void init(void) ATTRIBUTES
 
 void init(void) {
-	registerAnimation(tick, key , 4, 450);
+//	registerApp(start, key);
+	registerAnimation(tick, 4, 450);
 }
 
 

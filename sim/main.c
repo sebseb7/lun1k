@@ -47,16 +47,21 @@ void getLedXY(uint8_t x, uint8_t y, uint8_t* red,uint8_t* green, uint8_t* blue) 
 	*blue = leds[y][x][2];
 }
 
-void registerAnimation(tick_fun tick,key_fun key, uint16_t t, uint16_t ignore)
+void registerAnimation(tick_fun tick, uint16_t t, uint16_t ignore)
 {
 	tick_fp = tick;
-	key_fp = key;
 
 	assert(t > 0);
 	// 122Hz / tick
 	interval = 1000000 / 122 * t;
 }
 
+/*void registerApp(tick_fun tick,key_fun key)
+{
+	tick_fp = tick;
+	key_fp = key;
+}
+*/
 
 int main(int argc, char *argv[]) {
 	int x, y;
@@ -69,6 +74,9 @@ int main(int argc, char *argv[]) {
 			leds[y][x][3]=1;
 		}
 	}
+
+
+	char nick[] = "myNick";
 
 	srand(time(NULL));
 
@@ -144,7 +152,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-		running &= !tick_fp();
+		running &= !tick_fp(nick);
 
 		
 		
