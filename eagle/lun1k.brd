@@ -1778,10 +1778,10 @@ design rules under a new name.</description>
 <via x="20" y="17.9" extent="1-16" drill="0.4"/>
 <via x="21.3" y="16.6" extent="1-16" drill="0.4"/>
 <via x="26.1" y="12.3" extent="1-16" drill="0.4"/>
-<wire x1="-22.029696875" y1="-22.4974125" x2="-5.720721875" y2="-18.393371875" width="0" layer="19" extent="1-1"/>
 <via x="2" y="16.1" extent="1-16" drill="0.4"/>
 <via x="4.5" y="14.9" extent="1-16" drill="0.4"/>
 <via x="0.5" y="10.6" extent="1-16" drill="0.4"/>
+<wire x1="-22.029696875" y1="-22.4974125" x2="-5.720721875" y2="-18.393371875" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+5V" class="1">
 <contactref element="IC1" pad="20"/>
@@ -2242,6 +2242,13 @@ design rules under a new name.</description>
 <wire x1="9.05" y1="4.25" x2="8.8" y2="4.5" width="0.2286" layer="1"/>
 <wire x1="8.8" y1="4.5" x2="8.65" y2="4.65" width="0.2286" layer="1"/>
 <wire x1="8.65" y1="4.65" x2="8.65" y2="5.4" width="0.2286" layer="1"/>
+<contactref element="IC3" pad="17"/>
+<wire x1="12.6644" y1="3.2062" x2="11.8938" y2="3.2062" width="0.2032" layer="1"/>
+<wire x1="11.8938" y1="3.2062" x2="11.7" y2="3.4" width="0.2032" layer="1"/>
+<wire x1="11.7" y1="3.4" x2="11.7" y2="4.1" width="0.2032" layer="1"/>
+<wire x1="11.7" y1="4.1" x2="11.6" y2="4.2" width="0.2032" layer="1"/>
+<wire x1="11.6" y1="4.2" x2="11.55" y2="4.25" width="0.2032" layer="1"/>
+<wire x1="11.55" y1="4.25" x2="10.5" y2="4.25" width="0.2032" layer="1"/>
 </signal>
 <signal name="SCK">
 <contactref element="SD1" pad="5"/>
@@ -2899,7 +2906,6 @@ design rules under a new name.</description>
 <wire x1="17.7" y1="-14" x2="18.7" y2="-13" width="0.2032" layer="1"/>
 <wire x1="18.7" y1="-13" x2="18.7" y2="-10.45" width="0.2032" layer="1"/>
 <wire x1="18.7" y1="-10.45" x2="18.8" y2="-10.35" width="0.2032" layer="1"/>
-<contactref element="IC3" pad="14"/>
 <wire x1="18.8" y1="-10.35" x2="19.85" y2="-10.35" width="0.2032" layer="1"/>
 <wire x1="19.85" y1="-10.35" x2="20.1" y2="-10.1" width="0.2032" layer="1"/>
 <via x="20.1" y="-10.1" extent="1-16" drill="0.4"/>
@@ -2931,7 +2937,8 @@ design rules under a new name.</description>
 <wire x1="9.8" y1="6.3" x2="9.1" y2="7" width="0.2032" layer="16"/>
 <via x="9.1" y="7" extent="1-16" drill="0.4"/>
 <wire x1="9.1" y1="7" x2="9.6438" y2="6.4562" width="0.2032" layer="1"/>
-<wire x1="9.6438" y1="6.4562" x2="10.4144" y2="6.4562" width="0.2032" layer="1"/>
+<contactref element="IC3" pad="15"/>
+<wire x1="9.8" y1="6.3" x2="10.4144" y2="5.9562" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="N$25">
 <contactref element="IC1" pad="3"/>
@@ -3153,11 +3160,11 @@ design rules under a new name.</description>
 </signal>
 <signal name="SW4">
 <contactref element="SW4" pad="1"/>
-<contactref element="IC3" pad="2"/>
-<wire x1="10.4144" y1="12.4562" x2="9.1438" y2="12.4562" width="0.2286" layer="1"/>
 <wire x1="9.1438" y1="12.4562" x2="8.4" y2="13.2" width="0.2286" layer="1"/>
 <wire x1="8.4" y1="13.2" x2="3.7" y2="13.2" width="0.2286" layer="1"/>
 <wire x1="3.7" y1="13.2" x2="0.954" y2="14.388434375" width="0.2286" layer="1"/>
+<contactref element="IC3" pad="14"/>
+<wire x1="9.1438" y1="12.4562" x2="10.4144" y2="6.4562" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SW2">
 <contactref element="SW2" pad="1"/>
