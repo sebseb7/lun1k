@@ -16400,7 +16400,7 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <instance part="U$1" gate="G$1" x="157.48" y="-68.58"/>
 <instance part="U$2" gate="G$1" x="203.2" y="-68.58"/>
 <instance part="P+1" gate="1" x="175.26" y="60.96" rot="R270"/>
-<instance part="+3V1" gate="G$1" x="134.62" y="63.5" rot="R270"/>
+<instance part="+3V1" gate="G$1" x="137.16" y="63.5" rot="R270"/>
 <instance part="GND1" gate="1" x="345.44" y="124.46"/>
 <instance part="GND10" gate="1" x="63.5" y="172.72" rot="R270"/>
 </instances>
@@ -16849,6 +16849,7 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <segment>
 <pinref part="IC3" gate="G$1" pin="PA10"/>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
+<wire x1="134.62" y1="63.5" x2="132.08" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="USB_VBUS" class="0">
