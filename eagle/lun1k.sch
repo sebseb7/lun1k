@@ -19304,6 +19304,9 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <part name="R11" library="rcl" deviceset="R-EU_" device="R0402" value="15k"/>
 <part name="R20" library="SparkFun-Resistors" deviceset="RESISTOR" device="0402-RES" value="680k"/>
 <part name="U$2" library="seb" deviceset="RECEPTABLE_1X4_HORIZ_SMT" device=""/>
+<part name="R21" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
+<part name="R23" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
+<part name="P+4" library="SparkFun" deviceset="3.3V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -19561,8 +19564,8 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <instance part="+3V2" gate="G$1" x="30.48" y="45.72" rot="R90"/>
 <instance part="GND32" gate="1" x="340.36" y="86.36" rot="R270"/>
 <instance part="P+3" gate="G$1" x="342.9" y="78.74" rot="R90"/>
-<instance part="PAD1" gate="1" x="60.96" y="71.12"/>
-<instance part="PAD2" gate="1" x="60.96" y="68.58"/>
+<instance part="PAD1" gate="1" x="58.42" y="71.12"/>
+<instance part="PAD2" gate="1" x="58.42" y="68.58"/>
 <instance part="D1" gate="G$1" x="233.68" y="-25.4"/>
 <instance part="L5" gate="G$1" x="210.82" y="-25.4" rot="R90"/>
 <instance part="IC2" gate="G$1" x="210.82" y="-40.64"/>
@@ -19578,6 +19581,9 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <instance part="R11" gate="G$1" x="187.96" y="-43.18" rot="R90"/>
 <instance part="R20" gate="G$1" x="53.34" y="63.5" rot="R180"/>
 <instance part="U$2" gate="G$1" x="353.06" y="60.96"/>
+<instance part="R21" gate="G$1" x="368.3" y="99.06" rot="R180"/>
+<instance part="R23" gate="G$1" x="368.3" y="93.98" rot="R180"/>
+<instance part="P+4" gate="G$1" x="373.38" y="101.6"/>
 </instances>
 <busses>
 </busses>
@@ -20089,6 +20095,14 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <pinref part="C32" gate="G$1" pin="+"/>
 <pinref part="C33" gate="G$1" pin="1"/>
 <pinref part="R11" gate="G$1" pin="2"/>
+</segment>
+<segment>
+<pinref part="R23" gate="G$1" pin="1"/>
+<pinref part="R21" gate="G$1" pin="1"/>
+<wire x1="373.38" y1="93.98" x2="373.38" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="373.38" y1="99.06" x2="373.38" y2="101.6" width="0.1524" layer="91"/>
+<junction x="373.38" y="99.06"/>
+<pinref part="P+4" gate="G$1" pin="3.3V"/>
 </segment>
 </net>
 <net name="D-" class="0">
@@ -21034,12 +21048,14 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <segment>
 <pinref part="IC3" gate="G$1" pin="PC14"/>
 <pinref part="PAD1" gate="1" pin="P"/>
+<wire x1="60.96" y1="71.12" x2="63.5" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$23" class="0">
 <segment>
 <pinref part="IC3" gate="G$1" pin="PC15"/>
 <pinref part="PAD2" gate="1" pin="P"/>
+<wire x1="60.96" y1="68.58" x2="63.5" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$24" class="0">
@@ -21114,6 +21130,11 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <junction x="353.06" y="83.82"/>
 <label x="342.9" y="83.82" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R21" gate="G$1" pin="2"/>
+<wire x1="363.22" y1="99.06" x2="355.6" y2="99.06" width="0.1524" layer="91"/>
+<label x="355.6" y="99.06" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SCL2" class="0">
 <segment>
@@ -21127,6 +21148,11 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <wire x1="353.06" y1="81.28" x2="342.9" y2="81.28" width="0.1524" layer="91"/>
 <junction x="353.06" y="81.28"/>
 <label x="342.9" y="81.28" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R23" gate="G$1" pin="2"/>
+<wire x1="363.22" y1="93.98" x2="355.6" y2="93.98" width="0.1524" layer="91"/>
+<label x="355.6" y="93.98" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
