@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 	}
 
 
-	char nick[] = "lun1k";
+	char nick[] = "hello World";
 
 	srand(time(NULL));
 

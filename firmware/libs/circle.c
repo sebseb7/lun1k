@@ -8,7 +8,7 @@ static void dla_plot(int x, int y, uint8_t r,uint8_t g , uint8_t b, float br)
 	uint8_t o_green = 0;
 	uint8_t o_blue = 0;
 
-//	getLedXY(x,y,&o_red,&o_green,&o_blue);
+	getLedXY(x,y,&o_red,&o_green,&o_blue);
 
 	r=br*r+((1-br)*o_red);
 	g=br*g+((1-br)*o_green);
