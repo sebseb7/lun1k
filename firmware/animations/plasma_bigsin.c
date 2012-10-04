@@ -65,7 +65,7 @@ static uint8_t tick(char* nick) {
 			);
 		}
 	}
-	draw_text_inv_8x6((LED_WIDTH/2)-(6*3),LED_HEIGHT/2-4, nick);
+	draw_text_inv_16pt((LED_WIDTH/2)-(6*3),LED_HEIGHT/2-4, nick);
 	a+=1;
 	if(a==0x4000)
 	{
