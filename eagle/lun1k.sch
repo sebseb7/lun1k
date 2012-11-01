@@ -15473,21 +15473,6 @@ DIN A3, landscape with extra doc field</description>
 <vertex x="0.875" y="-0.875"/>
 </polygon>
 </package>
-<package name="SMD4012">
-<wire x1="-1.85" y1="1.75" x2="-1.85" y2="0.85" width="0.127" layer="21"/>
-<wire x1="-1.85" y1="1.75" x2="1.85" y2="1.75" width="0.127" layer="21"/>
-<wire x1="1.85" y1="1.75" x2="1.85" y2="0.85" width="0.127" layer="21"/>
-<wire x1="-1.85" y1="-1.75" x2="1.85" y2="-1.75" width="0.127" layer="21"/>
-<wire x1="1.85" y1="-1.75" x2="1.85" y2="-0.85" width="0.127" layer="21"/>
-<wire x1="-1.85" y1="-1.75" x2="-1.85" y2="-0.85" width="0.127" layer="21"/>
-<wire x1="-1.85" y1="0.85" x2="-1.85" y2="-0.85" width="0.127" layer="51"/>
-<wire x1="1.85" y1="0.85" x2="1.85" y2="-0.85" width="0.127" layer="51"/>
-<circle x="0" y="0" radius="1.7414" width="0.127" layer="51"/>
-<smd name="P$1" x="-1.9" y="0" dx="0.9" dy="1.3" layer="1"/>
-<smd name="P$2" x="1.9" y="0" dx="0.9" dy="1.3" layer="1"/>
-<text x="-3.81" y="2.54" size="1.27" layer="25">&gt;NAME</text>
-<text x="-3.81" y="-3.81" size="1.27" layer="27">&gt;VALUE</text>
-</package>
 <package name="RECEPTABLE_1X4_HORIZ_SMT">
 <wire x1="-5.08" y1="3.81" x2="-4.318" y2="3.81" width="0.127" layer="21"/>
 <wire x1="-3.302" y1="3.81" x2="5.08" y2="3.81" width="0.127" layer="21"/>
@@ -15534,6 +15519,18 @@ package type OT</description>
 <rectangle x1="0.7" y1="-1.5" x2="1.2" y2="-0.85" layer="51"/>
 <rectangle x1="0.7" y1="0.85" x2="1.2" y2="1.5" layer="51"/>
 <rectangle x1="-1.2" y1="0.85" x2="-0.7" y2="1.5" layer="51"/>
+</package>
+<package name="CDRH3D16">
+<wire x1="-2.69" y1="0" x2="-0.72" y2="1.97" width="0.127" layer="21"/>
+<wire x1="0" y1="2.69" x2="-0.32" y2="2.37" width="0.127" layer="21"/>
+<wire x1="0" y1="2.69" x2="0.32" y2="2.37" width="0.127" layer="21"/>
+<wire x1="2.69" y1="0" x2="0.72" y2="1.97" width="0.127" layer="21"/>
+<wire x1="2.69" y1="0" x2="0.72" y2="-1.97" width="0.127" layer="21"/>
+<wire x1="0.32" y1="-2.37" x2="0" y2="-2.69" width="0.127" layer="21"/>
+<wire x1="0" y1="-2.69" x2="-0.32" y2="-2.37" width="0.127" layer="21"/>
+<wire x1="-0.72" y1="-1.97" x2="-2.69" y2="0" width="0.127" layer="21"/>
+<smd name="P$1" x="0" y="-1.8" dx="0.8" dy="1.1" layer="1" rot="R90"/>
+<smd name="P$2" x="0" y="1.8" dx="0.8" dy="1.1" layer="1" rot="R90"/>
 </package>
 </packages>
 <symbols>
@@ -15598,14 +15595,6 @@ package type OT</description>
 <pin name="PVIN1" x="25.4" y="30.48" length="middle" rot="R180"/>
 <pin name="BAT" x="25.4" y="38.1" length="middle" rot="R180"/>
 </symbol>
-<symbol name="SMD-INDUCTOR-4012">
-<wire x1="-5.08" y1="0" x2="-2.54" y2="0" width="0.254" layer="94" curve="-180"/>
-<wire x1="-2.54" y1="0" x2="0" y2="0" width="0.254" layer="94" curve="-180"/>
-<wire x1="0" y1="0" x2="2.54" y2="0" width="0.254" layer="94" curve="-180"/>
-<wire x1="2.54" y1="0" x2="5.08" y2="0" width="0.254" layer="94" curve="-180"/>
-<pin name="P$1" x="-7.62" y="0" length="short"/>
-<pin name="P$2" x="7.62" y="0" length="short" rot="R180"/>
-</symbol>
 <symbol name="PINHD_1X4">
 <wire x1="-3.81" y1="-5.08" x2="3.81" y2="-5.08" width="0.4064" layer="94"/>
 <wire x1="3.81" y1="-5.08" x2="3.81" y2="7.62" width="0.4064" layer="94"/>
@@ -15632,6 +15621,13 @@ package type OT</description>
 <pin name="FB" x="17.78" y="-2.54" length="middle" rot="R180"/>
 <pin name="SW" x="17.78" y="2.54" length="middle" rot="R180"/>
 <pin name="GND" x="0" y="-12.7" length="middle" rot="R90"/>
+</symbol>
+<symbol name="L">
+<text x="3.81" y="-1.4986" size="1.778" layer="95" rot="R180">&gt;NAME</text>
+<text x="3.81" y="3.302" size="1.778" layer="96" rot="R180">&gt;VALUE</text>
+<rectangle x1="-2.54" y1="-1.27" x2="2.54" y2="1.27" layer="94"/>
+<pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -15702,22 +15698,6 @@ package type OT</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SMD-INDUCTOR-4012">
-<gates>
-<gate name="G$1" symbol="SMD-INDUCTOR-4012" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="SMD4012">
-<connects>
-<connect gate="G$1" pin="P$1" pad="P$1"/>
-<connect gate="G$1" pin="P$2" pad="P$2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="RECEPTABLE_1X4_HORIZ_SMT">
 <gates>
 <gate name="G$1" symbol="PINHD_1X4" x="0" y="0"/>
@@ -15752,6 +15732,22 @@ package type OT</description>
 <connect gate="G$1" pin="GND" pad="2"/>
 <connect gate="G$1" pin="IN" pad="5"/>
 <connect gate="G$1" pin="SW" pad="1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="CDH3D16" prefix="L" uservalue="yes">
+<gates>
+<gate name="G$1" symbol="L" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="CDRH3D16">
+<connects>
+<connect gate="G$1" pin="1" pad="P$1"/>
+<connect gate="G$1" pin="2" pad="P$2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -19262,13 +19258,12 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <part name="C4" library="SparkFun" deviceset="CAP" device="0805" value="330pF"/>
 <part name="C7" library="SparkFun" deviceset="CAP" device="0805" value="10pF"/>
 <part name="C8" library="SparkFun" deviceset="CAP" device="0805" value="1µF"/>
-<part name="R8" library="SparkFun-Resistors" deviceset="RESISTOR" device="0805-RES" value="130k"/>
-<part name="R9" library="SparkFun-Resistors" deviceset="RESISTOR" device="0805-RES" value="680k"/>
+<part name="R8" library="SparkFun-Resistors" deviceset="RESISTOR" device="0805-RES" value="150k"/>
+<part name="R9" library="SparkFun-Resistors" deviceset="RESISTOR" device="0805-RES" value="470k"/>
 <part name="R12" library="SparkFun-Resistors" deviceset="RESISTOR" device="0805-RES" value="15k"/>
-<part name="R18" library="SparkFun-Resistors" deviceset="RESISTOR" device="0805-RES" value="121k"/>
+<part name="R18" library="SparkFun-Resistors" deviceset="RESISTOR" device="0805-RES" value="120k"/>
 <part name="R19" library="SparkFun-Resistors" deviceset="RESISTOR" device="0805-RES" value="1k"/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
-<part name="L1" library="seb" deviceset="SMD-INDUCTOR-4012" device="" value="2,2µH"/>
 <part name="R24" library="SparkFun-Resistors" deviceset="RESISTOR" device="0402-RES" value="680k"/>
 <part name="GND29" library="supply1" deviceset="GND" device=""/>
 <part name="R30" library="SparkFun-Resistors" deviceset="RESISTOR" device="0402-RES" value="680k"/>
@@ -19307,6 +19302,7 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <part name="R21" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
 <part name="R23" library="SparkFun" deviceset="RESISTOR" device="0402-RES" value="10k"/>
 <part name="P+4" library="SparkFun" deviceset="3.3V" device=""/>
+<part name="L6" library="seb" deviceset="CDH3D16" device="" value="2.2µH"/>
 </parts>
 <sheets>
 <sheet>
@@ -19348,8 +19344,8 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <text x="345.44" y="200.66" size="1.778" layer="94">3,3V</text>
 <text x="355.6" y="200.66" size="1.778" layer="94">5V</text>
 <text x="365.76" y="200.66" size="1.778" layer="94">4,98V</text>
-<text x="345.44" y="195.58" size="1.778" layer="94">360k</text>
-<text x="345.44" y="190.5" size="1.778" layer="94">115k</text>
+<text x="345.44" y="195.58" size="1.778" layer="94">470k</text>
+<text x="345.44" y="190.5" size="1.778" layer="94">150k</text>
 <text x="355.6" y="195.58" size="1.778" layer="94">630k</text>
 <text x="355.6" y="190.5" size="1.778" layer="94">120k</text>
 <text x="365.76" y="195.58" size="1.778" layer="94">680k</text>
@@ -19422,7 +19418,7 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <instance part="FID2" gate="G$1" x="353.06" y="111.76"/>
 <instance part="FID3" gate="G$1" x="365.76" y="111.76"/>
 <instance part="Q2" gate="G$1" x="254" y="45.72"/>
-<instance part="GND28" gate="1" x="264.16" y="127"/>
+<instance part="GND28" gate="1" x="254" y="139.7" rot="R270"/>
 <instance part="R22" gate="G$1" x="187.96" y="81.28" rot="R90"/>
 <instance part="X1_" gate="1" x="279.4" y="144.78"/>
 <instance part="X1_" gate="2" x="279.4" y="139.7"/>
@@ -19545,7 +19541,6 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <instance part="R18" gate="G$1" x="317.5" y="198.12" rot="R90"/>
 <instance part="R19" gate="G$1" x="241.3" y="236.22"/>
 <instance part="GND7" gate="1" x="228.6" y="182.88"/>
-<instance part="L1" gate="G$1" x="309.88" y="213.36" rot="R90"/>
 <instance part="R24" gate="G$1" x="246.38" y="187.96" rot="R90"/>
 <instance part="GND29" gate="1" x="246.38" y="180.34"/>
 <instance part="R30" gate="G$1" x="233.68" y="203.2" rot="R180"/>
@@ -19584,6 +19579,7 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <instance part="R21" gate="G$1" x="368.3" y="99.06" rot="R180"/>
 <instance part="R23" gate="G$1" x="368.3" y="93.98" rot="R180"/>
 <instance part="P+4" gate="G$1" x="373.38" y="101.6"/>
+<instance part="L6" gate="G$1" x="309.88" y="213.36" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -19708,8 +19704,7 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <pinref part="GND27" gate="1" pin="GND"/>
 </segment>
 <segment>
-<wire x1="264.16" y1="139.7" x2="276.86" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="264.16" y1="129.54" x2="264.16" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="256.54" y1="139.7" x2="276.86" y2="139.7" width="0.1524" layer="91"/>
 <pinref part="X1_" gate="2" pin="1"/>
 <pinref part="GND28" gate="1" pin="GND"/>
 </segment>
@@ -20498,9 +20493,9 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 </net>
 <net name="VLIPO" class="0">
 <segment>
-<wire x1="276.86" y1="144.78" x2="248.92" y2="144.78" width="0.1524" layer="91"/>
-<pinref part="X1_" gate="1" pin="1"/>
-<label x="248.92" y="144.78" size="1.778" layer="95"/>
+<label x="259.08" y="134.62" size="1.778" layer="95"/>
+<wire x1="276.86" y1="134.62" x2="259.08" y2="134.62" width="0.1524" layer="91"/>
+<pinref part="X1_" gate="3" pin="1"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="BAT"/>
@@ -20834,20 +20829,18 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 </net>
 <net name="N$18" class="0">
 <segment>
-<wire x1="309.88" y1="205.74" x2="302.26" y2="205.74" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="205.74" x2="302.26" y2="208.28" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="208.28" x2="297.18" y2="208.28" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="208.28" x2="297.18" y2="208.28" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="SWCD2"/>
-<pinref part="L1" gate="G$1" pin="P$1"/>
+<pinref part="L6" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$22" class="0">
 <segment>
 <wire x1="297.18" y1="213.36" x2="302.26" y2="213.36" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="213.36" x2="302.26" y2="220.98" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="220.98" x2="309.88" y2="220.98" width="0.1524" layer="91"/>
+<wire x1="302.26" y1="213.36" x2="302.26" y2="218.44" width="0.1524" layer="91"/>
+<wire x1="302.26" y1="218.44" x2="309.88" y2="218.44" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="SWAB2"/>
-<pinref part="L1" gate="G$1" pin="P$2"/>
+<pinref part="L6" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="CHG" class="0">
