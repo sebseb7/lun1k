@@ -21155,6 +21155,15 @@ Source: www.sumida.com/products/pdf/CEP125.pdf</description>
 <label x="355.6" y="93.98" size="1.778" layer="95"/>
 </segment>
 </net>
+<net name="N$29" class="0">
+<segment>
+<pinref part="IC3" gate="G$1" pin="PC8"/>
+<wire x1="132.08" y1="53.34" x2="152.4" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="53.34" x2="152.4" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="IC3" gate="G$1" pin="PA8"/>
+<wire x1="152.4" y1="58.42" x2="132.08" y2="58.42" width="0.1524" layer="91"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
