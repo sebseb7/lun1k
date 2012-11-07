@@ -3,29 +3,26 @@ UNAME := $(shell uname)
 COMPILER = gcc
 
 
-FLAGS=--std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code -pedantic  -Wstrict-prototypes
+FLAGS=--std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code -pedantic  -Wstrict-prototypes  -Wextra -fsingle-precision-constant
 LDFLAGS=
 BINEXT=
 
 ifeq ($(UNAME), Darwin)
 	COMPILER = clang
 	FLAGS   += `sdl-config --cflags`
-	LDFLAGS += `sdl-config --libs` -lSDL_image
+	LDFLAGS += `sdl-config --libs` -lSDL_image -lSDL_ttf
 endif
 
 ifeq ($(UNAME), Linux)
 	FLAGS   += `sdl-config --cflags`
-	LDFLAGS +=  -lSDL -lSDL_image
+	LDFLAGS +=  -lSDL -lSDL_image -lSDL_ttf
 endif
 
 ifeq ($(UNAME), MINGW32_NT-6.1)
 	FLAGS   += -I/MinGW/msys/1.0/include/ 
-	LDFLAGS += -L/MinGW/msys/1.0/lib -lmingw32 -lSDLmain -lSDL -lSDL_image
+	LDFLAGS += -L/MinGW/msys/1.0/lib -lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf
 	BINEXT = .exe
 endif
-
-FLAGS += -Wstrict-prototypes -Wundef -Wall -Wextra -Wunreachable-code  
-FLAGS += -fsingle-precision-constant -funsigned-char    
 
 SOURCES=$(wildcard ../firmware/animations/*.c)
 BINARIES=$(SOURCES:../firmware/animations/%.c=%$(BINEXT))
