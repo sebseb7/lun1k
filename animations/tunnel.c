@@ -60,7 +60,7 @@ static void deinit(void) {
 }
 
 
-static struct brick {
+struct brick {
     uint8_t r, g, b;
 };
 static struct brick bricks[] = {
