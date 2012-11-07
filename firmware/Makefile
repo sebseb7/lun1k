@@ -18,7 +18,7 @@ endif
 #../animations/tunnel_less_ram.c \
 
 SRC=$(wildcard  *.c libs/*.c) \
-	core/stdio.c core/syscalls.c core/stm32fxxx_it.c core/system_stm32f$(STM32F)xx.c \
+	core/syscalls.c core/stm32fxxx_it.c core/system_stm32f$(STM32F)xx.c \
 	../animations/plasma_bigsin.c \
 	../animations/plasma_bigsin.c
 
