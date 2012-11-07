@@ -210,20 +210,20 @@ int main(int argc, char *argv[]) {
 		SDL_Surface *text;
 		SDL_Color text_color = {255, 255, 255};
 		SDL_Color text_color2 = {0,0,0};
-		text = TTF_RenderText_Shaded(font,
-				"A journey of a thousand miles begins with a single step.",
-				text_color,text_color2);
+//		text = TTF_RenderText_Shaded(font,
+//				"A journey of a thousand miles begins with a single step.",
+//				text_color,text_color2);
 
-		if (text == NULL)
-		{
-			printf("TTF_RenderText_Solid() Failed: %s \n",TTF_GetError());
-			TTF_Quit();
-			SDL_Quit();
-			exit(1);
-		}
+//		if (text == NULL)
+//		{
+//			printf("TTF_RenderText_Solid() Failed: %s \n",TTF_GetError());
+//			TTF_Quit();
+//			SDL_Quit();
+//			exit(1);
+//		}
 		
-		SDL_BlitSurface(text, 0, screen, 0);
-		SDL_FreeSurface(text);
+//		SDL_BlitSurface(text, 0, screen, 0);
+//		SDL_FreeSurface(text);
 		
 		SDL_Flip(screen);
 	}
