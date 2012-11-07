@@ -9,7 +9,9 @@ BINEXT=
 
 ifeq ($(UNAME), Darwin)
 	COMPILER = clang
-	FLAGS   += `sdl-config --cflags`
+	FLAGS   += -Qunused-arguments
+	
+	FLAGS   += `sdl-config --cflags` 
 	LDFLAGS += `sdl-config --libs` -lSDL_image -lSDL_ttf
 endif
 
