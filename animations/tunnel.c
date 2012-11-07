@@ -15,7 +15,7 @@ static uint16_t aTable[2 * LED_WIDTH][2 * LED_HEIGHT];
 static int16_t shiftLookX = 0; //LED_WIDTH / 2;
 static int16_t shiftLookY = 0; //LED_HEIGHT / 2;
 
-void init(void) {
+static void init(void) {
     int16_t x, y;
 		
     for(y = 0; y < 2 * LED_HEIGHT; y++) 
@@ -53,17 +53,17 @@ void init(void) {
     }
 }
 
-void deinit(void) {
+static void deinit(void) {
 
 	// free 
 
 }
 
 
-struct brick {
+static struct brick {
     uint8_t r, g, b;
 };
-struct brick bricks[] = {
+static struct brick bricks[] = {
     { 255, 0, 0 },
     { 0, 255, 0 },
     { 0, 0, 255 },
