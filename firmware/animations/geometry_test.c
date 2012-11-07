@@ -28,7 +28,7 @@ static uint8_t tick(char* nick __attribute__((__unused__))) {
 
 
 
-static void constructor(void) ATTRIBUTES
+static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
 	registerAnimation(init,tick,deinit, 4, 300);
 }

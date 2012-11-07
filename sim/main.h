@@ -8,7 +8,7 @@
 
 #define SIMULATOR
 
-#define ATTRIBUTES	__attribute__((constructor));
+#define CONSTRUCTOR_ATTRIBUTES	__attribute__((constructor));
 
 typedef void (*init_fun)(void);
 typedef void (*deinit_fun)(void);
