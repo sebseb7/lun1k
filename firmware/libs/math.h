@@ -1,7 +1,6 @@
 #ifndef _MATH_H
 #define _MATH_H
 
-#include "math.h"
 #include <stdint.h>
 
 uint16_t sini(uint16_t x);

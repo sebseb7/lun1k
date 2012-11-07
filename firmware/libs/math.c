@@ -1,6 +1,9 @@
 #include <math.h>
-#include "math.h"
 #include <stdlib.h>
+
+#include "math.h"
+#include "main.h"
+
 
 // table size: 8kb
 static uint16_t sin_table[0x1000] =

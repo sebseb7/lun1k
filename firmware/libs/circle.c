@@ -1,6 +1,8 @@
 #include "stdio.h"
 #include "main.h"
 #include <math.h>
+#include "libs/math.h"
+
 
 static void dla_plot(int x, int y, uint8_t r,uint8_t g , uint8_t b, float br)
 {
@@ -18,16 +20,12 @@ static void dla_plot(int x, int y, uint8_t r,uint8_t g , uint8_t b, float br)
 
 }
 
-static double pythagoras( double side1, double side2 )
-{
-	return sqrt(pow( side1, 2 ) + pow( side2, 2 ));
-}
 
 // uncompleted
-#define swap_(a, b) do{ __typeof__(a) tmp;  tmp = a; a = b; b = tmp; }while(0)
+/*#define swap_(a, b) do{ __typeof__(a) tmp;  tmp = a; a = b; b = tmp; }while(0)
 void draw_filledCircleSlice(
 	unsigned int x, unsigned int y,
-	double rad,
+	float rad,
 	uint8_t r,
 	uint8_t g,
 	uint8_t b,
@@ -48,7 +46,7 @@ void draw_filledCircleSlice(
 		for(j=0;j<(rad*2);j++)
 		{
 	
-			double dist = pythagoras( j,i );
+			float dist = pythagorasf( j,i );
 
 			if(dist <= rad-1)
 			{
@@ -61,7 +59,7 @@ void draw_filledCircleSlice(
 	}
 }
 #undef swap_
-
+*/
 void draw_filledCircle(
 	unsigned int x, unsigned int y,
 	double rad,
