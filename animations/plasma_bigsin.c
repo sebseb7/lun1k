@@ -2,12 +2,12 @@
 #include "main.h"
 #include <stdio.h>
 #include <math.h>
-#include "../libs/text.h"
-#include "../libs/math.h"
+#include "libs/text.h"
+#include "libs/math.h"
 
 static uint16_t a = 0;
 
-static uint8_t tick(char* nick) {
+static uint8_t tick(void) {
 
 	
 	uint8_t x, y;
@@ -40,6 +40,7 @@ static uint8_t tick(char* nick) {
 			);
 		}
 	}
+	char* nick = "lun1k";
 	uint16_t text_width = get_text_width_16pt(nick);
 	draw_text_inv_16pt((LED_WIDTH/2)-(text_width/2),LED_HEIGHT/2-11, nick);
 	a+=1;

@@ -105,8 +105,6 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 
 	fillRGB(0,0,0);
 
-	char nick[] = "hello World";
-
 	srand(time(NULL));
 
 
@@ -203,7 +201,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 			}
 		}
 
-		tick_fp[current_animation](nick);
+		tick_fp[current_animation]();
 
 
 	

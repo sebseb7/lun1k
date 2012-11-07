@@ -3,7 +3,7 @@ UNAME := $(shell uname)
 COMPILER = gcc
 
 
-FLAGS=--std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code -pedantic  -Wstrict-prototypes  -Wextra -fsingle-precision-constant
+FLAGS= -I. -I../firmware --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code -pedantic  -Wstrict-prototypes  -Wextra -fsingle-precision-constant
 LDFLAGS=
 BINEXT=
 
@@ -26,8 +26,8 @@ ifeq ($(UNAME), MINGW32_NT-6.1)
 	BINEXT = .exe
 endif
 
-SOURCES=$(wildcard ../firmware/animations/*.c)
-BINARIES=$(SOURCES:../firmware/animations/%.c=%$(BINEXT))
+SOURCES=$(wildcard ../animations/*.c)
+BINARIES=$(SOURCES:../animations/%.c=%$(BINEXT))
 
 LIB_SOURCES=$(wildcard ../firmware/libs/*.c)
 LIB_HEADERS=$(wildcard ../firmware/libs/*.g)
@@ -37,7 +37,7 @@ all: $(BINARIES) _all_animations
 clean:
 	rm -f ${BINARIES} _all_animations
 
-%$(BINEXT): ../firmware/animations/%.c $(LIB_SOURCES) $(LIB_HEADERS) main.c main.h Makefile 
+%$(BINEXT): ../animations/%.c $(LIB_SOURCES) $(LIB_HEADERS) main.c main.h Makefile 
 	@echo "  \033[1;34mCompile\033[0m $< -> \033[1;33m $@\033[0m "
 	@$(COMPILER) $(FLAGS) main.c $(LIB_SOURCES) $(LDFLAGS) $< -o $@ -I. 
 

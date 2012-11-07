@@ -2,10 +2,10 @@
 #include "main.h"
 #include <stdio.h>
 
-#include "../libs/wuline.h"
-#include "../libs/circle.h"
-#include "../libs/text.h"
-#include "../libs/math.h"
+#include "libs/wuline.h"
+#include "libs/circle.h"
+#include "libs/text.h"
+#include "libs/math.h"
 
 
 static void init(void)
@@ -15,7 +15,7 @@ static void deinit(void)
 {
 }
 
-static uint8_t tick(char* nick __attribute__((__unused__))) {
+static uint8_t tick(void) {
 
 	draw_filledCircle(randr(0,128),randr(0,128),randr(10,20),randr(0,255),randr(0,255),randr(0,255));
 	//draw_filledCircleSlice(randr(0,128),randr(0,128),randr(10,20),randr(0,255),randr(0,255),randr(0,255),randr(0,360),randr(0,360));

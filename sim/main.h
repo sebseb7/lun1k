@@ -12,7 +12,7 @@
 
 typedef void (*init_fun)(void);
 typedef void (*deinit_fun)(void);
-typedef uint8_t (*tick_fun)(char*);
+typedef uint8_t (*tick_fun)(void);
 typedef void (*key_fun)(uint8_t);
 
 int sdlpause;

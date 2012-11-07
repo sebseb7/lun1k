@@ -1,10 +1,11 @@
 /* Based on: http://lodev.org/cgtutor/tunnel.html */
 #include <stdlib.h>
-#include "main.h"
 #include <stdio.h>
 #include <math.h>
-#include "../libs/text.h"
-#include "../libs/math.h"
+
+#include "main.h"
+#include "libs/text.h"
+#include "libs/math.h"
 
 #define MIN(a, b) (a < b ? a : b)
 
@@ -92,7 +93,7 @@ static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
 
 // as this is a "screensaver" you should display the message/nick somewhere
 
-static uint8_t tick(char* nick __attribute__((__unused__))) {
+static uint8_t tick(void) {
     static uint16_t t = 0;
     t++;
     shiftLookX = LED_WIDTH * (uint32_t)sini(17 * t + 0x0fff) / 0xffff;
