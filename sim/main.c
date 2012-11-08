@@ -16,7 +16,7 @@
 
 
 
-#define FRAMETIME 25
+#define FRAMETIME 33
 
 int sdlpause = 0;
 
