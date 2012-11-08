@@ -103,6 +103,12 @@ void fillRGB(uint8_t r,uint8_t g , uint8_t b)
 	}
 }
 
+#ifdef linux
+#define VERA_TTF "/usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf"
+#else
+#define VERA_TTF "/usr/X11/share/fonts/TTF/Vera.ttf"
+#endif
+
 int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unused__))) {
 
 	fillRGB(0,0,0);
@@ -120,7 +126,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 	}
 
 	TTF_Font *font;
-	font = TTF_OpenFont("/usr/X11/share/fonts/TTF/Vera.ttf", 24);
+	font = TTF_OpenFont(VERA_TTF, 24);
 	if (font == NULL)
 	{
 		printf("TTF_OpenFont() Failed: %s \n",TTF_GetError());
