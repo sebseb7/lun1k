@@ -98,8 +98,8 @@ static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
 static uint8_t tick(void) {
     static uint16_t t = 0;
     t++;
-    int16_t shiftLookX = LED_WIDTH * (uint32_t)sini(17 * t + 0x0fff) / 0xffff;
-    int16_t shiftLookY = LED_HEIGHT * (uint32_t)sini(11 * t + 0x0fff) / 0xffff;
+    int16_t shiftLookX = LED_WIDTH * (uint32_t)sini(49 * t + 0x0fff) / 0xffff;
+    int16_t shiftLookY = LED_HEIGHT * (uint32_t)sini(31 * t + 0x0fff) / 0xffff;
 	
     uint16_t x, y;
 
@@ -118,12 +118,11 @@ static uint8_t tick(void) {
                 uint8_t y2 = y1 + (i >> 1);
                 z = getZ(x2, y2);
                 uint16_t a = getA(x2,y1);
-                uint32_t texel = getTex(a + t * 0x7, z + t);
+                uint32_t texel = getTex(a + t * 0x7, z + t * 2);
                 r += ((texel & 0xff0000) >> 16);
                 g += ((texel & 0xff00) >> 8);
                 b += (texel & 0xff);
             }
-            /* printf("%ix%i\ta=%04X\tz=%04X\n", x, y, a, z); */
             /* apply shade */
             uint16_t f = 0xff - MIN(0xff, z);
             r = f * r >> 10;
