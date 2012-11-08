@@ -7,13 +7,19 @@
 #include "libs/text.h"
 #include "libs/math.h"
 
-#define MIN(a, b) (a < b ? a : b)
+#include "tunnel_tex.h"
+
+#define MIN(a, b) ((a < b) ? a : b)
 
 
-static uint8_t zTable[2 * LED_WIDTH][2 * LED_HEIGHT];
+static uint16_t zTable[2 * LED_WIDTH][2 * LED_HEIGHT];
 static uint16_t aTable[2 * LED_WIDTH][2 * LED_HEIGHT];
-static int16_t shiftLookX = 0; //LED_WIDTH / 2;
-static int16_t shiftLookY = 0; //LED_HEIGHT / 2;
+
+/* No idea why the one in math.h doesn't work */
+double pythagoras1( double side1, double side2 )
+{
+	return sqrt(side1*side1+side2*side2);
+}
 
 static void init(void) {
     int16_t x, y;
@@ -27,23 +33,10 @@ static void init(void) {
                 y1 = y - LED_HEIGHT;
             double distance =
                 1 /
-                (pythagoras(x1, y1)
+                (pythagoras1(x1, y1)
                  + 1);
 
-
-/* please fix warning : 
-
-../firmware/animations/tunnel.c:31:29: warning: implicit conversion from 'int' to 'uint8_t' (aka 'unsigned char') changes value from 4095 to 255 [-Wconstant-conversion]
-            uint8_t z = MIN(0xfff, 0xfff * distance);
-                        ~~~~^~~~~~~~~~~~~~~~~~~~~~~~
-../firmware/animations/tunnel.c:9:28: note: expanded from macro 'MIN'
-#define MIN(a, b) (a < b ? a : b)
-                         ~ ^
-
-*/
-
-
-            uint8_t z = MIN(0xfff, 0xfff * distance);
+            uint16_t z = MIN(0xfff, 0xfff * distance);
             zTable[x][y] = z;
 
             double angle = atan2(x1, y1);
@@ -60,34 +53,9 @@ static void deinit(void) {
 }
 
 
-struct brick {
-    uint8_t r, g, b;
-};
-static struct brick bricks[] = {
-    { 255, 0, 0 },
-    { 0, 255, 0 },
-    { 0, 0, 255 },
-    { 255, 255, 0 },
-    { 0, 255, 255 },
-    { 255, 255, 255}
-};
-
 static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
-    /* Grid, turn these knobs for texture flickr */
-    uint8_t am8 = (a >> 7) & 0xf;
-    uint8_t zm8 = (z >> 0) & 0x1f;
-    if (am8 == 2 && zm8 == 2)
-        return 0xffff7f;
-    if (am8 == 2 || zm8 == 2)
-        return 0x3f1f00;
-
-    /* TODO: nifty texture */
-
-    /* Bricks */
-    uint8_t brickI = ((a >> 12) + (z >> 4)) % sizeof(bricks);
-    /* printf("Brick %i/%i\t(a=%04X\tz=%04X)\n", brickI, sizeof(bricks), a, z); */
-    struct brick brick = bricks[brickI];
-    return (uint16_t)brick.r << 16 | (uint16_t)brick.g << 8 | (uint16_t)brick.b;
+    /* printf("getTex(%X, %X)\n", z, a); */
+    return texGetRGB(z, a >> 6);
 }
 
 
@@ -96,8 +64,8 @@ static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
 static uint8_t tick(void) {
     static uint16_t t = 0;
     t++;
-    shiftLookX = LED_WIDTH * (uint32_t)sini(17 * t + 0x0fff) / 0xffff;
-    shiftLookY = LED_HEIGHT * (uint32_t)sini(11 * t + 0x0fff) / 0xffff;
+    int16_t shiftLookX = LED_WIDTH * (uint32_t)sini(9 * t + 0x0fff) / 0xffff;
+    int16_t shiftLookY = LED_HEIGHT * (uint32_t)sini(5 * t + 0x0fff) / 0xffff;
 	
     uint16_t x, y;
 
@@ -106,14 +74,19 @@ static uint8_t tick(void) {
         for(x = 0; x < LED_WIDTH; x++) 
         {
             /* TODO: delta speed from shiftLook[XY] */
-            uint16_t z = zTable[x + shiftLookX][y + shiftLookY] + t;
-            uint16_t a = aTable[x + shiftLookX][y + shiftLookY] + t * 0xf;
+            uint16_t z = zTable[x + shiftLookX][y + shiftLookY];
+            uint16_t a = aTable[x + shiftLookX][y + shiftLookY];
             /* printf("%ix%i\ta=%04X\tz=%04X\n", x, y, a, z); */
-            uint32_t texel = getTex(a, z);
-            /* TODO: shade proportional to z */
+            uint32_t texel = getTex(a + t * 7, z + t / 10);
             uint8_t r = ((texel & 0xff0000) >> 16);
             uint8_t g = ((texel & 0xff00) >> 8);
             uint8_t b = (texel & 0xff);
+            /* apply shade */
+            uint16_t f = 0x1ff - MIN(0x1ff, z);
+            r = f * r >> 9;
+            g = f * g >> 9;
+            b = f * b >> 9;
+
             setLedXY(x, y, r, g, b);
         }
     }
