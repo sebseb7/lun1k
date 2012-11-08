@@ -16,7 +16,7 @@ static uint16_t zTable[2 * LED_WIDTH][2 * LED_HEIGHT];
 static uint16_t aTable[2 * LED_WIDTH][2 * LED_HEIGHT];
 
 /* No idea why the one in math.h doesn't work */
-double pythagoras1( double side1, double side2 )
+static double pythagoras1( double side1, double side2 )
 {
 	return sqrt(side1*side1+side2*side2);
 }
