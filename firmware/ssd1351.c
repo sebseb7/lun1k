@@ -431,8 +431,8 @@ void lcdInit(void)
 }
 
 void getLedXY(uint8_t x, uint8_t y, uint8_t* red,uint8_t* green, uint8_t* blue) {
-//	if (x >= LED_WIDTH) return;
-//	if (y >= LED_HEIGHT) return;
+	if (x >= LED_WIDTH) return;
+	if (y >= LED_HEIGHT) return;
 	*red = leds[y][x][0];
 	*green = leds[y][x][1];
 	*blue = leds[y][x][2];
@@ -440,8 +440,8 @@ void getLedXY(uint8_t x, uint8_t y, uint8_t* red,uint8_t* green, uint8_t* blue) 
 
 
 void invLedXY(uint8_t x, uint8_t y) {
-//	if (x >= LED_WIDTH) return;
-//	if (y >= LED_HEIGHT) return;
+	if (x >= LED_WIDTH) return;
+	if (y >= LED_HEIGHT) return;
 	leds[y][x][0] = 255 - leds[y][x][0];
 	leds[y][x][1] = 255 - leds[y][x][1];
 	leds[y][x][2] = 255 - leds[y][x][2];
@@ -467,8 +467,8 @@ void invLedXY(uint8_t x, uint8_t y) {
 
 void setLedXY(uint8_t x, uint8_t y, uint8_t r,uint8_t g, uint8_t b)
 {
-//	if ((x >= ssd1351Properties.width) || (y >= ssd1351Properties.height))
-//		return;
+	if ((x >= ssd1351Properties.width) || (y >= ssd1351Properties.height))
+		return;
 	
 	leds[y][x][0] = r;
 	leds[y][x][1] = g;
