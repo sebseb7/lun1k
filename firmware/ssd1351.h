@@ -9,8 +9,8 @@
 #define I6800
 #define C262K
 
-extern uint32_t portc_map[64];
-extern uint32_t portb_map[64];
+extern const uint32_t portc_map[64];
+extern const uint32_t portb_map[64];
 
 
 #ifdef C262K

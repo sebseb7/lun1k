@@ -1,7 +1,7 @@
 #include "ssd1351.h"
 
 
-uint32_t portc_map[64]= {
+const uint32_t portc_map[64]= {
 #ifdef lun1k
 	3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,
 	2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,
@@ -18,7 +18,7 @@ uint32_t portc_map[64]= {
 #endif
 };
 
-uint32_t portb_map[64]= {
+const uint32_t portb_map[64]= {
 #ifdef lun1k
 	3221422080,3221422080,3221422080,3221422080,3221356545,3221356545,3221356545,3221356545,
 	3221291010,3221291010,3221291010,3221291010,3221225475,3221225475,3221225475,3221225475,
@@ -60,7 +60,7 @@ static void sendBy(uint8_t byte)
 }
 
 
-static lcdProperties_t ssd1351Properties = { 128, 128 };
+static const lcdProperties_t ssd1351Properties = { 128, 128 };
 
 uint8_t leds[LED_HEIGHT][LED_WIDTH][3] __attribute__ ((section(".ccm")));
 
