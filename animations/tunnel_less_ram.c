@@ -31,11 +31,11 @@ static double pythagoras1( double side1, double side2 )
 static void init(void) {
     int16_t x, y;
 		
-	zTable = malloc(LED_WIDTH* sizeof(uint16_t *));
+    zTable = malloc(2 * LED_HEIGHT * sizeof(uint16_t *));
 
-	for(y = 0; y < LED_HEIGHT; y++) 
+    for(y = 0; y < 2 * LED_HEIGHT; y++) 
     {
-		zTable[y] = malloc((y+1)*sizeof(uint16_t));
+        zTable[y] = malloc((y+1)*sizeof(uint16_t));
         for(x = 0; x < (y+1); x++) 
         {
             int16_t
@@ -61,10 +61,26 @@ static uint16_t getA(uint16_t x,uint16_t y)
 
 }
 
+static uint16_t getZ(uint16_t x, uint16_t y)
+{
+
+    if(x >= 2 * LED_WIDTH)
+        x = (2 * LED_WIDTH - 1)-(x-(2 * LED_WIDTH));
+    if(y >= 2 * LED_HEIGHT)
+        y = (2 * LED_HEIGHT - 1)-(y-(2 * LED_HEIGHT));
+    if(y > x)
+    {
+        uint8_t t = x;
+        x = y;
+        y = t;
+    }
+    return zTable[x][y];
+}
+
 static void deinit(void) {
 
 	// free 
-	for(int y = 0; y < LED_HEIGHT; y++) 
+	for(int y = 0; y < 2 * LED_HEIGHT; y++) 
     {
 		free(zTable[y]);
 	}
@@ -94,30 +110,25 @@ static uint8_t tick(void) {
             /* TODO: delta speed from shiftLook[XY] */
             uint8_t x1 = x + shiftLookX;
             uint8_t y1 = y + shiftLookY;
-
-            if(x1 > 127)
-                x1 = 127-(x1-128);
-            if(y1 > 127)
-                y1 = 127-(y1-128);
-            if(y1 > x1)
-            {
-                uint8_t t = x1;
-                x1 = y1;
-                y1 = t;
-            }
             
-            uint16_t z = zTable[x1][y1];
-            uint16_t a = getA(x + shiftLookX,y + shiftLookY);
+            uint16_t r = 0, g = 0, b = 0;
+            uint16_t z;
+            for(uint8_t i = 0; i < 4; i++) {
+                uint8_t x2 = x1 + (i & 1);
+                uint8_t y2 = y1 + (i >> 1);
+                z = getZ(x2, y2);
+                uint16_t a = getA(x2,y1);
+                uint32_t texel = getTex(a + t * 0x7, z + t);
+                r += ((texel & 0xff0000) >> 16);
+                g += ((texel & 0xff00) >> 8);
+                b += (texel & 0xff);
+            }
             /* printf("%ix%i\ta=%04X\tz=%04X\n", x, y, a, z); */
-            uint32_t texel = getTex(a + t * 0x7, z + t / 3);
-            uint8_t r = ((texel & 0xff0000) >> 16);
-            uint8_t g = ((texel & 0xff00) >> 8);
-            uint8_t b = (texel & 0xff);
             /* apply shade */
             uint16_t f = 0xff - MIN(0xff, z);
-            r = f * r >> 8;
-            g = f * g >> 8;
-            b = f * b >> 8;
+            r = f * r >> 10;
+            g = f * g >> 10;
+            b = f * b >> 10;
             
             setLedXY(x, y, r, g, b);
         }
