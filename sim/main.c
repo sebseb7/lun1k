@@ -220,7 +220,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 					SDL_FillRect(
 						screen, 
 						&rect, 
-						SDL_MapRGB(screen->format, leds[y][x][0],leds[y][x][1],leds[y][x][2])
+						SDL_MapRGB(screen->format, leds[y][x][0] & 0xFC ,leds[y][x][1] & 0xFC ,leds[y][x][2] & 0xFC)
 					);
 					leds[y][x][3] = 0;
 
