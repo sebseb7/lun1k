@@ -16,6 +16,8 @@
 
 
 
+#define FRAMETIME 25
+
 int sdlpause = 0;
 
 /*unsigned long long int get_clock(void)
@@ -101,6 +103,12 @@ void fillRGB(uint8_t r,uint8_t g , uint8_t b)
 	}
 }
 
+#ifdef linux
+#define VERA_TTF "/usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf"
+#else
+#define VERA_TTF "/usr/X11/share/fonts/TTF/Vera.ttf"
+#endif
+
 int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unused__))) {
 
 	fillRGB(0,0,0);
@@ -118,7 +126,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 	}
 
 	TTF_Font *font;
-	font = TTF_OpenFont("/usr/X11/share/fonts/TTF/Vera.ttf", 24);
+	font = TTF_OpenFont(VERA_TTF, 24);
 	if (font == NULL)
 	{
 		printf("TTF_OpenFont() Failed: %s \n",TTF_GetError());
@@ -141,8 +149,9 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 	int tick_count = 0;
 	int running = 1;
 	//unsigned long long int startTime = get_clock();
+        Uint32 lastFrame = SDL_GetTicks(); 
+
 	while(running) {
-		Uint32 frameStart = SDL_GetTicks(); 
 		SDL_Event ev;
 		while(SDL_PollEvent(&ev)) {
 			switch(ev.type) {
@@ -256,14 +265,14 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 		SDL_Flip(screen);
 
 
-		Uint32 frameStop = SDL_GetTicks(); 
+		Uint32 now = SDL_GetTicks(); 
 
-		if( (frameStop-frameStart) < 33 )
+		if( (now - lastFrame) < FRAMETIME )
 		{
-			SDL_Delay(33 - (frameStop-frameStart));
+                  SDL_Delay(FRAMETIME - (now - lastFrame));
 		}
+                lastFrame = SDL_GetTicks();
 
-		
 		
 		tick_count++;
 
