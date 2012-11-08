@@ -62,7 +62,7 @@ static void sendBy(uint8_t byte)
 
 static const lcdProperties_t ssd1351Properties = { 128, 128 };
 
-uint8_t leds[LED_HEIGHT][LED_WIDTH][3] __attribute__ ((section(".ccm")));
+uint8_t leds[LED_HEIGHT][LED_WIDTH][3] CCM_ATTRIBUTES; 
 
 
 /*************************************************/

@@ -52,10 +52,9 @@ typedef struct
  */
 
 
-//#define lunik
 
 
-#ifdef lunik
+#ifdef lun1k
 
 #define SET_CS (GPIO_SetBits(GPIOC,GPIO_Pin_6));
 #define CLR_CS (GPIO_ResetBits(GPIOC,GPIO_Pin_6));	
