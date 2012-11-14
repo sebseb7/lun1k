@@ -7,9 +7,9 @@
 
 void pixeldraw(int x, int y, int color)
 {
-	uint8_t r[] = {0,25,255,255,127,127,0,  0  ,0  ,0  ,127,127,0  ,0  ,0  ,255};
-	uint8_t g[] = {0,0  ,255,0  ,0  ,255,127,0  ,255,255,127,255,127,127,0  ,255};
-	uint8_t b[] = {0,0  ,0  ,255,255,0  ,255,255,255,127,255,0  ,127,0  ,127,255};
+	uint8_t r[] = {0,145,255,0  ,255,0  ,255,0  ,127,0  ,127,127,0  ,0  ,0  ,255};
+	uint8_t g[] = {0,0  ,0  ,0  ,0  ,255,255,255,255,255,127,255,127,127,0  ,255};
+	uint8_t b[] = {0,145 ,0  ,255,255,0  ,0  ,255,127,127,255,0  ,127,0  ,127,255};
 
 	x+=3;
 	y+=3;
@@ -35,6 +35,8 @@ static uint8_t tick(void) {
 
 
 	tetris_update();
+	Delay(10);
+
 
 	for(int i = 0; i < 3; i++)
 	{
@@ -45,16 +47,6 @@ static uint8_t tick(void) {
 
 	return 0;
 }
-
-int button_down(unsigned int nr, unsigned int button)
-{
-	return 0;
-}
-int is_occupied(unsigned int nr)
-{
-	return 0;
-}
-
 
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
