@@ -14,14 +14,15 @@ endif
 
 #########################################################################
 
-#../animations/geometry_test.c \
-#../animations/tunnel_less_ram.c \
-
 SRC=$(wildcard  *.c libs/*.c) \
 	core/syscalls.c core/stm32fxxx_it.c core/system_stm32f$(STM32F)xx.c \
+	../animations/tunnel_noaa.c \
+	../animations/lib/tunnel_tex.c \
+	../animations/tetris.c \
+	../animations/lib/tetris.c \
+	../animations/lib/grid.c \
 	../animations/plasma_bigsin.c \
 	../animations/plasma_weed.c 
-#	../animations/tunnel_less_ram.c 
 
 
 ASRC=core/startup_stm32f$(STM32F)xx.s
@@ -32,13 +33,13 @@ HEADERS=$(wildcard core/*.h libs/*.h *.h)
 #  Compiler Options
 GCFLAGS = -DSTM32F=$(STM32F) -ffreestanding -std=gnu99 -mcpu=cortex-m$(CORTEXM) -mthumb $(OPTIMIZATION) -I. -Icore -DARM_MATH_CM$(CORTEXM) -DUSE_STDPERIPH_DRIVER 
 ifeq ($(CORTEXM),4)
-GCFLAGS+= -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16 
+GCFLAGS+= -Dlun1k=1 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16 
 endif
 GCFLAGS+=-ISTM32_USB_Device_Library/Class/cdc/inc
 GCFLAGS+=-ISTM32_USB_OTG_Driver/inc
 GCFLAGS+=-ISTM32_USB_Device_Library/Core/inc
 # Warnings
-GCFLAGS += -Wstrict-prototypes -Wundef -Wall -Wextra -Wunreachable-code  
+GCFLAGS += -Wno-strict-aliasing -Wstrict-prototypes -Wundef -Wall -Wextra -Wunreachable-code  
 # Optimizazions
 GCFLAGS += -fsingle-precision-constant -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -fno-builtin -ffunction-sections -fno-common -fdata-sections 
 # Debug stuff
