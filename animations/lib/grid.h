@@ -30,7 +30,7 @@ typedef struct Grid {
 	int state;
 	int state_delay;
 	int animation;
-	char matrix[GRID_HEIGHT][GRID_WIDTH];
+	unsigned char matrix[GRID_HEIGHT][GRID_WIDTH];
 	char highlight[GRID_HEIGHT];
 	int input_mov;
 	int input_rep;

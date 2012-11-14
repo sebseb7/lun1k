@@ -22,7 +22,7 @@ static const char STONES[7][16] = {
 
 static const char PALETTE[] = {
 	1, // background
-	15, 9, 14, 10, 13, 11, 12, // stones
+	2, 3, 4, 5, 6, 7, 8, // stones
 	0, 15, // blinking
 };
 enum { // indices in PALETTE
@@ -104,7 +104,7 @@ static int rate_grid(Grid* grid) {
 			if(grid->matrix[y][x]) magic += y;
 			else if(y > 0 && grid->matrix[y - 1][x]) magic -= 20;
 
-			if(grid->matrix[y][x] == -1) {
+			if(grid->matrix[y][x] == 127) {
 				if(y > 0 && grid->matrix[y - 1][x] > 0) magic += 20;
 				if(x == 0 || grid->matrix[y][x - 1] > 0) magic += 20;
 				if(y == GRID_HEIGHT - 1 || grid->matrix[y + 1][x] > 0) magic += 20;
@@ -170,7 +170,7 @@ static void grid_bot(Grid* grid, int* mov, int* rot, int* drop) {
 			if(!grid_collision(grid, 1)) {
 
 				memcpy(bot, grid, sizeof(Grid));
-				stone_to_grid(bot, -1);
+				stone_to_grid(bot, 127);
 
 				int m = rate_grid(bot);
 				if(first || m > magic) {
