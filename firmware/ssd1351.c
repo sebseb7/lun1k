@@ -233,7 +233,7 @@ void lcdInit(void)
 	DATA(0xB1);                               // Make all commands accessible 
 	CMD(SSD1351_CMD_SLEEPMODE_DISPLAYOFF);
 	CMD(SSD1351_CMD_SETFRONTCLOCKDIV);
-	DATA(0xf0);//was F1
+	DATA(0xf1);//was F1
 	CMD(SSD1351_CMD_SETMUXRRATIO);
 	DATA(0x7f);//7f
 	CMD(SSD1351_CMD_COLORDEPTH);
@@ -283,6 +283,71 @@ void lcdInit(void)
 	DATA(0x01);//was 0x01
 	CMD(SSD1351_CMD_SETDISPLAYMODE_RESET);
 
+    CMD(SSD1351_CMD_GRAYSCALELOOKUP);
+	
+    DATA(0x05);
+    DATA(0x06);
+    DATA(0x07);
+    DATA(0x08);
+    DATA(0x09);
+    DATA(0x0a);
+    DATA(0x0b);
+    DATA(0x0c);
+    DATA(0x0D);
+    DATA(0x0E);
+    DATA(0x0F);
+    DATA(0x10);
+    DATA(0x11);
+    DATA(0x12);
+    DATA(0x13);
+    DATA(0x14);
+    DATA(0x15);
+    DATA(0x16);
+    DATA(0x18);
+    DATA(0x1a);
+    DATA(0x1b);
+    DATA(0x1C);
+    DATA(0x1D);
+    DATA(0x1F);
+    DATA(0x21);
+    DATA(0x23);
+    DATA(0x25);
+    DATA(0x27);
+    DATA(0x2A);
+    DATA(0x2D);
+    DATA(0x30);
+    DATA(0x33);
+    DATA(0x36);
+    DATA(0x39);
+    DATA(0x3C);
+    DATA(0x3F);
+    DATA(0x42);
+    DATA(0x45);
+    DATA(0x48);
+    DATA(0x4C);
+    DATA(0x50);
+    DATA(0x54);
+    DATA(0x58);
+    DATA(0x5C);
+    DATA(0x60);
+    DATA(0x64);
+    DATA(0x68);
+    DATA(0x6C);
+    DATA(0x70);
+    DATA(0x74);
+    DATA(0x78);
+    DATA(0x7D);
+    DATA(0x82);
+    DATA(0x87);
+    DATA(0x8C);
+    DATA(0x91);
+    DATA(0x96);
+    DATA(0x9B);
+    DATA(0xA0);
+    DATA(0xA5);
+    DATA(0xAA);
+    DATA(0xAF);
+    DATA(0xB4);
 
 	// Use default grayscale for now to save flash space (1k), but here are
 	// the values if someone wants to change them ...
