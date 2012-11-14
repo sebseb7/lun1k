@@ -5,7 +5,6 @@
 #include <time.h>
 #include <SDL/SDL.h>
 #include "SDL/SDL_image.h"
-#include <SDL/SDL_ttf.h>
 
 #include "main.h"
 
@@ -28,13 +27,26 @@ int sdlpause = 0;
 }
 */
 #define MAX_ANIMATIONS 200
+#define MAX_APPS 200
 
 int animationcount = 0;
+int appcount = 0;
 
-init_fun init_fp[MAX_ANIMATIONS];
-tick_fun tick_fp[MAX_ANIMATIONS];
-deinit_fun deinit_fp[MAX_ANIMATIONS];
-int duration[MAX_ANIMATIONS];
+struct animation {
+	init_fun init_fp;
+	tick_fun tick_fp;
+	deinit_fun deinit_fp;
+	int duration;
+	int min_delay;
+} animations[MAX_ANIMATIONS];
+
+
+struct app {
+	init_fun init_fp;
+	tick_fun tick_fp;
+	deinit_fun deinit_fp;
+	int min_delay;
+} apps[MAX_APPS];
 
 
 SDL_Surface* screen;
@@ -69,24 +81,15 @@ void registerAnimation(init_fun init,tick_fun tick, deinit_fun deinit,uint16_t t
 {
 	if(animationcount == MAX_ANIMATIONS)
 		return;
-	init_fp[animationcount] = init;
-	tick_fp[animationcount] = tick;
-	deinit_fp[animationcount] = deinit;
-	duration[animationcount] = count;
+	animations[animationcount].init_fp = init;
+	animations[animationcount].tick_fp = tick;
+	animations[animationcount].deinit_fp = deinit;
+	animations[animationcount].duration = count;
+	animations[animationcount].min_delay = t;
 
 	animationcount++;
 
-	assert(t > 0);
-	// 122Hz / tick
-	//interval = 1000000 / 122 * t;
 }
-
-/*void registerApp(tick_fun tick,key_fun key)
-{
-	tick_fp = tick;
-	key_fp = key;
-}
-*/
 
 
 void fillRGB(uint8_t r,uint8_t g , uint8_t b)
@@ -103,11 +106,6 @@ void fillRGB(uint8_t r,uint8_t g , uint8_t b)
 	}
 }
 
-#ifdef linux
-#define VERA_TTF "/usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf"
-#else
-#define VERA_TTF "/usr/X11/share/fonts/TTF/Vera.ttf"
-#endif
 
 int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unused__))) {
 
@@ -118,23 +116,6 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 
 	int current_animation = 0;
 
-	if (TTF_Init() != 0)
-	{
-		printf("TTF_Init() Failed: %s \n",TTF_GetError());
-		SDL_Quit();
-		exit(1);
-	}
-
-	TTF_Font *font;
-	font = TTF_OpenFont(VERA_TTF, 24);
-	if (font == NULL)
-	{
-		printf("TTF_OpenFont() Failed: %s \n",TTF_GetError());
-		TTF_Quit();
-		SDL_Quit();
-		exit(1);
-	}
-	
 	screen = SDL_SetVideoMode(287,606,32, SDL_SWSURFACE | SDL_DOUBLEBUF);
 
 	IMG_Init(IMG_INIT_PNG);
@@ -144,12 +125,12 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 	SDL_BlitSurface(image,0,screen,0);
 	SDL_Flip(screen);
 
-	init_fp[current_animation]();
+	animations[current_animation].init_fp();
 	
 	int tick_count = 0;
 	int running = 1;
 	//unsigned long long int startTime = get_clock();
-        Uint32 lastFrame = SDL_GetTicks(); 
+	Uint32 lastFrame = SDL_GetTicks(); 
 
 	while(running) {
 		SDL_Event ev;
@@ -211,7 +192,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 			}
 		}
 
-		tick_fp[current_animation]();
+		animations[current_animation].tick_fp();
 
 
 	
@@ -238,29 +219,6 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 			}
 		}
 
-		//startTime+=interval;
-		//int delay = startTime-get_clock();
-//		if(delay > 0)
-//			usleep(delay);
-		
-		
-//		SDL_Surface *text;
-//		SDL_Color text_color = {255, 255, 255};
-//		SDL_Color text_color2 = {0,0,0};
-//		text = TTF_RenderText_Shaded(font,
-//				"A journey of a thousand miles begins with a single step.",
-//				text_color,text_color2);
-
-//		if (text == NULL)
-//		{
-//			printf("TTF_RenderText_Solid() Failed: %s \n",TTF_GetError());
-//			TTF_Quit();
-//			SDL_Quit();
-//			exit(1);
-//		}
-		
-//		SDL_BlitSurface(text, 0, screen, 0);
-//		SDL_FreeSurface(text);
 		
 		SDL_Flip(screen);
 
@@ -269,17 +227,17 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 
 		if( (now - lastFrame) < FRAMETIME )
 		{
-                  SDL_Delay(FRAMETIME - (now - lastFrame));
+			SDL_Delay(FRAMETIME - (now - lastFrame));
 		}
-                lastFrame = SDL_GetTicks();
+		lastFrame = SDL_GetTicks();
 
 		
 		tick_count++;
 
 
-		if(tick_count == duration[current_animation])
+		if(tick_count == animations[current_animation].duration)
 		{
-			deinit_fp[current_animation]();
+			animations[current_animation].deinit_fp();
 
 			current_animation++;
 			if(current_animation == animationcount)
@@ -290,7 +248,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 	
 			fillRGB(0,0,0);
 
-			init_fp[current_animation]();
+			animations[current_animation].init_fp();
 
 
 		}

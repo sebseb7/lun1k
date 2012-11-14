@@ -10,10 +10,17 @@
 
 #define CONSTRUCTOR_ATTRIBUTES	__attribute__((constructor));
 
+typedef enum {
+	KEY_A,
+	KEY_B,
+	KEY_ESC,
+	KEY_STICK,
+} key_type;
+
+
 typedef void (*init_fun)(void);
 typedef void (*deinit_fun)(void);
 typedef uint8_t (*tick_fun)(void);
-typedef void (*key_fun)(uint8_t);
 
 int sdlpause;
 
