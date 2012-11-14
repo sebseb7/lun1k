@@ -19,11 +19,47 @@ void Delay(__IO uint32_t nTime)
 	while(TimingDelay != 0);
 }
 
+static unsigned int button_esc_down = 0;
+static int button_esc_pressed = 0;
+static unsigned int button_stick_down = 0;
+static int button_stick_pressed = 0;
+static int buttonsInitialized = 0;
+
+
 void TimingDelay_Decrement(void)
 {
 	if (TimingDelay != 0x00)
 	{ 
 		TimingDelay--;
+	}
+	if(buttonsInitialized)
+	{
+		if(!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13))
+		{
+			button_stick_down++;
+			if(button_stick_down == 50)
+			{
+				button_stick_pressed = 1;
+			}
+		}
+		else
+		{
+			button_stick_down = 0;
+			button_stick_pressed = 0;
+		}
+		if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8))
+		{
+			button_esc_down++;
+			if(button_esc_down == 50)
+			{
+				button_esc_pressed = 1;
+			}
+		}
+		else
+		{
+			button_esc_down = 0;
+			button_esc_pressed = 0;
+		}
 	}
 	tick++;
 }
@@ -31,6 +67,7 @@ void TimingDelay_Decrement(void)
 #define MAX_ANIMATIONS 30
 
 static int animationcount;
+
 
 
 struct animation {
@@ -135,6 +172,21 @@ int main(void)
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_1;       
 	GPIO_Init(GPIOA, &GPIO_InitStructure);  
 
+
+	//ESC Button
+	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_8;       
+	GPIO_Init(GPIOB, &GPIO_InitStructure);  
+	
+	//stick button
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_13;       
+	GPIO_Init(GPIOC, &GPIO_InitStructure);  
+	buttonsInitialized=1;
+		
+
+
 	//set RW to 0
 	GPIO_ResetBits(GPIOC,GPIO_Pin_9);	
 
@@ -179,6 +231,7 @@ int main(void)
 
 
 	lcdInit();
+//	n35p112_init();
 
 	
 	int current_animation = 0;
@@ -191,27 +244,29 @@ int main(void)
 	while(1)
 	{
 		loopcount++;
-		if(loopcount == 35)
+		if((loopcount == 55)||(loopcount == 57))
 		{
 #ifdef lun1k
 			GPIOC->ODR           |=       1<<1;
 			GPIOD->ODR           |=       1<<2;
 			GPIOB->ODR           |=       1<<3;
+			GPIOC->ODR           |=       1<<3;
 #else
 			GPIOB->ODR           &=       ~(1<<13);
 #endif
 		}
-		if(loopcount == 36)
+		if((loopcount == 56)||(loopcount == 58))
 		{
 #ifdef lun1k
 			GPIOC->ODR           &=       ~(1<<1);
 			GPIOD->ODR           &=       ~(1<<2);
 			GPIOB->ODR           &=       ~(1<<3);
+			GPIOC->ODR           &=       ~(1<<3);
 #else
 			GPIOB->ODR           |=       1<<13;
 #endif
-
-			loopcount = 0;
+			if(loopcount==58)
+				loopcount = 0;
 		}
 		
 
@@ -219,7 +274,6 @@ int main(void)
 		animations[current_animation].tick_fp();
 
 #ifdef lun1k
-		GPIOC->ODR           &=       ~(1<<3);
 #else
 		GPIOB->ODR           |=       1<<12;
 #endif
@@ -227,7 +281,6 @@ int main(void)
 		lcdFlush();
 
 #ifdef lun1k
-		GPIOC->ODR           |=       1<<3;
 #else
 		GPIOB->ODR           &=       ~(1<<12);
 #endif
@@ -236,8 +289,9 @@ int main(void)
 		tick_count++;
 
 
-		if(tick_count == animations[current_animation].duration)
+		if((button_esc_pressed) || (tick_count == animations[current_animation].duration))
 		{
+			button_esc_pressed=0;
 			animations[current_animation].deinit_fp();
 
 			current_animation++;
