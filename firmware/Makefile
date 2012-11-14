@@ -1,21 +1,14 @@
 PROJECT=template
 
 
-STM32F=4
-LSCRIPT=core/stm32f$(STM32F)xx_flash.ld
+LSCRIPT=core/stm32f4xx_flash.ld
 
 OPTIMIZATION = -O2
-
-ifeq ($(STM32F),2)
-CORTEXM=3
-else
-CORTEXM=4
-endif
 
 #########################################################################
 
 SRC=$(wildcard  *.c libs/*.c) \
-	core/syscalls.c core/stm32fxxx_it.c core/system_stm32f$(STM32F)xx.c \
+	core/syscalls.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/tunnel_noaa.c \
 	../animations/lib/tunnel_tex.c \
 	../animations/tetris.c \
@@ -25,16 +18,14 @@ SRC=$(wildcard  *.c libs/*.c) \
 	../animations/plasma_weed.c 
 
 
-ASRC=core/startup_stm32f$(STM32F)xx.s
+ASRC=core/startup_stm32f4xx.s
 OBJECTS= $(SRC:.c=.o) $(ASRC:.s=.o)
 LSTFILES= $(SRC:.c=.lst)
 HEADERS=$(wildcard core/*.h libs/*.h *.h)
 
 #  Compiler Options
-GCFLAGS = -DSTM32F=$(STM32F) -ffreestanding -std=gnu99 -mcpu=cortex-m$(CORTEXM) -mthumb $(OPTIMIZATION) -I. -Icore -DARM_MATH_CM$(CORTEXM) -DUSE_STDPERIPH_DRIVER 
-ifeq ($(CORTEXM),4)
+GCFLAGS = -DSTM32F=4 -ffreestanding -std=gnu99 -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -I. -Icore -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVER 
 GCFLAGS+= -Dlun1k=1 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16 
-endif
 GCFLAGS+=-ISTM32_USB_Device_Library/Class/cdc/inc
 GCFLAGS+=-ISTM32_USB_OTG_Driver/inc
 GCFLAGS+=-ISTM32_USB_Device_Library/Core/inc
@@ -45,14 +36,12 @@ GCFLAGS += -fsingle-precision-constant -funsigned-char -funsigned-bitfields -fpa
 # Debug stuff
 GCFLAGS += -Wa,-adhlns=$(<:.c=.lst),-gstabs -g 
 
-GCFLAGS+= -ISTM32F$(STM32F)_drivers/inc
+GCFLAGS+= -ISTM32F4_drivers/inc
 
 
-LDFLAGS = -mcpu=cortex-m$(CORTEXM) -mthumb $(OPTIMIZATION) -T$(LSCRIPT) 
-ifeq ($(CORTEXM),4)
+LDFLAGS = -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -T$(LSCRIPT) 
 LDFLAGS+= -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16
-endif
-LDFLAGS+= -LSTM32F$(STM32F)_drivers/build -lSTM32F$(STM32F)xx_drivers -lm -lnosys -lc
+LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc
 
 
 #  Compiler/Assembler Paths
@@ -64,11 +53,11 @@ SIZE = arm-none-eabi-size
 
 #########################################################################
 
-all: STM32F$(STM32F)_drivers/build/libSTM32F$(STM32F)_drivers.a $(PROJECT).bin Makefile 
+all: STM32F4_drivers/build/libSTM32F4_drivers.a $(PROJECT).bin Makefile 
 	@$(SIZE) $(PROJECT).elf -A | grep 'text\|data\|section\|bss\|ccm'
 
-STM32F$(STM32F)_drivers/build/libSTM32F$(STM32F)_drivers.a:
-	@make -C STM32F$(STM32F)_drivers/build
+STM32F4_drivers/build/libSTM32F4_drivers.a:
+	@make -C STM32F4_drivers/build
 
 $(PROJECT).bin: $(PROJECT).elf Makefile
 	@echo "generating $(PROJECT).bin"
@@ -83,7 +72,6 @@ clean:
 	$(REMOVE) $(LSTFILES)
 	$(REMOVE) $(PROJECT).bin
 	$(REMOVE) $(PROJECT).elf
-	#make -C STM32F$(STM32F)_drivers/build clean
 
 #########################################################################
 

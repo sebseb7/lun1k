@@ -35,8 +35,6 @@ static uint8_t tick(void) {
 
 
 	tetris_update();
-	Delay(10);
-
 
 	for(int i = 0; i < 3; i++)
 	{
