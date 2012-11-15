@@ -11,11 +11,13 @@ SRC=$(wildcard  *.c libs/*.c) \
 	core/syscalls.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/tunnel_noaa.c \
 	../animations/lib/tunnel_tex.c \
+	../animations/fgl_cube.c \
 	../animations/tetris.c \
 	../animations/lib/tetris.c \
 	../animations/lib/grid.c \
 	../animations/plasma_bigsin.c \
-	../animations/plasma_weed.c 
+	../animations/plasma_weed.c \
+	$(wildcard libs/libfixmath/*.c libs/fgl/*.c)
 
 
 ASRC=core/startup_stm32f4xx.s
@@ -35,6 +37,8 @@ GCFLAGS += -Wno-strict-aliasing -Wstrict-prototypes -Wundef -Wall -Wextra -Wunre
 GCFLAGS += -fsingle-precision-constant -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -fno-builtin -ffunction-sections -fno-common -fdata-sections 
 # Debug stuff
 GCFLAGS += -Wa,-adhlns=$(<:.c=.lst),-gstabs -g 
+# FGL
+GCFLAGS += -I libs
 
 GCFLAGS+= -ISTM32F4_drivers/inc
 

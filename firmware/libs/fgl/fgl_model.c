@@ -1,7 +1,6 @@
 #include "fgl_model.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 #include <fgl/fgl_draw.h>
@@ -51,97 +50,97 @@ typedef struct {
 
 
 
-fgl_model* fgl_model_load_md2(const char* inPath) {
-	FILE* tempFile = fopen(inPath, "rb");
-	if(tempFile == NULL)
-		return NULL;
+/* fgl_model* fgl_model_load_md2(const char* inPath) { */
+/* 	FILE* tempFile = fopen(inPath, "rb"); */
+/* 	if(tempFile == NULL) */
+/* 		return NULL; */
 
-	_md2_header_t tempHeader;
-	if(fread(&tempHeader, sizeof(_md2_header_t), 1, tempFile) < 1) {
-		fclose(tempFile);
-		return NULL;
-	}
+/* 	_md2_header_t tempHeader; */
+/* 	if(fread(&tempHeader, sizeof(_md2_header_t), 1, tempFile) < 1) { */
+/* 		fclose(tempFile); */
+/* 		return NULL; */
+/* 	} */
 
-	if((strncmp((char*)&tempHeader.ident, "IDP2", 4) != 0) || (tempHeader.version != 8)) {
-		fclose(tempFile);
-		return NULL;
-	}
+/* 	if((strncmp((char*)&tempHeader.ident, "IDP2", 4) != 0) || (tempHeader.version != 8)) { */
+/* 		fclose(tempFile); */
+/* 		return NULL; */
+/* 	} */
 
-	fix16_t     tempVerts_u[tempHeader.num_st];
-	fix16_t     tempVerts_v[tempHeader.num_st];
-	_md2_triangle_t tempTris[tempHeader.num_tris];
-	_md2_vertex_t   tempVerts[tempHeader.num_xyz];
+/* 	fix16_t     tempVerts_u[tempHeader.num_st]; */
+/* 	fix16_t     tempVerts_v[tempHeader.num_st]; */
+/* 	_md2_triangle_t tempTris[tempHeader.num_tris]; */
+/* 	_md2_vertex_t   tempVerts[tempHeader.num_xyz]; */
 
-	uintptr_t i, j, k;
+/* 	uintptr_t i, j, k; */
 
-	fseek(tempFile, tempHeader.offset_st, SEEK_SET);
-	for(i = 0; i < tempHeader.num_st; i++) {
-		uint16_t tempU, tempV;
-		fread(&tempU, 2, 1, tempFile);
-		fread(&tempV, 2, 1, tempFile);
-		//tempVerts_u[i] = fix16_div(fix16_from_int(tempU), fix16_from_int(tempHeader.skinwidth));
-		//tempVerts_v[i] = fix16_div(fix16_from_int(tempV), fix16_from_int(tempHeader.skinheight));
-		tempVerts_u[i] = tempU;
-		tempVerts_v[i] = tempV;
-	}
+/* 	fseek(tempFile, tempHeader.offset_st, SEEK_SET); */
+/* 	for(i = 0; i < tempHeader.num_st; i++) { */
+/* 		uint16_t tempU, tempV; */
+/* 		fread(&tempU, 2, 1, tempFile); */
+/* 		fread(&tempV, 2, 1, tempFile); */
+/* 		//tempVerts_u[i] = fix16_div(fix16_from_int(tempU), fix16_from_int(tempHeader.skinwidth)); */
+/* 		//tempVerts_v[i] = fix16_div(fix16_from_int(tempV), fix16_from_int(tempHeader.skinheight)); */
+/* 		tempVerts_u[i] = tempU; */
+/* 		tempVerts_v[i] = tempV; */
+/* 	} */
 
-	fseek(tempFile, tempHeader.offset_tris, SEEK_SET);
-	fread(tempTris, sizeof(_md2_triangle_t), tempHeader.num_tris, tempFile);
+/* 	fseek(tempFile, tempHeader.offset_tris, SEEK_SET); */
+/* 	fread(tempTris, sizeof(_md2_triangle_t), tempHeader.num_tris, tempFile); */
 
-	uintptr_t  tempModelFrameLen = ((tempHeader.num_tris * 3) * sizeof(fgl_vertex_t));
-	fgl_model* tempModel = (fgl_model*)malloc(sizeof(fgl_model) + (tempHeader.num_frames * tempModelFrameLen));
-	if(tempModel == NULL) {
-		fclose(tempFile);
-		return NULL;
-	}
+/* 	uintptr_t  tempModelFrameLen = ((tempHeader.num_tris * 3) * sizeof(fgl_vertex_t)); */
+/* 	fgl_model* tempModel = (fgl_model*)malloc(sizeof(fgl_model) + (tempHeader.num_frames * tempModelFrameLen)); */
+/* 	if(tempModel == NULL) { */
+/* 		fclose(tempFile); */
+/* 		return NULL; */
+/* 	} */
 
-	fseek(tempFile, tempHeader.offset_frames, SEEK_SET);
+/* 	fseek(tempFile, tempHeader.offset_frames, SEEK_SET); */
 
-	tempModel->vert_data   = (fgl_vertex_t*)((uintptr_t)tempModel + sizeof(fgl_model));
-	tempModel->vert_count  = (tempHeader.num_tris * 3);
-	tempModel->frame_count = tempHeader.num_frames;
+/* 	tempModel->vert_data   = (fgl_vertex_t*)((uintptr_t)tempModel + sizeof(fgl_model)); */
+/* 	tempModel->vert_count  = (tempHeader.num_tris * 3); */
+/* 	tempModel->frame_count = tempHeader.num_frames; */
 
-	fgl_vertex_t* tempPtr = tempModel->vert_data;
-	for(i = 0; i < tempModel->frame_count; i++) {
-		_md2_vector3_t tempScalef;
-		_md2_vector3_t tempTranslatef;
-		char tempName[16];
+/* 	fgl_vertex_t* tempPtr = tempModel->vert_data; */
+/* 	for(i = 0; i < tempModel->frame_count; i++) { */
+/* 		_md2_vector3_t tempScalef; */
+/* 		_md2_vector3_t tempTranslatef; */
+/* 		char tempName[16]; */
 
-		fread(&tempScalef, sizeof(_md2_vector3_t), 1, tempFile);
-		fread(&tempTranslatef, sizeof(_md2_vector3_t), 1, tempFile);
-		fread(tempName, 1, 16, tempFile);
-		fread(tempVerts, sizeof(_md2_vertex_t), tempHeader.num_xyz, tempFile);
+/* 		fread(&tempScalef, sizeof(_md2_vector3_t), 1, tempFile); */
+/* 		fread(&tempTranslatef, sizeof(_md2_vector3_t), 1, tempFile); */
+/* 		fread(tempName, 1, 16, tempFile); */
+/* 		fread(tempVerts, sizeof(_md2_vertex_t), tempHeader.num_xyz, tempFile); */
 
-		fix16_t tempScale[3] = {
-			fix16_from_float(tempScalef.x),
-			fix16_from_float(tempScalef.y),
-			fix16_from_float(tempScalef.z)
-			};
+/* 		fix16_t tempScale[3] = { */
+/* 			fix16_from_float(tempScalef.x), */
+/* 			fix16_from_float(tempScalef.y), */
+/* 			fix16_from_float(tempScalef.z) */
+/* 			}; */
 
-		fix16_t tempTranslate[3] = {
-			fix16_from_float(tempTranslatef.x),
-			fix16_from_float(tempTranslatef.y),
-			fix16_from_float(tempTranslatef.z)
-			};
+/* 		fix16_t tempTranslate[3] = { */
+/* 			fix16_from_float(tempTranslatef.x), */
+/* 			fix16_from_float(tempTranslatef.y), */
+/* 			fix16_from_float(tempTranslatef.z) */
+/* 			}; */
 
-		for(j = 0; j < tempHeader.num_tris; j++) {
-			for(k = 0; k < 3; k++, tempPtr++) {
-				tempPtr->x = fix16_from_int(tempVerts[tempTris[j].v[k]].x);
-				tempPtr->x = fix16_mul(tempPtr->x, tempScale[0]) + tempTranslate[0];
-				tempPtr->y = fix16_from_int(tempVerts[tempTris[j].v[k]].y);
-				tempPtr->y = fix16_mul(tempPtr->y, tempScale[1]) + tempTranslate[1];
-				tempPtr->z = fix16_from_int(tempVerts[tempTris[j].v[k]].z);
-				tempPtr->z = fix16_mul(tempPtr->z, tempScale[2]) + tempTranslate[2];
-				tempPtr->u = tempVerts_u[tempTris[j].t[k]];
-				tempPtr->v = tempVerts_v[tempTris[j].t[k]];
-				tempPtr->c = FGL_COLOR_WHITE;
-			}
-		}
-	}
+/* 		for(j = 0; j < tempHeader.num_tris; j++) { */
+/* 			for(k = 0; k < 3; k++, tempPtr++) { */
+/* 				tempPtr->x = fix16_from_int(tempVerts[tempTris[j].v[k]].x); */
+/* 				tempPtr->x = fix16_mul(tempPtr->x, tempScale[0]) + tempTranslate[0]; */
+/* 				tempPtr->y = fix16_from_int(tempVerts[tempTris[j].v[k]].y); */
+/* 				tempPtr->y = fix16_mul(tempPtr->y, tempScale[1]) + tempTranslate[1]; */
+/* 				tempPtr->z = fix16_from_int(tempVerts[tempTris[j].v[k]].z); */
+/* 				tempPtr->z = fix16_mul(tempPtr->z, tempScale[2]) + tempTranslate[2]; */
+/* 				tempPtr->u = tempVerts_u[tempTris[j].t[k]]; */
+/* 				tempPtr->v = tempVerts_v[tempTris[j].t[k]]; */
+/* 				tempPtr->c = FGL_COLOR_WHITE; */
+/* 			} */
+/* 		} */
+/* 	} */
 
-	fclose(tempFile);
-	return tempModel;
-}
+/* 	fclose(tempFile); */
+/* 	return tempModel; */
+/* } */
 
 void fgl_model_delete(fgl_model* inModel) {
 	free(inModel);
