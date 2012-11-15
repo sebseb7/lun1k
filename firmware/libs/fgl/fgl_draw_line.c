@@ -16,25 +16,25 @@ extern uint16_t*    _fgl_depth_buffer;
 
 #define _fgl_draw_line fgl_draw_line_cs
 #define _polygon_color
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 #define _fgl_draw_line fgl_draw_line_ci
 #define _vertex_color
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 #define _fgl_draw_line fgl_draw_line_tn
 #define _texture
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 #define _fgl_draw_line fgl_draw_line_cs_tn
 #define _polygon_color
 #define _texture
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 #define _fgl_draw_line fgl_draw_line_ci_tn
 #define _vertex_color
 #define _texture
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 
 
@@ -42,30 +42,30 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _depth_write
 #define _depth_test
 #define _polygon_color
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 #define _fgl_draw_line fgl_draw_line_dw_dt_ci
 #define _depth_write
 #define _depth_test
 #define _vertex_color
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 #define _fgl_draw_line fgl_draw_line_dw_dt_tn
 #define _depth_write
 #define _depth_test
 #define _texture
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 #define _fgl_draw_line fgl_draw_line_dw_dt_cs_tn
 #define _depth_write
 #define _depth_test
 #define _polygon_color
 #define _texture
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"
 
 #define _fgl_draw_line fgl_draw_line_dw_dt_ci_tn
 #define _depth_write
 #define _depth_test
 #define _vertex_color
 #define _texture
-#include "_fgl_draw_line.h"
+#include "include/_fgl_draw_line.h"

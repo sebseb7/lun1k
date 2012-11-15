@@ -18,63 +18,63 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _func_name_sprite render_sprite_cs
 #define _func_name_raster raster_triangle_cs
 #define _polygon_color
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_ci
 #define _func_name_raster raster_triangle_ci
 #define _vertex_color
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_tn
 #define _func_name_sprite render_sprite_tn
 #define _func_name_raster raster_triangle_tn
 #define _texture
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_cs_tn
 #define _func_name_sprite render_sprite_cs_tn
 #define _func_name_raster raster_triangle_cs_tn
 #define _polygon_color
 #define _texture
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_ci_tn
 #define _func_name_raster raster_triangle_ci_tn
 #define _vertex_color
 #define _texture
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_cl_cs
 #define _func_name_raster raster_triangle_cl_cs
 #define _polygon_color
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_cl_ci
 #define _func_name_raster raster_triangle_cl_ci
 #define _vertex_color
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_cl_tn
 #define _func_name_raster raster_triangle_cl_tn
 #define _texture
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_cl_cs_tn
 #define _func_name_raster raster_triangle_cl_cs_tn
 #define _polygon_color
 #define _texture
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_cl_ci_tn
 #define _func_name_raster raster_triangle_cl_ci_tn
 #define _vertex_color
 #define _texture
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 
 
@@ -84,14 +84,14 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _depth_write
 #define _depth_test
 #define _polygon_color
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_ci
 #define _func_name_raster raster_triangle_dw_dt_ci
 #define _depth_write
 #define _depth_test
 #define _vertex_color
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_tn
 #define _func_name_sprite render_sprite_dw_dt_tn
@@ -99,7 +99,7 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _depth_write
 #define _depth_test
 #define _texture
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_cs_tn
 #define _func_name_sprite render_sprite_dw_dt_cs_tn
@@ -108,7 +108,7 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _depth_test
 #define _polygon_color
 #define _texture
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_ci_tn
 #define _func_name_raster raster_triangle_dw_dt_ci_tn
@@ -116,7 +116,7 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _depth_test
 #define _vertex_color
 #define _texture
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_cl_cs
 #define _func_name_raster raster_triangle_dw_dt_cl_cs
@@ -124,7 +124,7 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _depth_test
 #define _polygon_color
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_cl_ci
 #define _func_name_raster raster_triangle_dw_dt_cl_ci
@@ -132,7 +132,7 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _depth_test
 #define _vertex_color
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_cl_tn
 #define _func_name_raster raster_triangle_dw_dt_cl_tn
@@ -140,7 +140,7 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _depth_test
 #define _texture
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_cl_cs_tn
 #define _func_name_raster raster_triangle_dw_dt_cl_cs_tn
@@ -149,7 +149,7 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _polygon_color
 #define _texture
 #define _clip
-#include "_render.h"
+#include "include/_render.h"
 
 #define _func_name render_triangle_dw_dt_cl_ci_tn
 #define _func_name_raster raster_triangle_dw_dt_cl_ci_tn
@@ -158,4 +158,4 @@ extern uint16_t*    _fgl_depth_buffer;
 #define _vertex_color
 #define _texture
 #define _clip
-#include "_render.h"
+#include "include/_render.h"

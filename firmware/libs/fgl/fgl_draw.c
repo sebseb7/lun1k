@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "render.h"
-#include "fgl_draw_line.h"
+#include "include/render.h"
+#include "include/fgl_draw_line.h"
 #include "fgl_color.h"
 #include "fgl_texture.h"
 #include "fgl_matrix.h"
