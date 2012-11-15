@@ -161,8 +161,6 @@ static void init(void) {
     fgl_texture_clear(_display_buffer);
     fgl_draw_buffer_set(_display_buffer);
 
-    //fgl_texture_create(16, 16);
-
     uint16_t* tempDepth = (uint16_t*)malloc((_display_buffer->width * _display_buffer->height) << 1);
     if(tempDepth != NULL)
         fgl_depth_buffer_set(tempDepth);
@@ -184,7 +182,12 @@ static void init(void) {
     fgl_scale(fix16_from_int(1), fix16_from_int(1), fix16_from_int(1));
 
 
-        fgl_enable(FGL_CULL_FACE);
+    fgl_enable(FGL_CULL_FACE);
+
+    fgl_texture* tempTexture = fgl_texture_create(16, 16);
+    memcpy(tempTexture->data, tex, 2 * 16 * 16 );
+    fgl_texture_bind(tempTexture);
+    fgl_enable(FGL_TEXTURE_2D);
 }
 
 static void deinit(void) {
