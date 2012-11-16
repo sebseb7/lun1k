@@ -14,6 +14,7 @@ SRC=$(wildcard  *.c libs/*.c) \
 	../animations/tetris.c \
 	../animations/lib/tetris.c \
 	../animations/lib/grid.c \
+	../animations/tunnel_less_ram.c \
 	../animations/plasma_bigsin.c \
 	../animations/plasma_weed.c 
 
@@ -32,7 +33,7 @@ GCFLAGS+=-ISTM32_USB_Device_Library/Core/inc
 # Warnings
 GCFLAGS += -Wno-strict-aliasing -Wstrict-prototypes -Wundef -Wall -Wextra -Wunreachable-code  
 # Optimizazions
-GCFLAGS += -fsingle-precision-constant -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -fno-builtin -ffunction-sections -fno-common -fdata-sections 
+GCFLAGS += -fstrict-aliasing -fsingle-precision-constant -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -fno-builtin -ffunction-sections -fno-common -fdata-sections 
 # Debug stuff
 GCFLAGS += -Wa,-adhlns=$(<:.c=.lst),-gstabs -g 
 
