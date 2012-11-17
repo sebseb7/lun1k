@@ -19,50 +19,45 @@ void Delay(__IO uint32_t nTime)
 	while(TimingDelay != 0);
 }
 
-static unsigned int button_esc_down = 0;
-static int button_esc_pressed = 0;
-static unsigned int button_stick_down = 0;
-static int button_stick_pressed = 0;
-static int buttonsInitialized = 0;
+
+static uint16_t key_state;
+static uint16_t key_press;
+uint32_t buttonsInitialized = 0;
 
 
 void TimingDelay_Decrement(void)
 {
+	static uint16_t ct0, ct1;
+	uint16_t i;
+
 	if (TimingDelay != 0x00)
 	{ 
 		TimingDelay--;
 	}
 	if(buttonsInitialized)
 	{
-		if(!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13))
-		{
-			button_stick_down++;
-			if(button_stick_down == 50)
-			{
-				button_stick_pressed = 1;
-			}
-		}
-		else
-		{
-			button_stick_down = 0;
-			button_stick_pressed = 0;
-		}
-		if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8))
-		{
-			button_esc_down++;
-			if(button_esc_down == 50)
-			{
-				button_esc_pressed = 1;
-			}
-		}
-		else
-		{
-			button_esc_down = 0;
-			button_esc_pressed = 0;
-		}
+		uint16_t key_curr = ((GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8)^1)<<1)|
+							(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13)<<2)|
+							(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_4)<<3)|
+							GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0);
+
+		i = key_state ^ ~key_curr;
+		ct0 = ~( ct0 & i );
+		ct1 = ct0 ^ (ct1 & i);
+		i &= ct0 & ct1;
+		key_state ^= i;
+		key_press |= key_state & i;
 	}
 	tick++;
 }
+
+uint16_t get_key_press( uint16_t key_mask )
+{
+	key_mask &= key_press;                          // read key(s)
+	key_press ^= key_mask;                          // clear key(s)
+	return key_mask;
+}
+
 
 #define MAX_ANIMATIONS 30
 
@@ -183,6 +178,12 @@ int main(void)
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_13;       
 	GPIO_Init(GPIOC, &GPIO_InitStructure);  
+	//A
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_4;       
+	GPIO_Init(GPIOB, &GPIO_InitStructure);  
+	//B
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_0;       
+	GPIO_Init(GPIOA, &GPIO_InitStructure);  
 	buttonsInitialized=1;
 		
 
@@ -289,9 +290,8 @@ int main(void)
 		tick_count++;
 
 
-		if((button_esc_pressed) || (tick_count == animations[current_animation].duration))
+		if(get_key_press(0x0f))
 		{
-			button_esc_pressed=0;
 			animations[current_animation].deinit_fp();
 
 			current_animation++;
