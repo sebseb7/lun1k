@@ -25,6 +25,18 @@ void draw_char_inv_8x6(int x,int y, char text)
 		}
 	}
 }
+void fill_8x6(uint8_t x, uint8_t y, uint8_t count,uint8_t r, uint8_t g , int8_t b)
+{
+	int i;
+	for (i = 0; i < 6*count; i++)
+	{
+		int j;
+		for (j = 0; j < 8; j++)
+		{
+			setLedXY(x+i,y+j+4,r,g,b);
+		}
+	}
+}
 void draw_char_8x6(int x,int y, char text, uint8_t r,uint8_t g, uint8_t b)
 {
 	text-=32;
@@ -166,7 +178,12 @@ void draw_number_8x6(uint8_t x, uint8_t y, int32_t number, uint8_t length, uint8
 {
 
 	char s[10];
-	sprintf(s, "%d", number);
+#ifdef SIMULATOR
+	sprintf(s, "%i", number);
+#else
+	sprintf(s, "%li", number);
+#endif
+
 	int len = strlen(s);
 
 	if (length < len) {

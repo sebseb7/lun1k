@@ -4,8 +4,8 @@
 
 #include <stdint.h>
 
-extern uint8_t charWidth_16pt[];
-extern uint16_t startIdx_16pt[];
-extern uint8_t  charMap_16pt[];
+extern const uint8_t charWidth_16pt[];
+extern const uint16_t startIdx_16pt[];
+extern const uint8_t  charMap_16pt[];
 
 #endif

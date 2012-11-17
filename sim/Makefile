@@ -3,40 +3,47 @@ UNAME := $(shell uname)
 COMPILER = gcc
 
 
-FLAGS=--std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code -pedantic  -Wstrict-prototypes
+FLAGS= -I. -I../firmware --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  -fsingle-precision-constant
 LDFLAGS=
 BINEXT=
 
 ifeq ($(UNAME), Darwin)
 	COMPILER = clang
-	FLAGS   += `sdl-config --cflags`
-	LDFLAGS += `sdl-config --libs` -lSDL_image
+	FLAGS   += -Qunused-arguments
+	
+	FLAGS   += `sdl-config --cflags` 
+	LDFLAGS += `sdl-config --libs` -lSDL_image 
 endif
 
 ifeq ($(UNAME), Linux)
-	LDFLAGS +=  -lSDL -lSDL_image
+	FLAGS   += `sdl-config --cflags`
+	LDFLAGS +=  -lSDL -lSDL_image 
 endif
 
 ifeq ($(UNAME), MINGW32_NT-6.1)
 	FLAGS   += -I/MinGW/msys/1.0/include/ 
-	LDFLAGS += -L/MinGW/msys/1.0/lib -lmingw32 -lSDLmain -lSDL -lSDL_image
+	LDFLAGS += -L/MinGW/msys/1.0/lib -lmingw32 -lSDLmain -lSDL -lSDL_image 
 	BINEXT = .exe
 endif
 
-SOURCES=$(wildcard ../firmware/animations/*.c)
-BINARIES=$(SOURCES:../firmware/animations/%.c=%$(BINEXT))
+SOURCES=$(wildcard ../animations/*.c)
+BINARIES=$(SOURCES:../animations/%.c=%$(BINEXT))
 
-LIB_SOURCES=$(wildcard ../firmware/libs/*.c)
-LIB_HEADERS=$(wildcard ../firmware/libs/*.g)
+LIB_SOURCES=$(wildcard ../firmware/libs/*.c ../animations/lib/*.c)
+LIB_HEADERS=$(wildcard ../firmware/libs/*.h ../animations/lib/*.h)
 
-all: $(BINARIES) _full
+all: $(BINARIES) _all_animations
 
 clean:
-	rm -f ${BINARIES}
+	rm -f ${BINARIES} _all_animations
 
-%$(BINEXT): ../firmware/animations/%.c $(LIB_SOURCES) $(LIB_HEADERS) main.c main.h Makefile 
-	$(COMPILER) $(FLAGS) main.c $(LIB_SOURCES) $(LDFLAGS) $< -o $@ -I. 
+%$(BINEXT): ../animations/%.c $(LIB_SOURCES) $(LIB_HEADERS) main.c main.h Makefile 
+	@echo "  \033[1;34mCompile\033[0m $< -> \033[1;33m $@\033[0m "
+	@$(COMPILER) $(FLAGS) main.c $(LIB_SOURCES) $(LDFLAGS) $< -o $@ -I. 
 
-_full: $(SOURCES) $(LIB_SOURCES) $(LIB_HEADERS) main.c main.h Makefile 
-	$(COMPILER) -DFULL=1 $(FLAGS) $(LIB_SOURCES) $(SOURCES) $(LDFLAGS) main.c -o _full -I. 
+_all_animations: $(SOURCES) $(LIB_SOURCES) $(LIB_HEADERS) main.c main.h Makefile 
+	@echo "  \033[1;34mCompile all animations \033[0m -> \033[1;33m _all_animations \033[0m"
+	@$(COMPILER) -DFULL=1 $(FLAGS) $(LIB_SOURCES) $(SOURCES) $(LDFLAGS) main.c -o _all_animations -I. 
+
+.PHONY : clean all 
 
