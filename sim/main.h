@@ -10,12 +10,12 @@
 
 #define CONSTRUCTOR_ATTRIBUTES	__attribute__((constructor));
 
-typedef enum {
-	KEY_A,
-	KEY_B,
-	KEY_ESC,
-	KEY_STICK,
-} key_type;
+#define KEY_A (1<<0)
+#define KEY_ESC (1<<1)
+#define KEY_STICK (1<<2)
+#define KEY_B (1<<3)
+
+uint16_t get_key_press( uint16_t key_mask );
 
 
 typedef void (*init_fun)(void);

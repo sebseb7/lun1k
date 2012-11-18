@@ -91,6 +91,14 @@ void registerAnimation(init_fun init,tick_fun tick, deinit_fun deinit,uint16_t t
 
 }
 
+static uint16_t key_press;
+uint16_t get_key_press( uint16_t key_mask )
+{
+	key_mask &= key_press;                          // read key(s)
+	key_press ^= key_mask;                          // clear key(s)
+	return key_mask;
+}
+
 
 void fillRGB(uint8_t r,uint8_t g , uint8_t b)
 {
@@ -156,34 +164,16 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 							}
 							break;
 						case SDLK_1:
-							//key_fp(1);
+							key_press |= KEY_ESC;
 							break;
 						case SDLK_2:
-							//key_fp(2);
+							key_press |= KEY_B;
 							break;
 						case SDLK_3:
-							//key_fp(3);
+							key_press |= KEY_A;
 							break;
 						case SDLK_4:
-							//key_fp(4);
-							break;
-						case SDLK_5:
-							//key_fp(5);
-							break;
-						case SDLK_6:
-							//key_fp(6);
-							break;
-						case SDLK_7:
-							//key_fp(7);
-							break;
-						case SDLK_8:
-							//key_fp(8);
-							break;
-						case SDLK_9:
-							//key_fp(9);
-							break;
-						case SDLK_0:
-							//key_fp(0);
+							key_press |= KEY_STICK;
 							break;
 							
 						default: break;
