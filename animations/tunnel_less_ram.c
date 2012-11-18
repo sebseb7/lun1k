@@ -31,16 +31,16 @@ static double pythagoras1( double side1, double side2 )
 static void init(void) {
     int16_t x, y;
 		
-    zTable = malloc(2 * LED_HEIGHT * sizeof(uint16_t *));
+    zTable = malloc(LED_HEIGHT * sizeof(uint16_t *));
 
-    for(y = 0; y < 2 * LED_HEIGHT; y++) 
+    for(y = 0; y < LED_HEIGHT; y++) 
     {
         zTable[y] = malloc((y+1)*sizeof(uint16_t));
         for(x = 0; x < (y+1); x++) 
         {
             int16_t
-                x1 = x - 2 * LED_WIDTH,
-                y1 = y - 2 * LED_HEIGHT;
+                x1 = x - LED_WIDTH,
+                y1 = y - LED_HEIGHT;
             double distance =
                 1 /
                 (pythagoras1(x1, y1)
@@ -54,8 +54,8 @@ static void init(void) {
 static uint16_t getA(uint16_t x,uint16_t y)
 {
             int16_t
-                x1 = x - 2 * LED_WIDTH,
-                y1 = y - 2 * LED_HEIGHT;
+                x1 = x - LED_WIDTH,
+                y1 = y - LED_HEIGHT;
             float angle = atan2f(x1, y1);
             return 0x1fff + (angle * 0x1fff) / 3.1514f;
 
@@ -64,10 +64,10 @@ static uint16_t getA(uint16_t x,uint16_t y)
 static uint16_t getZ(uint16_t x, uint16_t y)
 {
 
-    if(x >= 2 * LED_WIDTH)
-        x = (2 * LED_WIDTH - 1)-(x-(2 * LED_WIDTH));
-    if(y >= 2 * LED_HEIGHT)
-        y = (2 * LED_HEIGHT - 1)-(y-(2 * LED_HEIGHT));
+    if(x >= LED_WIDTH)
+        x = (LED_WIDTH - 1)-(x-(LED_WIDTH));
+    if(y >= LED_HEIGHT)
+        y = (LED_HEIGHT - 1)-(y-(LED_HEIGHT));
     if(y > x)
     {
         uint8_t t = x;
@@ -80,7 +80,7 @@ static uint16_t getZ(uint16_t x, uint16_t y)
 static void deinit(void) {
 
 	// free 
-	for(int y = 0; y < 2 * LED_HEIGHT; y++) 
+	for(int y = 0; y < LED_HEIGHT; y++) 
     {
 		free(zTable[y]);
 	}
@@ -98,8 +98,8 @@ static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
 static uint8_t tick(void) {
     static uint16_t t = 0;
     t++;
-    int16_t shiftLookX = 2 * LED_WIDTH * (uint32_t)sini(49 * t + 0x0fff) / 0xffff;
-    int16_t shiftLookY = 2 * LED_HEIGHT * (uint32_t)sini(31 * t + 0x0fff) / 0xffff;
+    int16_t shiftLookX = LED_WIDTH * (uint32_t)sini(49 * t + 0x0fff) / 0xffff;
+    int16_t shiftLookY = LED_HEIGHT * (uint32_t)sini(31 * t + 0x0fff) / 0xffff;
 	
     uint16_t x, y;
 
@@ -107,27 +107,19 @@ static uint8_t tick(void) {
     {
         for(x = 0; x < LED_WIDTH; x++) 
         {
-            /* TODO: delta speed from shiftLook[XY] */
-            uint16_t x1 = 2 * x + shiftLookX;
-            uint16_t y1 = 2 * y + shiftLookY;
-            
-            uint16_t r = 0, g = 0, b = 0;
-            uint16_t z;
-            for(uint8_t i = 0; i < 4; i++) {
-                uint16_t x2 = x1 + (i & 1);
-                uint16_t y2 = y1 + (i >> 1);
-                z = getZ(x2, y2);
-                uint16_t a = getA(x2,y1);
-                uint32_t texel = getTex(a + t * 0x7, z + t * 2);
-                r += ((texel & 0xff0000) >> 16);
-                g += ((texel & 0xff00) >> 8);
-                b += (texel & 0xff);
-            }
+            uint8_t x1 = x + shiftLookX;
+            uint8_t y1 = y + shiftLookY;
+            uint16_t z = getZ(x1,y1);
+            uint16_t a = getA(x1,y1);
+            uint32_t texel = getTex(a + t * 0x7, z + t * 2);
+            uint8_t r = ((texel & 0xff0000) >> 16);
+            uint8_t g = ((texel & 0xff00) >> 8);
+            uint8_t b = (texel & 0xff);
             /* apply shade */
             uint16_t f = 0xff - MIN(0xff, z);
-            r = f * r >> 10;
-            g = f * g >> 10;
-            b = f * b >> 10;
+            r = f * r >> 8;
+            g = f * g >> 8;
+            b = f * b >> 8;
             
             setLedXY(x, y, r, g, b);
         }
