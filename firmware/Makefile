@@ -13,7 +13,6 @@ SRC=$(wildcard  *.c libs/*.c) \
 	../animations/tetris.c \
 	../animations/lib/tetris.c \
 	../animations/lib/grid.c \
-	../animations/tunnel_less_ram.c \
 	../animations/plasma_bigsin.c \
 	../animations/plasma_weed.c \
 	$(wildcard libs/libfixmath/*.c libs/fgl/*.c)
@@ -36,8 +35,6 @@ GCFLAGS += -Wno-strict-aliasing -Wstrict-prototypes -Wundef -Wall -Wextra -Wunre
 GCFLAGS += -fstrict-aliasing -fsingle-precision-constant -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -fno-builtin -ffunction-sections -fno-common -fdata-sections 
 # Debug stuff
 GCFLAGS += -Wa,-adhlns=$(<:.c=.lst),-gstabs -g 
-# FGL
-GCFLAGS += -I libs
 
 GCFLAGS+= -ISTM32F4_drivers/inc
 
