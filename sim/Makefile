@@ -3,7 +3,7 @@ UNAME := $(shell uname)
 COMPILER = gcc
 
 
-FLAGS= -I. -I../firmware -I../firmware/libs --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  -fsingle-precision-constant -g -O3 -ftree-vectorize
+FLAGS= -I. -I../firmware -I../firmware/libs --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  -fsingle-precision-constant
 LDFLAGS=
 BINEXT=
 
