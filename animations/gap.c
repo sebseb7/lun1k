@@ -38,7 +38,7 @@ static void init(void) {
 static void deinit(void) {
 }
 
-static uint8_t *body_u =
+static const uint8_t *body_u =
     "   ooo  "
     "  o   o "
     " o o o o"
@@ -47,7 +47,7 @@ static uint8_t *body_u =
     "o  ooo  "
     " o  o  o"
     "  oooooo";
-static uint8_t *body_l1 =
+static const uint8_t *body_l1 =
     "   oo   "
     "   oo   "
     "   oo   "
@@ -56,7 +56,7 @@ static uint8_t *body_l1 =
     " o    o "
     " o    o "
     " o    o ";
-static uint8_t *body_l2 =
+static const uint8_t *body_l2 =
     "   oo   "
     "   oo   "
     "   oo   "
@@ -65,7 +65,7 @@ static uint8_t *body_l2 =
     "   o  o "
     "  o   o "
     "  o    o";
-static uint8_t *body_l3 =
+static const uint8_t *body_l3 =
     "   oo   "
     "   oo   "
     "   oo   "
@@ -75,7 +75,7 @@ static uint8_t *body_l3 =
     " o   o  "
     "o    o  ";
 
-static uint8_t *brick =
+static const uint8_t *brick =
     "oooooooooooooooo"
     "       o        "
     "       o        "
