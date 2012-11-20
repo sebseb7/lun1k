@@ -22,12 +22,17 @@
 
 int8_t land[LED_WIDTH / BLOCK_WIDTH + 1];
 uint8_t gap_len = 0;
-int8_t x = 0, y = 0, y_acc = 0;
+int8_t x = 0, y = 0, y_acc = 0, step = 0;
+uint32_t score = 0;
+int8_t lives = 5;
 
 static void init(void) {
     int8_t i;
     for(i = 0; i < sizeof(land); i++)
         land[i] = 1;
+    x = 0;
+    y = 0;
+    y_acc = 0;
 }
 
 static void deinit(void) {
@@ -89,11 +94,14 @@ static uint8_t *brick =
     "o               ";
 
 static uint8_t tick(void) {
+    static uint8_t want_jump = 0;
+
     x++;
+    score++;
     while(x >= BLOCK_WIDTH) {
         x -= BLOCK_WIDTH;
         memcpy(land, land + 1, sizeof(land) * sizeof(*land));
-        uint8_t new_land = gap_len > 1 || random() & 3 != 0;
+        uint8_t new_land = gap_len > 1 || rand() & 1 != 0;
         gap_len = new_land ? 0 : gap_len + 1;
         land[sizeof(land) - 1] = new_land;
     }
@@ -116,21 +124,48 @@ static uint8_t tick(void) {
                     sky = 1;
             }
             if (sky)
-                setLedXY(px, py, 127 - py, 127 - py, 127);
+                setLedXY(px, py, 192 - py, 192 - py, 192);
         }
 
     /* Handle player */
     /* Jump */
-    if (get_key_press(KEY_A | KEY_B) && y_acc == 0)
-        y_acc = -14;
+    uint8_t key = get_key_press(KEY_A | KEY_B);
+    if (key) {
+        want_jump = 1;
+        for(py = 0; py < 8; py++) {
+            setLedXY(PLAYER_X + x - py / 2, LAND_Y - 48 + y + py, 255, 255, 127);
+            setLedXY(PLAYER_X + x + py / 2, LAND_Y - 48 + y + py, 255, 255, 127);
+        }
+    }
+    /* On ground? */
+    if (y_acc == 0 && y == 0) {
+        step++;
+        if (want_jump) {
+            y_acc = -12;
+            want_jump = 0;
+        }
+    }
 
     /* Gravity */
-    y_acc++;
-    if (y < 48)
-        y += y_acc;
+    if (x & 1) {
+        if (y < 63)
+            y += y_acc;
+        y_acc++;
+        if (y >= 63) {
+            /* Die */
+            lives--;
+            y = 0;
+            y_acc = 4;
+            if (lives < 0) {
+                lives = 5;
+                score = 0;
+            }
+        }
+    }
+
     uint8_t above_land1 = land[(PLAYER_X + x) / BLOCK_WIDTH];
     uint8_t above_land2 = land[(PLAYER_X + x + 7) / BLOCK_WIDTH];
-    if (y > 0 && y <= 127 && (above_land1 || above_land2)) {
+    if (y > 0 && y <= 15 && (above_land1 || above_land2)) {
         y_acc = 0;
         y = 0;
     }
@@ -142,7 +177,7 @@ static uint8_t tick(void) {
                 setLedXY(PLAYER_X + px, LAND_Y - 16 + py + y, 0, 0, 0);
         }
     uint8_t *body_l;
-    switch((x >> 1) & 0x3) {
+    switch((step >> 1) & 0x3) {
     case 0:
         body_l = body_l1;
         break;
@@ -161,6 +196,13 @@ static uint8_t tick(void) {
             if (body_l[px + 8 * py] != ' ')
                 setLedXY(PLAYER_X + px, LAND_Y - 8 + py + y, 0, 0, 0);
         }
+
+    
+    char t[256];
+    snprintf(t, 256, "%i lives", lives);
+    draw_text_8x6(0, 0, t, 255, 255, 255);
+    snprintf(t, 256, "Score: %i", score);
+    draw_text_8x6(LED_WIDTH - 6 * strlen(t), 0, t, 255, 255, 255);
 
     return 0;
 }
