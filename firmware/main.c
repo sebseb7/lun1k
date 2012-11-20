@@ -50,7 +50,10 @@ void TimingDelay_Decrement(void)
 	}
 	tick++;
 }
-
+uint32_t getSysTick(void)
+{
+	return tick;
+}
 uint16_t get_key_press( uint16_t key_mask )
 {
 	key_mask &= key_press;                          // read key(s)

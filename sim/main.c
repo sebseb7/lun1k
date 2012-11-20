@@ -103,6 +103,11 @@ uint16_t get_key_state( uint16_t key_mask )
 	return key_mask & key_press;
 }
 
+uint32_t getSysTick(void)
+{
+	return SDL_GetTicks()*10;
+}
+
 
 void fillRGB(uint8_t r,uint8_t g , uint8_t b)
 {
