@@ -20,6 +20,7 @@ void registerAnimation(init_fun init,tick_fun tick,deinit_fun deinit, uint16_t t
 #define KEY_B (1<<3)
 
 uint16_t get_key_press( uint16_t key_mask );
+uint16_t get_key_state( uint16_t key_mask );
 
 #define CONSTRUCTOR_ATTRIBUTES	__attribute__((constructor));
 

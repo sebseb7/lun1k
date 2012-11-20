@@ -58,6 +58,11 @@ uint16_t get_key_press( uint16_t key_mask )
 	return key_mask;
 }
 
+uint16_t get_key_state( uint16_t key_mask )
+{
+	return key_mask & key_press;
+}
+
 
 #define MAX_ANIMATIONS 30
 

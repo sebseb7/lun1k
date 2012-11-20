@@ -16,6 +16,7 @@
 #define KEY_B (1<<3)
 
 uint16_t get_key_press( uint16_t key_mask );
+uint16_t get_key_state( uint16_t key_mask );
 
 
 typedef void (*init_fun)(void);
