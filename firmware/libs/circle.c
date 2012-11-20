@@ -62,7 +62,7 @@ void draw_filledCircleSlice(
 */
 void draw_filledCircle(
 	unsigned int x, unsigned int y,
-	double rad,
+	float rad,
 	uint8_t r,
 	uint8_t g,
 	uint8_t b )
@@ -74,7 +74,7 @@ void draw_filledCircle(
 	{
 		for(j=0;j<(i+1);j++)
 		{
-			double dist = pythagoras( j,i );
+			float dist = pythagorasf( j,i );
 			if(dist <= rad-1)
 			{
 				setLedXY(y-j,x+i,r,g,b);

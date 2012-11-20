@@ -27,8 +27,8 @@ static void dla_plot(int x, int y, uint8_t r,uint8_t g , uint8_t b, float br)
 }
 
 #define ipart_(X) ((int)(X))
-#define round_(X) ((int)(((double)(X))+0.5))
-#define fpart_(X) (((double)(X))-(double)ipart_(X))
+#define round_(X) ((int)(((float)(X))+0.5))
+#define fpart_(X) (((float)(X))-(float)ipart_(X))
 #define rfpart_(X) (1.0-fpart_(X))
 
 #define swap_(a, b) do{ __typeof__(a) tmp;  tmp = a; a = b; b = tmp; }while(0)
@@ -39,8 +39,8 @@ void draw_line(
 	uint8_t g,
 	uint8_t b )
 {
-	double dx = (double)x2 - (double)x1;
-	double dy = (double)y2 - (double)y1;
+	float dx = (float)x2 - (float)x1;
+	float dy = (float)y2 - (float)y1;
 	if ( fabs(dx) > fabs(dy) ) 
 	{
 		if ( x2 < x1 ) 
@@ -48,19 +48,19 @@ void draw_line(
 			swap_(x1, x2);
 			swap_(y1, y2);
 		}
-		double gradient = dy / dx;
-		double xend = round_(x1);
-		double yend = y1 + gradient*(xend - x1);
-		double xgap = rfpart_(x1 + 0.5);
+		float gradient = dy / dx;
+		float xend = round_(x1);
+		float yend = y1 + gradient*(xend - x1);
+		float xgap = rfpart_(x1 + 0.5f);
 		int xpxl1 = xend;
 		int ypxl1 = ipart_(yend);
 		dla_plot(xpxl1, ypxl1, r,g,b,rfpart_(yend)*xgap);
 		dla_plot(xpxl1, ypxl1+1, r,g,b,fpart_(yend)*xgap);
-		double intery = yend + gradient;
+		float intery = yend + gradient;
 
 		xend = round_(x2);
 		yend = y2 + gradient*(xend - x2);
-		xgap = fpart_(x2+0.5);
+		xgap = fpart_(x2+0.5f);
 		int xpxl2 = xend;
 		int ypxl2 = ipart_(yend);
 		dla_plot(xpxl2, ypxl2, r,g,b,rfpart_(yend) * xgap);
@@ -83,19 +83,19 @@ void draw_line(
 			swap_(x1, x2);
 			swap_(y1, y2);
 		}
-		double gradient = dx / dy;
-		double yend = round_(y1);
-		double xend = x1 + gradient*(yend - y1);
-		double ygap = rfpart_(y1 + 0.5);
+		float gradient = dx / dy;
+		float yend = round_(y1);
+		float xend = x1 + gradient*(yend - y1);
+		float ygap = rfpart_(y1 + 0.5f);
 		int ypxl1 = yend;
 		int xpxl1 = ipart_(xend);
 		dla_plot(xpxl1, ypxl1, r,g,b,rfpart_(xend)*ygap);
 		dla_plot(xpxl1, ypxl1+1, r,g,b,fpart_(xend)*ygap);
-		double interx = xend + gradient;
+		float interx = xend + gradient;
 	
 		yend = round_(y2);
 		xend = x2 + gradient*(yend - y2);
-		ygap = fpart_(y2+0.5);
+		ygap = fpart_(y2+0.5f);
 		int ypxl2 = yend;
 		int xpxl2 = ipart_(xend);
 		dla_plot(xpxl2, ypxl2, r,g,b,rfpart_(xend) * ygap);

@@ -3,7 +3,7 @@
 
 void draw_filledCircleSlice(
 	unsigned int x, unsigned int y,
-	double rad,
+	float rad,
 	uint8_t r,
 	uint8_t g,
 	uint8_t b,
@@ -12,7 +12,7 @@ void draw_filledCircleSlice(
 
 void draw_filledCircle(
 	unsigned int x, unsigned int y,
-	double rad,
+	float rad,
 	uint8_t r,
 	uint8_t g,
 	uint8_t b );
