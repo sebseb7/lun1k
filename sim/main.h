@@ -25,7 +25,7 @@ typedef uint8_t (*tick_fun)(void);
 
 int sdlpause;
 
-uint32_t getSysTick(void)
+uint32_t getSysTick(void);
 
 void registerAnimation(init_fun init,tick_fun tick,deinit_fun deinit, uint16_t t, uint16_t duration);
 //void registerApp(tick_fun tick,uint16_t t);
