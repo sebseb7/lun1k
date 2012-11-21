@@ -5,6 +5,8 @@
 #include <time.h>
 #include <SDL/SDL.h>
 #include "SDL/SDL_image.h"
+#include <dlfcn.h>
+#include <stdio.h>
 
 #include "main.h"
 
@@ -61,13 +63,6 @@ void  free (void *pMem)
 
 int sdlpause = 0;
 
-/*unsigned long long int get_clock(void)
-  {
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
-  return (unsigned long long int)tv.tv_usec + 1000000*tv.tv_sec;
-  }
-  */
 #define MAX_ANIMATIONS 200
 #define MAX_APPS 200
 
@@ -191,7 +186,10 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 	//unsigned long long int startTime = get_clock();
 	Uint32 lastFrame = SDL_GetTicks(); 
 
+	printf("asd\n");
+
 	while(running) {
+	printf("t\n");
 		SDL_Event ev;
 		while(SDL_PollEvent(&ev)) {
 			switch(ev.type) {
