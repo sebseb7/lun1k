@@ -16,6 +16,8 @@
 #include<sys/time.h>
 #include <dlfcn.h>
 
+#define MAX_HEAP_SIZE 98304 //96k
+
 static size_t gnCurrentMemory = 0;
 static size_t gnPeakMemory    = 0;
 
@@ -23,6 +25,10 @@ void *malloc (size_t nSize)
 {
 	void *(*libc_malloc)(size_t) = dlsym(RTLD_NEXT, "malloc");
 	void *pMem = libc_malloc(sizeof(size_t) + nSize);
+
+	if(gnCurrentMemory+nSize > MAX_HEAP_SIZE)
+		return NULL;
+
 
 	if (pMem)
 	{
