@@ -104,7 +104,7 @@ static uint8_t tick(void) {
     while(x >= BLOCK_WIDTH) {
         x -= BLOCK_WIDTH;
         memcpy(land, land + 1, sizeof(land) * sizeof(*land));
-        uint8_t new_land = gap_len > 1 || rand() & 1 != 0;
+        uint8_t new_land = gap_len > 1 || rand() & (1 != 0);
         gap_len = new_land ? 0 : gap_len + 1;
         land[sizeof(land) - 1] = new_land;
     }
@@ -204,7 +204,7 @@ static uint8_t tick(void) {
     char t[256];
     snprintf(t, 256, "%i lives", lives);
     draw_text_8x6(0, 0, t, 255, 255, 255);
-    snprintf(t, 256, "Score: %i", score);
+    snprintf(t, 256, "Score: %u", (unsigned int)score);
     draw_text_8x6(LED_WIDTH - 6 * strlen(t), 0, t, 255, 255, 255);
 
     return 0;
