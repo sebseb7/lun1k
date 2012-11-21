@@ -12,7 +12,49 @@
 #include <string.h>
 
 #include<sys/time.h>
+#include <dlfcn.h>
 
+static size_t gnCurrentMemory = 0;
+static size_t gnPeakMemory    = 0;
+
+void *malloc (size_t nSize)
+{
+	void *(*libc_malloc)(size_t) = dlsym(RTLD_NEXT, "malloc");
+	void *pMem = libc_malloc(sizeof(size_t) + nSize);
+
+	if (pMem)
+	{
+		size_t *pSize = (size_t *)pMem;
+		memcpy(pSize, &nSize, sizeof(nSize));
+		gnCurrentMemory += nSize;
+		if (gnCurrentMemory > gnPeakMemory)
+		{
+			gnPeakMemory = gnCurrentMemory;
+		}
+
+		printf("malloc - Size (%lu), Current (%lu), Peak (%lu)\n", nSize, gnCurrentMemory, gnPeakMemory);
+		return(pSize + 1);
+	}
+	return NULL;
+}
+
+void  free (void *pMem)
+{
+	if(pMem)
+	{
+		size_t *pSize = (size_t *)pMem;
+		--pSize;
+
+		assert(gnCurrentMemory >= *pSize);
+
+		printf("free - Size (%lu), Current (%lu), Peak (%lu)\n",  *pSize, gnCurrentMemory, gnPeakMemory);
+
+		gnCurrentMemory -= *pSize;
+
+		void (*libc_free)(void*) = dlsym(RTLD_NEXT, "free");
+		libc_free(pSize);
+	}
+}
 
 
 #define FRAMETIME 33
@@ -20,12 +62,12 @@
 int sdlpause = 0;
 
 /*unsigned long long int get_clock(void)
-{
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	return (unsigned long long int)tv.tv_usec + 1000000*tv.tv_sec;
-}
-*/
+  {
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  return (unsigned long long int)tv.tv_usec + 1000000*tv.tv_sec;
+  }
+  */
 #define MAX_ANIMATIONS 200
 #define MAX_APPS 200
 
@@ -138,7 +180,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 	SDL_Flip(screen);
 
 	animations[current_animation].init_fp();
-	
+
 	int tick_count = 0;
 	int running = 1;
 	//unsigned long long int startTime = get_clock();
@@ -179,7 +221,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 						case SDLK_4:
 							key_press |= KEY_STICK;
 							break;
-							
+
 						default: break;
 					}
 				default: break;
@@ -189,10 +231,10 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 		animations[current_animation].tick_fp();
 
 
-	
 
 
-		
+
+
 		int x, y;
 		for(x = 0; x < LED_WIDTH; x++) {
 			for(y = 0; y < LED_HEIGHT; y++) {
@@ -202,10 +244,10 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 
 					SDL_Rect rect = { x+80, y+130, 1,1 };
 					SDL_FillRect(
-						screen, 
-						&rect, 
-						SDL_MapRGB(screen->format, leds[y][x][0] & 0xFC ,leds[y][x][1] & 0xFC ,leds[y][x][2] & 0xFC)
-					);
+							screen, 
+							&rect, 
+							SDL_MapRGB(screen->format, leds[y][x][0] & 0xFC ,leds[y][x][1] & 0xFC ,leds[y][x][2] & 0xFC)
+							);
 					leds[y][x][3] = 0;
 
 				}
@@ -213,7 +255,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 			}
 		}
 
-		
+
 		SDL_Flip(screen);
 
 
@@ -225,7 +267,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 		}
 		lastFrame = SDL_GetTicks();
 
-		
+
 		tick_count++;
 
 
@@ -239,7 +281,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 				current_animation = 0;
 			}
 			tick_count=0;
-	
+
 			fillRGB(0,0,0);
 
 			animations[current_animation].init_fp();
