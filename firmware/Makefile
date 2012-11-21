@@ -13,18 +13,18 @@ SRC=$(wildcard  *.c libs/*.c) \
 	../animations/linebox.c \
 	../animations/gap.c \
 	../animations/tunnel_no_tex.c \
+	../animations/interference.c \
 	../animations/tetris.c \
 	../animations/lib/tetris.c \
 	../animations/lib/grid.c \
 	../animations/plasma_bigsin.c \
-	../animations/plasma_weed.c \
-	$(wildcard libs/libfixmath/*.c libs/fgl/*.c)
+	../animations/plasma_weed.c
 
 
 ASRC=core/startup_stm32f4xx.s
 OBJECTS= $(SRC:.c=.o) $(ASRC:.s=.o)
 LSTFILES= $(SRC:.c=.lst)
-HEADERS=$(wildcard core/*.h libs/*.h *.h)
+HEADERS=$(wildcard core/*.h *.h)
 
 #  Compiler Options
 GCFLAGS = -DSTM32F=4 -ffreestanding -std=gnu99 -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -I. -Icore -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVER 
