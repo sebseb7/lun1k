@@ -6,6 +6,7 @@
 
 void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
+uint32_t getSysTick(void);
 
 typedef void (*init_fun)(void);
 typedef void (*deinit_fun)(void);
