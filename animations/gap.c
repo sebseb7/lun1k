@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
+#include <string.h>
 #include "main.h"
 #include "libs/text.h"
 #include "libs/math.h"
@@ -27,7 +27,7 @@ uint32_t score;
 int8_t lives;
 
 static void init(void) {
-    int8_t i;
+    uint32_t i;
     for(i = 0; i < sizeof(land); i++)
         land[i] = 1;
     x = 0;
@@ -41,7 +41,7 @@ static void init(void) {
 static void deinit(void) {
 }
 
-static const uint8_t *body_u =
+static const char body_u[] =
     "   ooo  "
     "  o   o "
     " o o o o"
@@ -50,7 +50,7 @@ static const uint8_t *body_u =
     "o  ooo  "
     " o  o  o"
     "  oooooo";
-static const uint8_t *body_l1 =
+static const char body_l1[] =
     "   oo   "
     "   oo   "
     "   oo   "
@@ -59,7 +59,7 @@ static const uint8_t *body_l1 =
     " o    o "
     " o    o "
     " o    o ";
-static const uint8_t *body_l2 =
+static const char body_l2[] =
     "   oo   "
     "   oo   "
     "   oo   "
@@ -68,7 +68,7 @@ static const uint8_t *body_l2 =
     "   o  o "
     "  o   o "
     "  o    o";
-static const uint8_t *body_l3 =
+static const char body_l3[] =
     "   oo   "
     "   oo   "
     "   oo   "
@@ -78,7 +78,7 @@ static const uint8_t *body_l3 =
     " o   o  "
     "o    o  ";
 
-static const uint8_t *brick =
+static const char brick[] =
     "oooooooooooooooo"
     "       o        "
     "       o        "
@@ -179,7 +179,7 @@ static uint8_t tick(void) {
             if (body_u[px + 8 * py] != ' ')
                 setLedXY(PLAYER_X + px, LAND_Y - 16 + py + y, 0, 0, 0);
         }
-    uint8_t *body_l;
+    const char* body_l;
     switch((step >> 1) & 0x3) {
     case 0:
         body_l = body_l1;
