@@ -298,7 +298,7 @@ int main(void)
 		tick_count++;
 
 
-		if(get_key_press(KEY_STICK))
+		if(get_key_press(KEY_ESC))
 		{
 			animations[current_animation].deinit_fp();
 
