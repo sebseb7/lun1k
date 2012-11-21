@@ -32,6 +32,7 @@ static void init() {
 }
 
 static void deinit() {
+    FreeMap();
 }
 
 
@@ -45,7 +46,7 @@ static uint8_t tick(void) {
 
     static float a = 0;
     a += 0.01;
-    sa = 0.003 * sin(a * M_PI);
+    sa = 0.03 * sin(a * M_PI);
     ss = 20 * s;
 }
 

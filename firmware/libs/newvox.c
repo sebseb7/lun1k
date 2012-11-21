@@ -30,10 +30,12 @@
 
 #include "main.h"
 
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
 typedef unsigned char byte;
 
-byte *HMap;      /* Height field */
-byte *CMap;      /* Color map */
+byte *HMap = NULL;      /* Height field */
+byte *CMap = NULL;      /* Color map */
 
 /* Reduces a value to 0..255 (used in height field computation) */
 static int Clamp(int x)
@@ -45,6 +47,7 @@ static int Clamp(int x)
 void ComputeMap(void)
 {
   int p,i,j,k,k2,p2;
+  FreeMap();
   HMap = malloc(256 * 256);
   CMap = malloc(256 * 256);
 
@@ -92,6 +95,19 @@ void ComputeMap(void)
       if ( k<1 ) k=1; if (k>255) k=255;
       CMap[i+j]=k;
     }
+}
+
+void FreeMap() {
+  if (HMap)
+  {
+    free(HMap);
+    HMap = NULL;
+  }
+  if (CMap)
+  {
+    free(CMap);
+    CMap = NULL;
+  }
 }
 
 int lasty[LED_WIDTH],         /* Last pixel drawn on a given column */
@@ -158,13 +174,16 @@ static void Line(int x0,int y0,int x1,int y1,int hy,int s)
       if ( y<0 ) y=0;
       while ( y<a )
       {
-        if (h < 0x23) {
-          uint8_t w = 0xff - (cc >> 17);
+        if (h < 23) {
+          /* Snow tops */
+          uint8_t w = 0xff - (cc >> 20);
           setLedXY(i, a, w, w, w);
-        } else if (h > 0xe7)
+        } else if (h > 0xe5)
+          /* Rivers & Lakes */
           setLedXY(i, a, 0, 0, 0x7f - (cc >> 18));
         else
-          setLedXY(i, a, 0, cc >> 18, 0);
+          /* Grass */
+          setLedXY(i, a, cc >> 19, MIN(0xff, (cc >> 19) + 0x7f), cc >> 19);
 	cc+=sc;
 	a--;
       }
@@ -224,8 +243,8 @@ void View(int x0,int y0,float aa)
   /* Draw the landscape from near to far without overdraw */
   for ( d=0; d<100; d+=1+(d>>6) )
   {
-    Line(x0+d*65536*cos(aa-FOV),y0+d*65536*sin(aa-FOV),
-         x0+d*65536*cos(aa+FOV),y0+d*65536*sin(aa+FOV),
-         h-10,100*256/(d+1));
+    Line(x0+d*0x7fff*cos(aa-FOV),y0+d*0x7fff*sin(aa-FOV),
+         x0+d*0x7fff*cos(aa+FOV),y0+d*0x7fff*sin(aa+FOV),
+         h-30,150*256/(d+1));
   }
 }

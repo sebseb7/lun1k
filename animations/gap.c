@@ -21,10 +21,10 @@
 #define LAND_Y LED_HEIGHT - BLOCK_HEIGHT
 
 int8_t land[LED_WIDTH / BLOCK_WIDTH + 1];
-uint8_t gap_len = 0;
-int8_t x = 0, y = 0, y_acc = 0, step = 0;
-uint32_t score = 0;
-int8_t lives = 5;
+uint8_t gap_len;
+int8_t x, y, y_acc = 0, step = 0;
+uint32_t score;
+int8_t lives;
 
 static void init(void) {
     int8_t i;
@@ -32,7 +32,10 @@ static void init(void) {
         land[i] = 1;
     x = 0;
     y = 0;
+    gap_len = 0;
     y_acc = 0;
+    score = 0;
+    lives = 5;
 }
 
 static void deinit(void) {
