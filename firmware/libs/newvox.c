@@ -29,6 +29,7 @@
 #include <string.h>
 
 #include "main.h"
+#include "newvox.h"
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
@@ -97,7 +98,7 @@ void ComputeMap(void)
     }
 }
 
-void FreeMap() {
+void FreeMap(void) {
   if (HMap)
   {
     free(HMap);
@@ -243,8 +244,8 @@ void View(int x0,int y0,float aa)
   /* Draw the landscape from near to far without overdraw */
   for ( d=0; d<100; d+=1+(d>>6) )
   {
-    Line(x0+d*0x7fff*cos(aa-FOV),y0+d*0x7fff*sin(aa-FOV),
-         x0+d*0x7fff*cos(aa+FOV),y0+d*0x7fff*sin(aa+FOV),
-         h-30,150*256/(d+1));
+    Line(x0+d*0xffff*cos(aa-FOV),y0+d*0xffff*sin(aa-FOV),
+         x0+d*0xffff*cos(aa+FOV),y0+d*0xffff*sin(aa+FOV),
+         h-50,100*256/(d+1));
   }
 }
