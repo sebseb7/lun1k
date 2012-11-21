@@ -216,7 +216,7 @@ static uint8_t tick(void) {
             g = f * g >> 8;
             b = f * b >> 8;
             
-            setLedXY(x, y, r, g, b);
+            setLedXY(x, y, b, g, r);
         }
     }
 
