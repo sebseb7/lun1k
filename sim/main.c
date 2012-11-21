@@ -186,10 +186,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 	//unsigned long long int startTime = get_clock();
 	Uint32 lastFrame = SDL_GetTicks(); 
 
-	printf("asd\n");
-
 	while(running) {
-	printf("t\n");
 		SDL_Event ev;
 		while(SDL_PollEvent(&ev)) {
 			switch(ev.type) {
