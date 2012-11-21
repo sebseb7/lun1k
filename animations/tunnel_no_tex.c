@@ -163,11 +163,11 @@ static void deinit(void) {
 }
 
 
-static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z,uint16_t t) {
+static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
 
 	uint32_t r = sini((z<<8)+(a<<2))>>8<<16;
-	uint32_t g = sini((sini(t*10)>>9)*z*3)>>8<<8;
-	uint32_t b = sini(z*1600+(a>>4))>>8;
+	uint32_t g = sini(z*300)>>8<<8;
+	//uint32_t b = sini(z*1600+(a>>4))>>8;
 	uint32_t b2 = sini((z<<7)+(a<<1))>>8;
 			
 //			h=t*sini(a*3+z*70)/512;
@@ -179,7 +179,7 @@ static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z,uin
 //	g |= ng>>2<<8;
 //	b |= nb>>2;
 
-	return r|g|b|b2;
+	return r|g|b2;
 
 	//return texGetRGB(z, a >> 6);
 }
@@ -204,12 +204,14 @@ static uint8_t tick(void) {
             uint8_t y1 = y + shiftLookY;
             uint16_t z = getZ(x1,y1);
             uint16_t a = getA(x1,y1);
-            uint32_t texel = getTex(a + t * 0x7, z + t * 2,t);
+            uint32_t texel = getTex(a + t * 0x7, z + t * 2);
             uint8_t r = ((texel & 0xff0000) >> 16);
             uint8_t g = ((texel & 0xff00) >> 8);
             uint8_t b = (texel & 0xff);
             /* apply shade */
-            uint16_t f = 0xff - MIN(0xff, z);
+    
+			r = sini(r*g)>>8;
+			uint16_t f = 0xff - MIN(0xff, z);
             r = f * r >> 8;
             g = f * g >> 8;
             b = f * b >> 8;
