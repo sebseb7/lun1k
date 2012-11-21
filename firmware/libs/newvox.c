@@ -28,11 +28,13 @@
 #include <math.h>
 #include <string.h>
 
+#include "main.h"
+
 typedef unsigned char byte;
 
-byte HMap[256*256];      /* Height field */
-byte CMap[256*256];      /* Color map */
-byte Video[320*200];     /* Off-screen buffer */
+byte *HMap;      /* Height field */
+byte *CMap;      /* Color map */
+byte *Video;     /* Off-screen buffer */
 
 /* Reduces a value to 0..255 (used in height field computation) */
 static int Clamp(int x)
@@ -44,6 +46,9 @@ static int Clamp(int x)
 void ComputeMap(void)
 {
   int p,i,j,k,k2,p2;
+  HMap = malloc(256 * 256);
+  CMap = malloc(256 * 256);
+  Video = malloc(LED_WIDTH * LED_HEIGHT);
 
   /* Start from a plasma clouds fractal */
   HMap[0]=128;
@@ -85,14 +90,14 @@ void ComputeMap(void)
   for ( i=0; i<256*256; i+=256 )
     for ( j=0; j<256; j++ )
     {
-      k=128+(HMap[((i+256)&0xFF00)+((j+1)&255)]-HMap[i+j])*4;
-      if ( k<0 ) k=0; if (k>255) k=255;
+      k=256+(HMap[((i+256)&0xFF00)+((j+1)&255)]-HMap[i+j])*8;
+      if ( k<1 ) k=1; if (k>255) k=255;
       CMap[i+j]=k;
     }
 }
 
-int lasty[320],         /* Last pixel drawn on a given column */
-    lastc[320];         /* Color of last pixel on a column */
+int lasty[LED_WIDTH],         /* Last pixel drawn on a given column */
+    lastc[LED_WIDTH];         /* Color of last pixel on a column */
 
 /*
    Draw a "section" of the landscape; x0,y0 and x1,y1 and the xy coordinates
@@ -105,8 +110,8 @@ static void Line(int x0,int y0,int x1,int y1,int hy,int s)
   int i,sx,sy;
 
   /* Compute xy speed */
-  sx=(x1-x0)/320; sy=(y1-y0)/320;
-  for ( i=0; i<320; i++ )
+  sx=(x1-x0)/LED_WIDTH; sy=(y1-y0)/LED_WIDTH;
+  for ( i=0; i<LED_WIDTH; i++ )
   {
     int c,y,h,u0,v0,u1,v1,a,b,h0,h1,h2,h3;
 
@@ -142,7 +147,6 @@ static void Line(int x0,int y0,int x1,int y1,int hy,int s)
     /* Draw the column */
     if ( y<(a=lasty[i]) )
     {
-      unsigned char *b=Video+a*320+i;
       int sc,cc;
 
 
@@ -152,12 +156,13 @@ static void Line(int x0,int y0,int x1,int y1,int hy,int s)
       sc=(c-lastc[i])/(a-y);
       cc=lastc[i];
 
-      if ( a>199 ) { b-=(a-199)*320; cc+=(a-199)*sc; a=199; }
+      if ( a>=LED_HEIGHT ) { b-=(a+1-LED_HEIGHT)*LED_WIDTH; cc+=(a+1-LED_HEIGHT)*sc; a=LED_HEIGHT-1; }
       if ( y<0 ) y=0;
       while ( y<a )
       {
-	*b=cc>>18; cc+=sc;
-	b-=320; a--;
+        setLedXY(i, a, 0, cc >> 18, 0);
+	cc+=sc;
+	a--;
       }
       lasty[i]=y;
 
@@ -179,13 +184,16 @@ void View(int x0,int y0,float aa)
   int d;
   int a,b,h,u0,v0,u1,v1,h0,h1,h2,h3;
 
-  /* Clear offscreen buffer */
-  /* memset(Video,0,320*200); */
+  /* Draw horizon */
+  for(int y = 0; y < 128; y++)
+    for(int x = 0; x < 128; x++) {
+      setLedXY(x,y, y, y, 127);
+    }
 
   /* Initialize last-y and last-color arrays */
-  for ( d=0; d<320; d++ )
+  for ( d=0; d<LED_WIDTH; d++ )
   {
-    lasty[d]=200;
+    lasty[d]=LED_HEIGHT;
     lastc[d]=-1;
   }
 
@@ -213,13 +221,6 @@ void View(int x0,int y0,float aa)
   {
     Line(x0+d*65536*cos(aa-FOV),y0+d*65536*sin(aa-FOV),
          x0+d*65536*cos(aa+FOV),y0+d*65536*sin(aa+FOV),
-         h-30,100*256/(d+1));
+         h-10,100*256/(d+1));
   }
-
-  /* Blit the final image to the screen */
-  for(int y = 0; y < 128; y++)
-    for(int x = 0; x < 128; x++) {
-      byte c = Video[x + 320 * y];
-      setLedXY(x,y, c, c, c);
-    }
 }

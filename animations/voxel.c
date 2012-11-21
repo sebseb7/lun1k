@@ -7,10 +7,10 @@
 #include "libs/math.h"
 #include "libs/newvox.h"
 
-int done;
-int i,k;
-float ss,sa,a,s;
-int x0,y0_;
+static int done;
+static int k;
+static float ss,sa,a,s;
+static int x0,y0_;
 
 static void init() {
     /* Compute the height map */
