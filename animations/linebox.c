@@ -55,7 +55,7 @@ static uint8_t tick(void) {
     for(uint8_t i = 0; i < sizeof(points); i++) {
         struct point *p1 = points + i;
         struct point *p2 = points + ((i + 13) % sizeof(points));
-        draw_line(p1->x, p1->y, p2->x, p2->y, 255, 255, 255);
+        draw_line(p1->x, p1->y, p2->x, p2->y, sini((uint16_t)getSysTick()*1.6f)>>8, sini(getSysTick()*2)>>8, sini(getSysTick())>>8);
     }
 
     return 0;
