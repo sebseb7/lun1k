@@ -12,7 +12,7 @@ static int k;
 static float ss,sa,a,s;
 static int x0,y0_;
 
-static void init() {
+static void init(void) {
     /* Compute the height map */
     ComputeMap();
 
@@ -31,7 +31,7 @@ static void init() {
     sa=0;
 }
 
-static void deinit() {
+static void deinit(void) {
     FreeMap();
 }
 
