@@ -48,6 +48,8 @@ static uint8_t tick(void) {
     a += 0.01;
     sa = 0.03 * sin(a * M_PI);
     ss = 20 * s;
+
+	return 0;
 }
 
 
