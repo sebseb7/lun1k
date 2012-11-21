@@ -6,6 +6,7 @@
 #define LED_WIDTH	128
 #define LED_HEIGHT	128
 
+#define LUN1K
 #define SIMULATOR
 
 #define CONSTRUCTOR_ATTRIBUTES	__attribute__((constructor));

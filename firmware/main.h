@@ -14,6 +14,7 @@ typedef uint8_t (*tick_fun)(void);
 
 void registerAnimation(init_fun init,tick_fun tick,deinit_fun deinit, uint16_t t, uint16_t duration);
 
+#define LUN1K
 
 #define KEY_A (1<<0)
 #define KEY_ESC (1<<1)
