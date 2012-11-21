@@ -34,7 +34,6 @@ typedef unsigned char byte;
 
 byte *HMap;      /* Height field */
 byte *CMap;      /* Color map */
-byte *Video;     /* Off-screen buffer */
 
 /* Reduces a value to 0..255 (used in height field computation) */
 static int Clamp(int x)
@@ -48,7 +47,6 @@ void ComputeMap(void)
   int p,i,j,k,k2,p2;
   HMap = malloc(256 * 256);
   CMap = malloc(256 * 256);
-  Video = malloc(LED_WIDTH * LED_HEIGHT);
 
   /* Start from a plasma clouds fractal */
   HMap[0]=128;
@@ -90,7 +88,7 @@ void ComputeMap(void)
   for ( i=0; i<256*256; i+=256 )
     for ( j=0; j<256; j++ )
     {
-      k=256+(HMap[((i+256)&0xFF00)+((j+1)&255)]-HMap[i+j])*8;
+      k=192+(HMap[((i+256)&0xFF00)+((j+1)&255)]-HMap[i+j])*8;
       if ( k<1 ) k=1; if (k>255) k=255;
       CMap[i+j]=k;
     }
@@ -160,7 +158,13 @@ static void Line(int x0,int y0,int x1,int y1,int hy,int s)
       if ( y<0 ) y=0;
       while ( y<a )
       {
-        setLedXY(i, a, 0, cc >> 18, 0);
+        if (h < 0x23) {
+          uint8_t w = 0xff - (cc >> 17);
+          setLedXY(i, a, w, w, w);
+        } else if (h > 0xe7)
+          setLedXY(i, a, 0, 0, 0x7f - (cc >> 18));
+        else
+          setLedXY(i, a, 0, cc >> 18, 0);
 	cc+=sc;
 	a--;
       }
@@ -189,7 +193,8 @@ void View(int x0,int y0,float aa)
     for(int x = 0; x < 128; x++) {
       setLedXY(x,y, y, y, 127);
     }
-
+  /* draw_filledCircle(LED_WIDTH / 2, LED_HEIGHT / 4, 32, */
+  /*                   0xff, 0xff, 0x7f); */
   /* Initialize last-y and last-color arrays */
   for ( d=0; d<LED_WIDTH; d++ )
   {
