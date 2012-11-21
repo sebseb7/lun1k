@@ -116,7 +116,7 @@ static const uint8_t grass_wall_tex[] = {
     "\0\0\274\0\0\200\200\200\274\0\0\274\0\0\274\0\0\274\0\0",
 };
 
-void draw_tex_rgb(uint8_t *tex, uint8_t x1, uint8_t y1, uint8_t dx, uint8_t dy) {
+void draw_tex_rgb(const uint8_t *tex, uint8_t x1, uint8_t y1, uint8_t dx, uint8_t dy) {
     uint8_t r = tex[3 * (y1 * BLOCK_W + x1)];
     uint8_t g = tex[3 * (y1 * BLOCK_W + x1) + 1];
     uint8_t b = tex[3 * (y1 * BLOCK_W + x1) + 2];
@@ -295,7 +295,7 @@ static const uint8_t ladder_tex[] = {
     "\0\0\0\0",
 };
 
-void draw_tex_rgba(uint8_t *tex, uint8_t x1, uint8_t y1, uint8_t dx, uint8_t dy) {
+void draw_tex_rgba(const uint8_t *tex, uint8_t x1, uint8_t y1, uint8_t dx, uint8_t dy) {
     uint8_t r = tex[4 * (y1 * BLOCK_W + x1)];
     uint8_t g = tex[4 * (y1 * BLOCK_W + x1) + 1];
     uint8_t b = tex[4 * (y1 * BLOCK_W + x1) + 2];
