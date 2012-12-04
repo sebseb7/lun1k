@@ -1,7 +1,8 @@
 #include "stdio.h"
 #include "main.h"
 #include <math.h>
-#include "libs/math.h"
+
+#include "libs/armmath.h"
 
 
 static void dla_plot(int x, int y, uint8_t r,uint8_t g , uint8_t b, float br)
@@ -68,7 +69,7 @@ void draw_filledCircle(
 	uint8_t b )
 {
 
-	uint8_t i,j;
+	float i,j;
 
 	for(i=0;i<rad;i++)
 	{

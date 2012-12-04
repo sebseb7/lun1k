@@ -13,7 +13,7 @@
 
 #include "main.h"
 #include "libs/text.h"
-#include "libs/math.h"
+#include "libs/armmath.h"
 
 #include "lib/tunnel_tex.h"
 

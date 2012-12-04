@@ -17,7 +17,7 @@ endif
 
 ifeq ($(UNAME), Linux)
 	FLAGS   += `sdl-config --cflags`
-	LDFLAGS +=  -lSDL -lSDL_image 
+	LDFLAGS += `sdl-config --libs` -lSDL_image 
 endif
 
 ifeq ($(UNAME), MINGW32_NT-6.1)

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "libs/text.h"
-#include "libs/math.h"
+#include "libs/armmath.h"
 
 static uint16_t a = 0;
 
