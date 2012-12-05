@@ -24,7 +24,7 @@ static size_t gnPeakMemory    = 0;
 void *malloc (size_t nSize)
 {
 	void *(*libc_malloc)(size_t) = dlsym(RTLD_NEXT, "malloc");
-	void *pMem = libc_malloc(sizeof(size_t) + nSize*sizeof(size_t) );
+	void *pMem = libc_malloc(nSize + sizeof(size_t));
 
 	if(gnCurrentMemory+nSize > MAX_HEAP_SIZE)
 	{
@@ -37,7 +37,7 @@ void *malloc (size_t nSize)
 	{
 		size_t *pSize = (size_t *)pMem;
 		memcpy(pSize, &nSize, sizeof(nSize));
-		gnCurrentMemory += sizeof(nSize)*nSize;
+		gnCurrentMemory += nSize;
 		if (gnCurrentMemory > gnPeakMemory)
 		{
 			gnPeakMemory = gnCurrentMemory;
