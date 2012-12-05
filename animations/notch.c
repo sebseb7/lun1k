@@ -14,14 +14,14 @@ static void init(void) {
     texmap = malloc(16 * 16 * 3 * 16 * sizeof(*texmap));
 
     for(int i = 1; i < 16; i++) {
-        int  br = 255 - (rand() * 96 / RAND_MAX);
+        int  br = 255 - ((float)rand() * 96 / RAND_MAX);
         for(int y = 0; y < 16 * 3; y++) {
             for (int x = 0; x < 16; x++) {
                 uint32_t color = 0x966C4A;
                 if (i == 4)
                     color = 0x7F7F7F;
-                if (i != 4 || (rand() * 3 / RAND_MAX) == 0) {
-                    br = 255 - (rand() * 96 / RAND_MAX);
+                if (i != 4 || (rand() % 3 == 0)) {
+                    br = 255 - ((float)rand() * 96 / RAND_MAX);
                 }
                 if ((i == 1 && y < (((x * x * 3 + x * 81) >> 2) & 3) + 18)) {
                     color = 0x6AAA40;
@@ -43,8 +43,8 @@ static void init(void) {
                         if (yd > xd)
                             xd = yd;
 
-                        br = 196 - (rand() * 32 / RAND_MAX) + xd % 3 * 32;
-                    } else if ((rand() * 2 / RAND_MAX) == 0) {
+                        br = 196 - (rand() & 31) + xd % 3 * 32;
+                    } else if (rand() & 1) {
                         br = br * (150 - (x & 1) * 100) / 100;
                     }
                 }
@@ -64,7 +64,7 @@ static void init(void) {
 
                 if (i == 8) {
                     color = 0x50D937;
-                    if ((rand() * 2 / RAND_MAX) == 0) {
+                    if (rand() & 1) {
                         color = 0;
                         brr = 255;
                     }
@@ -85,8 +85,8 @@ static void init(void) {
                 int i = z << 12 | y << 6 | x;
                 float yd = (y - 32.5) * 0.4;
                 float zd = (z - 32.5) * 0.4;
-                map[i] = rand() & 0xF | 1;
-                if (((float)rand()) / RAND_MAX > sqrt(sqrt(yd * yd + zd * zd)) - 0.8)
+                map[i] = rand() & 0xF;
+                if ((float)rand() / RAND_MAX > sqrt(sqrt(yd * yd + zd * zd)) - 0.8)
                     map[i] = 0;
             }
         }
