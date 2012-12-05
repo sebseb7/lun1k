@@ -16,6 +16,8 @@
 #include<sys/time.h>
 #include <dlfcn.h>
 
+#ifndef NOMALLOCWRAP
+
 #define MAX_HEAP_SIZE 198304 //96k
 
 static size_t gnCurrentMemory = 0;
@@ -67,6 +69,7 @@ void  free (void *pMem)
 	}
 }
 
+#endif
 
 #define FRAMETIME 33
 
