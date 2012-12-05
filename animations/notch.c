@@ -111,73 +111,65 @@ static uint8_t tick(void) {
     float xCos = cos(xRot);
     float xSin = sin(xRot);
 
-    float ox = 16.5 + (float)(getSysTick() % 100000) / 100000 * 64;
-    float oy = 16.5;
-    float oz = 16.5;
+    float o[3] = {
+        16.5 + (float)(getSysTick() % 100000) / 100000 * 64,
+        16.5,
+        16.5
+    };
 
     f++;
-    for(int x = f & 1; x < LED_WIDTH; x += 2) {
-        float ___xd = ((float)x - LED_WIDTH / 2) / LED_HEIGHT;
-        for(int y = (f & 3) >> 1; y < LED_HEIGHT; y += 2) {
-            float __yd = ((float)y - LED_HEIGHT / 2) / LED_HEIGHT;
+    for(int x = 0; x < LED_WIDTH; x++) {
+        float ___xd = (float)(x - LED_WIDTH / 2) / LED_HEIGHT;
+        for(int y = f & 1; y < LED_HEIGHT; y += 2) {
+            float __yd = (float)(y - LED_HEIGHT / 2) / LED_HEIGHT;
             float __zd = 1;
 
             float ___zd = __zd * yCos + __yd * ySin;
-            float _yd = __yd * yCos - __zd * ySin;
-
-            float _xd = ___xd * xCos + ___zd * xSin;
-            float _zd = ___zd * xCos - ___xd * xSin;
+            float _d[3] = {
+                ___xd * xCos + ___zd * xSin,
+                __yd * yCos - __zd * ySin,
+                ___zd * xCos - ___xd * xSin
+            };
 
             uint32_t col = 0;
             float br = 255;
             int ddist = 0;
 
-            float closest = 32;
+            float closest = 20;
             for (int d = 0; d < 3; d++) {
-                float dimLength = _xd;
-                if (d == 1)
-                    dimLength = _yd;
-                if (d == 2)
-                    dimLength = _zd;
+                float dimLength = _d[d];
 
                 float ll = 1 / (dimLength < 0 ? -dimLength : dimLength);
-                float xd = (_xd) * ll;
-                float yd = (_yd) * ll;
-                float zd = (_zd) * ll;
+                float dp[3] = {
+                    (_d[0]) * ll,
+                    (_d[1]) * ll,
+                    (_d[2]) * ll
+                };
 
-                float initial = ox - (int)ox;
-                if (d == 1)
-                    initial = oy - (int)oy;
-                if (d == 2)
-                    initial = oz - (int)oz;
+                float initial = o[d] - (int)o[d];
                 if (dimLength > 0)
                     initial = 1 - initial;
 
                 float dist = ll * initial;
 
-                float xp = ox + xd * initial;
-                float yp = oy + yd * initial;
-                float zp = oz + zd * initial;
+                float p[3];
+                for(int i = 0; i < 3; i++)
+                    p[i] = o[i] + dp[i] * initial;
 
                 if (dimLength < 0) {
-                    if (d == 0)
-                        xp--;
-                    if (d == 1)
-                        yp--;
-                    if (d == 2)
-                        zp--;
+                    p[d]--;
                 }
 
                 while (dist < closest) {
-                    uint8_t tex = map[((int)zp & 31) << 10 | ((int)yp & 31) << 5 | ((int)xp & 31)];
+                    uint8_t tex = map[((int)p[2] & 31) << 10 | ((int)p[1] & 31) << 5 | ((int)p[0] & 31)];
 
                     if (tex > 0) {
-                        int u = (int)((xp + zp) * 16) & 15;
-                        int v = ((int)(yp * 16) & 15) + 16;
+                        int u = (int)((p[0] + p[2]) * 16) & 15;
+                        int v = ((int)(p[1] * 16) & 15) + 16;
                         if (d == 1) {
-                            u = (int)(xp * 16) & 15;
-                            v = ((int)(zp * 16) & 15);
-                            if (yd < 0)
+                            u = (int)(p[0] * 16) & 15;
+                            v = ((int)(p[2] * 16) & 15);
+                            if (dp[1] < 0)
                                 v += 32;
                         }
 
@@ -185,13 +177,12 @@ static uint8_t tick(void) {
                         if (cc > 0) {
                             col = cc;
                             ddist = 255 - (int)(dist / 32 * 255);
-                            br = 255 * (255 - ((d + 2) % 3) * 50) / 255;
+                            br = 255 - ((d + 2) % 3) * 50;
                             closest = dist;
                         }
                     }
-                    xp += xd;
-                    yp += yd;
-                    zp += zd;
+                    for(int i = 0; i < 3; i++)
+                        p[i] += dp[i];
                     dist += ll;
                 }
             }
