@@ -17,23 +17,23 @@ static void init(void) {
         int  br = 255 - ((float)rand() * 96 / RAND_MAX);
         for(int y = 0; y < 16 * 3; y++) {
             for (int x = 0; x < 16; x++) {
-                uint32_t color = 0x966C4A;
+                uint32_t color = 0xff9e50;
                 if (i == 4)
                     color = 0x7F7F7F;
                 if (i != 4 || (rand() % 3 == 0)) {
                     br = 255 - ((float)rand() * 96 / RAND_MAX);
                 }
                 if ((i == 1 && y < (((x * x * 3 + x * 81) >> 2) & 3) + 18)) {
-                    color = 0x6AAA40;
+                    color = 0x8bff3e;
                 } else if ((i == 1 && y < (((x * x * 3 + x * 81) >> 2) & 3) + 19)) {
                     br = br * 2 / 3;
                 }
                 if (i == 7) {
-                    color = 0x675231;
+                    color = 0xb88f4f;
                     if (x > 0 && x < 15
                         && ((y > 0 && y < 15) || (y > 32 && y < 47))) {
                         
-                        color = 0xBC9862;
+                        color = 0xd0bc9f;
                         int xd = (x - 7);
                         int yd = ((y & 15) - 7);
                         if (xd < 0)
@@ -50,20 +50,20 @@ static void init(void) {
                 }
 
                 if (i == 5) {
-                    color = 0xB53A15;
+                    color = 0xff4911;
                     if ((x + (y >> 2) * 4) % 8 == 0 || y % 4 == 0) {
-                        color = 0xBCAFA5;
+                        color = 0xe0d3c9;
                     }
                 }
                 if (i == 9) {
-                    color = 0x4040ff;
+                    color = 0x5656ff;
                 }
                 int brr = br;
                 if (y >= 32)
                     brr /= 2;
 
                 if (i == 8) {
-                    color = 0x50D937;
+                    color = 0x5eff3e;
                     if (rand() & 1) {
                         color = 0;
                         brr = 255;
