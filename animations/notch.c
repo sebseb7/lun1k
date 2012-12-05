@@ -7,16 +7,6 @@
 #include "main.h"
 
 
-static float _sqrt( float a )
-{
-#if defined(__arm__) && defined (__ARM_PCS_VFP)
-	return __VSQRTF( a );
-#else
-	return sqrtf( a );
-#endif
-}
-
-
 uint8_t *map;
 uint32_t *texmap;
 
@@ -97,7 +87,7 @@ static void init(void) {
                 float yd = (y - 16.5) * 0.4;
                 float zd = (z - 16.5) * 0.4;
                 map[i] = rand() & 0xF;
-                if ((float)rand() / RAND_MAX > _sqrt(_sqrt(yd * yd + zd * zd)) - 0.8)
+                if ((float)rand() / RAND_MAX > sqrt(sqrt(yd * yd + zd * zd)) - 0.8)
                     map[i] = 0;
             }
         }
