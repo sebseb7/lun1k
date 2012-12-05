@@ -10,7 +10,7 @@ uint8_t *map;
 uint32_t *texmap;
 
 static void init(void) {
-    map = malloc(64 * 64 * 64 * sizeof(*map));
+    map = malloc(32 * 32 * 32 * sizeof(*map));
     texmap = malloc(16 * 16 * 3 * 16 * sizeof(*texmap));
 
     for(int i = 1; i < 16; i++) {
@@ -79,12 +79,12 @@ static void init(void) {
         }
     }
 
-    for(int x = 0; x < 64; x++) {
-        for(int y = 0; y < 64; y++) {
-            for (int z = 0; z < 64; z++) {
-                int i = z << 12 | y << 6 | x;
-                float yd = (y - 32.5) * 0.4;
-                float zd = (z - 32.5) * 0.4;
+    for(int x = 0; x < 32; x++) {
+        for(int y = 0; y < 32; y++) {
+            for (int z = 0; z < 32; z++) {
+                int i = z << 10 | y << 5 | x;
+                float yd = (y - 16.5) * 0.4;
+                float zd = (z - 16.5) * 0.4;
                 map[i] = rand() & 0xF;
                 if ((float)rand() / RAND_MAX > sqrt(sqrt(yd * yd + zd * zd)) - 0.8)
                     map[i] = 0;
@@ -110,9 +110,9 @@ static uint8_t tick(void) {
     float xCos = cos(xRot);
     float xSin = sin(xRot);
 
-    float ox = 32.5 + (float)(getSysTick() % 100000) / 100000 * 64;
-    float oy = 32.5;
-    float oz = 32.5;
+    float ox = 16.5 + (float)(getSysTick() % 100000) / 100000 * 64;
+    float oy = 16.5;
+    float oz = 16.5;
 
     f++;
     for(int x = 0; x < LED_WIDTH; x++) {
@@ -168,7 +168,7 @@ static uint8_t tick(void) {
                 }
 
                 while (dist < closest) {
-                    uint8_t tex = map[((int)zp & 63) << 12 | ((int)yp & 63) << 6 | ((int)xp & 63)];
+                    uint8_t tex = map[((int)zp & 31) << 10 | ((int)yp & 31) << 5 | ((int)xp & 31)];
 
                     if (tex > 0) {
                         int u = (int)((xp + zp) * 16) & 15;
