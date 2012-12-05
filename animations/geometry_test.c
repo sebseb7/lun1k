@@ -5,7 +5,7 @@
 #include "libs/wuline.h"
 #include "libs/circle.h"
 #include "libs/text.h"
-#include "libs/math.h"
+#include "libs/armmath.h"
 
 
 static void init(void)

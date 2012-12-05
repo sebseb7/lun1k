@@ -16,8 +16,8 @@ ifeq ($(UNAME), Darwin)
 endif
 
 ifeq ($(UNAME), Linux)
-	FLAGS   += `sdl-config --cflags`
-	LDFLAGS +=  -lSDL -lSDL_image 
+	FLAGS   += -DNOMALLOCWRAP=1 `sdl-config --cflags`
+	LDFLAGS += `sdl-config --libs` -lSDL_image 
 endif
 
 ifeq ($(UNAME), MINGW32_NT-6.1)

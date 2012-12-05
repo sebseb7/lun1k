@@ -16,6 +16,8 @@
 #include<sys/time.h>
 #include <dlfcn.h>
 
+#ifndef NOMALLOCWRAP
+
 #define MAX_HEAP_SIZE 198304 //96k
 
 static size_t gnCurrentMemory = 0;
@@ -24,11 +26,11 @@ static size_t gnPeakMemory    = 0;
 void *malloc (size_t nSize)
 {
 	void *(*libc_malloc)(size_t) = dlsym(RTLD_NEXT, "malloc");
-	void *pMem = libc_malloc(sizeof(size_t) + nSize);
+	void *pMem = libc_malloc(nSize + sizeof(size_t));
 
 	if(gnCurrentMemory+nSize > MAX_HEAP_SIZE)
 	{
-		printf("out of memory (%lu)\n",nSize);
+		printf("out of memory (%lu)\n",(long int)nSize);
 		return NULL;
 	}
 
@@ -43,7 +45,7 @@ void *malloc (size_t nSize)
 			gnPeakMemory = gnCurrentMemory;
 		}
 
-		printf("malloc - Size (%lu), Current (%lu), Peak (%lu)\n", nSize, gnCurrentMemory, gnPeakMemory);
+		printf("malloc - Size (%lu), Current (%lu), Peak (%lu)\n", (long unsigned int)nSize, (long unsigned int)gnCurrentMemory, (long unsigned int)gnPeakMemory);
 		return(pSize + 1);
 	}
 	return NULL;
@@ -60,13 +62,14 @@ void  free (void *pMem)
 
 		gnCurrentMemory -= *pSize;
 		
-		printf("free - Size (%lu), Current (%lu), Peak (%lu)\n",  *pSize, gnCurrentMemory, gnPeakMemory);
+		printf("free - Size (%lu), Current (%lu), Peak (%lu)\n",  (long unsigned int)*pSize, (long unsigned int)gnCurrentMemory, (long unsigned int)gnPeakMemory);
 
 		void (*libc_free)(void*) = dlsym(RTLD_NEXT, "free");
 		libc_free(pSize);
 	}
 }
 
+#endif
 
 #define FRAMETIME 33
 

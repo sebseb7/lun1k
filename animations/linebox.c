@@ -4,7 +4,7 @@
 
 #include "main.h"
 #include "libs/text.h"
-#include "libs/math.h"
+#include "libs/armmath.h"
 #include "libs/wuline.h"
 
 

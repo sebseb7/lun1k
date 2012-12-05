@@ -1,5 +1,5 @@
-#ifndef _MATH_H
-#define _MATH_H
+#ifndef _ARMMATH_H
+#define _ARMMATH_H
 
 #include <stdint.h>
 
