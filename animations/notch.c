@@ -126,9 +126,9 @@ static uint8_t tick(void) {
     float oz = 16.5;
 
     f++;
-    for(int x = 0; x < LED_WIDTH; x++) {
+    for(int x = f & 1; x < LED_WIDTH; x += 2) {
         float ___xd = ((float)x - LED_WIDTH / 2) / LED_HEIGHT;
-        for(int y = 0; y < LED_HEIGHT; y++) {
+        for(int y = (f & 3) >> 1; y < LED_HEIGHT; y += 2) {
             float __yd = ((float)y - LED_HEIGHT / 2) / LED_HEIGHT;
             float __zd = 1;
 
@@ -217,5 +217,5 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-    registerAnimation(init,tick,deinit, 4, 1000);
+    registerAnimation(init,tick,deinit, 0, 1000);
 }
