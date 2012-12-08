@@ -165,8 +165,8 @@ static void deinit(void) {
 
 static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
 
-	uint32_t r = sini((z<<8)+(a<<2))>>8<<16;
-	uint32_t g = sini(z*300)>>8<<8;
+	uint32_t r = sini((z<<8)+(a<<4))>>8<<16;
+	uint32_t g = sini(z*100)>>8<<8;
 	//uint32_t b = sini(z*1600+(a>>4))>>8;
 	uint32_t b2 = sini((z<<7)+(a<<1))>>8;
 			
