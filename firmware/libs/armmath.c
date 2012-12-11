@@ -33,6 +33,11 @@ uint16_t sini(uint16_t x)
 
 }
 
+uint16_t cosi(uint16_t x)
+{
+        return sini(x + 0xfff);
+}
+
 double pythagoras( double side1, double side2 )
 {
 	return sqrt(side1*side1+side2*side2);
