@@ -50,9 +50,9 @@ static uint8_t tick(void) {
                 }
             }
             /* This should be 9 but then it dies... */
-            sa /= 8.9f;
-            sb /= 8.9f;
-            sc /= 8.9f;
+            sa /= 9;
+            sb /= 9;
+            sc /= 9;
 
             int16_t ta = (sa * (260 + sb - sc)) >> 8;
             int16_t tb = (sb * (260 + sc - sa)) >> 8;
