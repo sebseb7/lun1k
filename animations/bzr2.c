@@ -86,7 +86,8 @@ static uint8_t tick(void) {
 		for (int x = 0; x < LED_WIDTH; x++, p++) {
 			bzr_a[p] = t_bzr_a[p];
 			bzr_b[p] = t_bzr_b[p];
-			bzr_c[p] = t_bzr_c[p];
+			bzr_c[p] = (t_bzr_a[p]>>4)+(t_bzr_c[p]);
+
 		}
 	}
 	return 0;
