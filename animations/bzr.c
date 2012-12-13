@@ -9,7 +9,7 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-float *bzr_a, *bzr_b, *bzr_c;
+int16_t *bzr_a, *bzr_b, *bzr_c;
 
 
 static void init(void) {
@@ -19,9 +19,9 @@ static void init(void) {
 
     for(int y = 0, p = 0; y < LED_HEIGHT; y++) {
         for (int x = 0; x < LED_WIDTH; x++, p++) {
-            bzr_a[p] = (float)rand() / RAND_MAX;
-            bzr_b[p] = (float)rand() / RAND_MAX;
-            bzr_c[p] = (float)rand() / RAND_MAX;
+            bzr_a[p] = rand() & 0xFF;
+            bzr_b[p] = rand() & 0xFF;
+            bzr_c[p] = rand() & 0xFF;
         }
     }
 }
@@ -38,7 +38,7 @@ static uint8_t tick(void) {
     for(int y = 0, p = 0; y < LED_HEIGHT; y++) {
         for (int x = 0; x < LED_WIDTH; x++, p++) {
             /* Compute neighbor averages, with wrap-around. */
-            float sa = 0, sb = 0, sc = 0;
+            int16_t sa = 0, sb = 0, sc = 0;
             for(int j = y; j < y + 3; j++) {
                 for(int i = x - 1; i < x + 2; i++) {
                     int q =
@@ -49,17 +49,18 @@ static uint8_t tick(void) {
                     sc += bzr_c[q];
                 }
             }
-            sa /= 9;
-            sb /= 9;
-            sc /= 9;
+            /* This should be 9 but then it dies... */
+            sa /= 8;
+            sb /= 8;
+            sc /= 8;
 
-            float ta = sa * (1 + sb - sc);
-            float tb = sb * (1 + sc - sa);
-            float tc = sc * (1 + sa - sb);
-            bzr_a[p] = MIN(1, ta);
-            bzr_b[p] = MIN(1, tb);
-            bzr_c[p] = MIN(1, tc);
-            setLedXY(x, y, 255 * bzr_a[p], 255 * bzr_b[p], 255 * bzr_c[p]);
+            int16_t ta = (sa * (256 + sb - sc)) >> 8;
+            int16_t tb = (sb * (256 + sc - sa)) >> 8;
+            int16_t tc = (sc * (256 + sa - sb)) >> 8;
+            bzr_a[p] = MIN(255, ta);
+            bzr_b[p] = MIN(255, tb);
+            bzr_c[p] = MIN(255, tc);
+            setLedXY(x, y, bzr_a[p], bzr_b[p], bzr_c[p]);
         }
     }    
 
