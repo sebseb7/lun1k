@@ -118,9 +118,17 @@ static uint8_t tick(void) {
     };
 
     f++;
-    for(int x = 0; x < LED_WIDTH; x++) {
+    int pw, ph;
+    if (f & 1) {
+      pw = 2;
+      ph = 1;
+    } else {
+      pw = 1;
+      ph = 2;
+    }
+    for(int x = 0; x < LED_WIDTH; x += pw) {
         float ___xd = (float)(x - LED_WIDTH / 2) / LED_HEIGHT;
-        for(int y = f & 1; y < LED_HEIGHT; y += 2) {
+        for(int y = 0; y < LED_HEIGHT; y += ph) {
             float __yd = (float)(y - LED_HEIGHT / 2) / LED_HEIGHT;
             float __zd = 1;
 
@@ -191,6 +199,10 @@ static uint8_t tick(void) {
             uint8_t g = ((col >> 8) & 0xff) * br * ddist / (255 * 255);
             uint8_t b = ((col) & 0xff) * br * ddist / (255 * 255);// + (255 -
             setLedXY(x, y, r, g, b);
+            if (pw == 2)
+              setLedXY(x + 1, y, r, g, b);
+            if (ph == 2)
+              setLedXY(x, y + 1, r, g, b);
         }
     }
     return 0;
