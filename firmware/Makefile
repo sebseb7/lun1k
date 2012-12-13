@@ -11,10 +11,10 @@ SRC=$(wildcard  *.c libs/*.c) \
 	core/syscalls.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/voxel.c \
 	../animations/notch.c \
+	../animations/interference.c \
 	../animations/linebox.c \
 	../animations/gap.c \
 	../animations/tunnel_no_tex.c \
-	../animations/interference.c \
 	../animations/tetris.c \
 	../animations/lib/tetris.c \
 	../animations/lib/grid.c \

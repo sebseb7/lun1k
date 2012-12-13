@@ -198,7 +198,7 @@ static void Line(int x0,int y0,int x1,int y1,int hy,int s)
   }
 }
 
-float FOV=3.141592654/4;   /* half of the xy field of view */
+float FOV=3.141592654/8;   /* half of the xy field of view */
 
 /*
 // Draw the view from the point x0,y0 (16.16) looking at angle a

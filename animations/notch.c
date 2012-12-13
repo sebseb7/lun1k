@@ -103,13 +103,13 @@ static void deinit(void) {
 int f = 0;
 
 static uint8_t tick(void) {
-    float xRot = sin((float)(getSysTick() % 100000) / 100000 * M_PI * 2) * 0.4
+    float xRot = sinf((float)(getSysTick() % 100000) / 100000 * M_PI * 2) * 0.4
         + M_PI / 2;
-    float yRot = cos((float)(getSysTick() % 100000) / 100000 * M_PI * 2) * 0.4;
-    float yCos = cos(yRot);
-    float ySin = sin(yRot);
-    float xCos = cos(xRot);
-    float xSin = sin(xRot);
+    float yRot = cosf((float)(getSysTick() % 100000) / 100000 * M_PI * 2) * 0.4;
+    float yCos = cosf(yRot);
+    float ySin = sinf(yRot);
+    float xCos = cosf(xRot);
+    float xSin = sinf(xRot);
 
     float o[3] = {
         16.5 + (float)(getSysTick() % 100000) / 100000 * 64,

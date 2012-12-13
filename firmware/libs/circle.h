@@ -17,5 +17,13 @@ void draw_filledCircle(
 	uint8_t g,
 	uint8_t b );
 
+void draw_filledEllipse(
+	unsigned int x, unsigned int y,
+	float radX,
+	float radY,
+	uint8_t r,
+	uint8_t g,
+	uint8_t b );
+
 #endif
 

@@ -107,4 +107,58 @@ void draw_filledCircle(
 
 }
 
+void onEllipsePoint(int xCenter,int yCenter,float x,float y,uint8_t r , uint8_t g, uint8_t b)
+{
+	setLedXY((xCenter + x),( yCenter + y),r,g,b);
+	setLedXY((xCenter - x),( yCenter + y),r,g,b);
+	setLedXY((xCenter + x),( yCenter - y),r,g,b);
+	setLedXY((xCenter - x),( yCenter - y),r,g,b);
+}
+
+	  void draw_filledEllipse(
+			  unsigned int xcenter, unsigned int ycenter,
+			  float a,
+			  float b,
+			  uint8_t r,
+			  uint8_t g,
+			  uint8_t b2 )
+{
+	float x,y,d;
+	x = 0;
+	y = b;
+	d = pow(b,2) - pow(a,2)*b + pow(a,2)/4;
+	onEllipsePoint(xcenter,ycenter,x,y,r,g,b2);
+	while( (a*a*(y-.5)) > (b*b*(x+1)) )
+	{
+		if(d<0)
+		{
+			d = d + pow(b,2)*(2*x+3);
+			x=x+1;
+		}
+		else
+		{
+			d = d + pow(b,2)*(2*x+3) + pow(a,2)*(-2*y+2);
+			x=x+1;
+			y=y-1;
+		}
+		onEllipsePoint(xcenter,ycenter,x,y,r,g,b2);
+	}
+	d = b*b*pow((x+.5),2) + a*a*pow((y-1),2) - a*a*b*b;
+	while(y>0)
+	{
+		if(d<0)
+		{
+			d = d + b*b*(2*x+2) + a*a*(-2*y+3);
+			x++;
+			y++;
+		}
+		else
+		{
+			d = d + a*a*(-2*y+3);
+			y--;
+		}
+		onEllipsePoint(xcenter,ycenter,x,y,r,g,b2);
+	}
+}
+
 
