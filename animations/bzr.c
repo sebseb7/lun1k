@@ -39,7 +39,7 @@ static uint8_t tick(void) {
         for (int x = 0; x < LED_WIDTH; x++, p++) {
             /* Compute neighbor averages, with wrap-around. */
             int16_t sa = 0, sb = 0, sc = 0;
-            for(int j = y; j < y + 3; j++) {
+            for(int j = y ; j < y + 3; j++) {
                 for(int i = x - 1; i < x + 2; i++) {
                     int q =
                         (j < 0 ? j + LED_HEIGHT : j >= LED_HEIGHT ? j - LED_HEIGHT : j) * LED_WIDTH +
@@ -50,13 +50,13 @@ static uint8_t tick(void) {
                 }
             }
             /* This should be 9 but then it dies... */
-            sa /= 8;
-            sb /= 8;
-            sc /= 8;
+            sa /= 8.9f;
+            sb /= 8.9f;
+            sc /= 8.9f;
 
-            int16_t ta = (sa * (256 + sb - sc)) >> 8;
-            int16_t tb = (sb * (256 + sc - sa)) >> 8;
-            int16_t tc = (sc * (256 + sa - sb)) >> 8;
+            int16_t ta = (sa * (260 + sb - sc)) >> 8;
+            int16_t tb = (sb * (260 + sc - sa)) >> 8;
+            int16_t tc = (sc * (260 + sa - sb)) >> 8;
             bzr_a[p] = MIN(255, ta);
             bzr_b[p] = MIN(255, tb);
             bzr_c[p] = MIN(255, tc);
@@ -69,5 +69,5 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
     void constructor(void) {
-    registerAnimation(init,tick,deinit, 42, 1000);
+    registerAnimation(init,tick,deinit, 12, 1000);
 }
