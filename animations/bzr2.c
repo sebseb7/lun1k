@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 #include "main.h"
 #include "libs/armmath.h"
+#include "libs/text.h"
 
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -45,6 +47,7 @@ static uint8_t tick(void) {
 	static int time = 0;
 	time++;
 
+        uint32_t start = getSysTick();
 
 	for(int y = 0, p = 0; y < LED_HEIGHT; y++) {
 		for (int x = 0; x < LED_WIDTH; x++, p++) {
@@ -94,6 +97,12 @@ static uint8_t tick(void) {
 
 		}
 	}
+
+        uint32_t end = getSysTick();
+        char frametime[16];
+        snprintf(frametime, 15, "%.1fms", (float)(end - start) / 10);
+        draw_text_8x6(LED_WIDTH - 6 * strlen(frametime), LED_HEIGHT - 12, frametime, 255, 255, 255);
+
 	return 0;
 }
 
