@@ -53,8 +53,12 @@ static uint8_t tick(void) {
 			for(int j = y - 2 ; j < y + 3; j++) {
 				for(int i = x - 2; i < x + 3; i++) {
 					int q =
+#if LED_WIDTH == 128 && LED_HEIGHT == 128
+                                                (j & 0x7f) * LED_WIDTH + (i & 0x7f);
+#else
 						(j < 0 ? j + LED_HEIGHT : j >= LED_HEIGHT ? j - LED_HEIGHT : j) * LED_WIDTH +
 						(i < 0 ? i + LED_WIDTH : i >= LED_WIDTH ? i - LED_WIDTH : i);
+#endif
 					sa += bzr_a[q];
 					sb += bzr_b[q];
 					sc += bzr_c[q];
