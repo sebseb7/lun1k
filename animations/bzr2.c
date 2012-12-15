@@ -50,28 +50,53 @@ static uint8_t tick(void) {
         uint32_t start = getSysTick();
 
 	for(int y = 0, p = 0; y < LED_HEIGHT; y++) {
-		for (int x = 0; x < LED_WIDTH; x++, p++) {
-			/* Compute neighbor averages, with wrap-around. */
-			int16_t sa = 0, sb = 0, sc = 0;
-			for(int j = y - 2 ; j < y + 3; j++) {
-				for(int i = x - 2; i < x + 3; i++) {
-					int q =
+                uint32_t ssab = 0;
+                int16_t ssc = 0;
+                int x = -1;
+                for(int j = y - 2 ; j < y + 3; j++) {
+                        for(int i = x - 2; i < x + 3; i++) {
+                                int q =
 #if LED_WIDTH == 128 && LED_HEIGHT == 128
                                                 (j & 0x7f) * LED_WIDTH + (i & 0x7f);
 #else
 						(j < 0 ? j + LED_HEIGHT : j >= LED_HEIGHT ? j - LED_HEIGHT : j) * LED_WIDTH +
 						(i < 0 ? i + LED_WIDTH : i >= LED_WIDTH ? i - LED_WIDTH : i);
 #endif
-					sa += bzr_a[q];
-					sb += bzr_b[q];
-					sc += bzr_c[q];
+                                        ssab = __QADD16(ssab, (bzr_a[q] << 16) | bzr_b[q]);
+					ssc += bzr_c[q];
 				}
 			}
 
+		for (int x = 0; x < LED_WIDTH; x++, p++) {
+			/* Compute neighbor averages, with wrap-around. */
+			for(int j = y - 2 ; j < y + 3; j++) {
+                                /* Subtract */
+                                int i = x - 3;
+                                int q =
+#if LED_WIDTH == 128 && LED_HEIGHT == 128
+                                        (j & 0x7f) * LED_WIDTH + (i & 0x7f);
+#else
+                                (j < 0 ? j + LED_HEIGHT : j >= LED_HEIGHT ? j - LED_HEIGHT : j) * LED_WIDTH +
+                                        (i < 0 ? i + LED_WIDTH : i >= LED_WIDTH ? i - LED_WIDTH : i);
+#endif
+                                ssab = __QSUB16(ssab, (bzr_a[q] << 16) | bzr_b[q]);
+                                ssc -= bzr_c[q];
+                                /* Add */
+                                i = x + 2;
+                                q =
+#if LED_WIDTH == 128 && LED_HEIGHT == 128
+                                        (j & 0x7f) * LED_WIDTH + (i & 0x7f);
+#else
+                                (j < 0 ? j + LED_HEIGHT : j >= LED_HEIGHT ? j - LED_HEIGHT : j) * LED_WIDTH +
+                                        (i < 0 ? i + LED_WIDTH : i >= LED_WIDTH ? i - LED_WIDTH : i);
+#endif
+                                ssab = __QADD16(ssab, (bzr_a[q] << 16) | bzr_b[q]);
+                                ssc += bzr_c[q];
+			}
 
-			sa /= 25;
-			sb /= 25;
-			sc /= 25;
+			int16_t sa = (ssab >> 16) / 25;
+			int16_t sb = (ssab & 0xffff) / 25;
+			int16_t sc = ssc / 25;
 
 			int16_t ta = (sa * (259 + sb - sc)) >> 8;
 			int16_t tb = (sb * (259 + sc - sa)) >> 8;
