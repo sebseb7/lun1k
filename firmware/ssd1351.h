@@ -58,27 +58,27 @@ typedef struct
 #define CLR_DC (GPIO_ResetBits(GPIOA,GPIO_Pin_7));	
 #define SET_RST	(GPIO_SetBits(GPIOA,GPIO_Pin_6));
 #define CLR_RST (GPIO_ResetBits(GPIOA,GPIO_Pin_6));	
-#define SET_SCK	(GPIO_SetBits(GPIOC,GPIO_Pin_4)); 
-#define CLR_SCK (GPIO_ResetBits(GPIOC,GPIO_Pin_4)); 
-#define SET_SID	(GPIO_SetBits(GPIOC,GPIO_Pin_5)); 
-#define CLR_SID (GPIO_ResetBits(GPIOC,GPIO_Pin_5)); 
+#define SET_SCK	(GPIO_SetBits(GPIOB,GPIO_Pin_15)); 
+#define CLR_SCK (GPIO_ResetBits(GPIOB,GPIO_Pin_15)); 
+#define SET_SID	(GPIO_SetBits(GPIOB,GPIO_Pin_0)); 
+#define CLR_SID (GPIO_ResetBits(GPIOB,GPIO_Pin_0)); 
 
 
 #ifdef I6800
-#define SET_E	(GPIO_SetBits(GPIOC,GPIO_Pin_7)); 
-#define CLR_E (GPIO_ResetBits(GPIOC,GPIO_Pin_7)); 
-#define SET_D2	(GPIO_SetBits(GPIOB,GPIO_Pin_0)); 
-#define CLR_D2 (GPIO_ResetBits(GPIOB,GPIO_Pin_0)); 
-#define SET_D3	(GPIO_SetBits(GPIOB,GPIO_Pin_1)); 
-#define CLR_D3 (GPIO_ResetBits(GPIOB,GPIO_Pin_1)); 
-#define SET_D4	(GPIO_SetBits(GPIOB,GPIO_Pin_15)); 
-#define CLR_D4 (GPIO_ResetBits(GPIOB,GPIO_Pin_15)); 
-#define SET_D5	(GPIO_SetBits(GPIOB,GPIO_Pin_14)); 
-#define CLR_D5 (GPIO_ResetBits(GPIOB,GPIO_Pin_14)); 
-#define SET_D6	(GPIO_SetBits(GPIOB,GPIO_Pin_13)); 
-#define CLR_D6 (GPIO_ResetBits(GPIOB,GPIO_Pin_13)); 
-#define SET_D7	(GPIO_SetBits(GPIOB,GPIO_Pin_12)); 
-#define CLR_D7 (GPIO_ResetBits(GPIOB,GPIO_Pin_12)); 
+#define SET_E	(GPIO_SetBits(GPIOC,GPIO_Pin_5)); 
+#define CLR_E (GPIO_ResetBits(GPIOC,GPIO_Pin_5)); 
+#define SET_D2	(GPIO_SetBits(GPIOB,GPIO_Pin_1)); 
+#define CLR_D2 (GPIO_ResetBits(GPIOB,GPIO_Pin_1)); 
+#define SET_D3	(GPIO_SetBits(GPIOB,GPIO_Pin_2)); 
+#define CLR_D3 (GPIO_ResetBits(GPIOB,GPIO_Pin_2)); 
+#define SET_D4	(GPIO_SetBits(GPIOB,GPIO_Pin_14)); 
+#define CLR_D4 (GPIO_ResetBits(GPIOB,GPIO_Pin_14)); 
+#define SET_D5	(GPIO_SetBits(GPIOB,GPIO_Pin_13)); 
+#define CLR_D5 (GPIO_ResetBits(GPIOB,GPIO_Pin_13)); 
+#define SET_D6	(GPIO_SetBits(GPIOB,GPIO_Pin_12)); 
+#define CLR_D6 (GPIO_ResetBits(GPIOB,GPIO_Pin_12)); 
+#define SET_D7	(GPIO_SetBits(GPIOC,GPIO_Pin_6)); 
+#define CLR_D7 (GPIO_ResetBits(GPIOC,GPIO_Pin_6)); 
 #endif
 
 #else

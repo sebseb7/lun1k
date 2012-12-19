@@ -131,33 +131,61 @@ int main(void)
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	
+/*
+ *      10   11
+ *
+ * E    C7   C5
+ * DC   A7   A7
+ * RW   C9   C9
+ * RST  A6   A6
+ * D0   C4   B15
+ * D1   C5   B0
+ * D2   B0   B1
+ * D3   B1   B2
+ * D4   B15  B14
+ * D5   B14  B13
+ * D6   B13  B12
+ * D7   B12  C6
+ *
+ */
 
 	
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_9;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_6;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_7;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_15;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_14;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_13;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_12;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_0;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_1;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_0;
+#if LUN1K_VERSION >= 11
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_2;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_5;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
+#endif
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_12;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_13;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_14;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_15;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+#if LUN1K_VERSION == 10
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_4;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_7;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
+#endif
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_5;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+#if LUN1K_VERSION >= 11
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_6;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+#endif
+#if LUN1K_VERSION == 10
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_7;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+#endif
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_9;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
 
 	//leds
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_2;       

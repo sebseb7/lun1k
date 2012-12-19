@@ -1,6 +1,6 @@
 #include "ssd1351.h"
 
-
+#if LUN1K_VERSION == 10
 const uint32_t portc_map[64]= {
 	3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,
 	2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,
@@ -19,20 +19,7 @@ const uint32_t portb_map[64]= {
 	245760,245760,245760,245760,180225,180225,180225,180225,114690,114690,114690,114690,
 	49155,49155,49155,49155
 };
-
-
-static void sendBy(uint8_t byte)
-{
-	GPIOC->BSRRL = (1<<7);
-
-	GPIOC->BSRR = portc_map[byte];
-	GPIOB->BSRR = portb_map[byte];
-
-	__ASM volatile ("nop");
-	__ASM volatile ("nop");
-
-	GPIOC->BSRRH = (1<<7);
-}
+#endif
 
 
 static const lcdProperties_t ssd1351Properties = { 128, 128 };
@@ -324,144 +311,6 @@ void lcdInit(void)
 	DATA(0xAF);
 	DATA(0xB4);
 
-	// Use default grayscale for now to save flash space (1k), but here are
-	// the values if someone wants to change them ...
-	/*	CMD(SSD1351_CMD_GRAYSCALELOOKUP);
-
-		DATA(0x02);	 // Gray Scale Level 1
-		DATA(0x03);	 // Gray Scale Level 2
-		DATA(0x04);	 // Gray Scale Level 3
-		DATA(0x05);	 // Gray Scale Level 4
-
-		DATA(0x06);	 // Gray Scale Level 5
-		DATA(0x07);	 // Gray Scale Level 6
-		DATA(0x08);	 // Gray Scale Level 7
-		DATA(0x09);	 // Gray Scale Level 8
-
-		DATA(0x0A);	 // Gray Scale Level 9
-		DATA(0x0B);	 // Gray Scale Level 10
-		DATA(0x0C);	 // Gray Scale Level 11
-		DATA(0x0D);	 // Gray Scale Level 12
-
-		DATA(0x0E);	 // Gray Scale Level 13
-		DATA(0x0F);	 // Gray Scale Level 14
-
-		DATA(0x10);	 // Gray Scale Level 15
-		DATA(0x11);	 // Gray Scale Level 16
-		DATA(0x12);	 // Gray Scale Level 17
-		DATA(0x13);	 // Gray Scale Level 18
-		DATA(0x15);	 // Gray Scale Level 19
-		DATA(0x17);	 // Gray Scale Level 20
-		DATA(0x19);	 // Gray Scale Level 21
-		DATA(0x1B);	 // Gray Scale Level 22
-		DATA(0x1D);	 // Gray Scale Level 23
-		DATA(0x1F);	 // Gray Scale Level 24
-		DATA(0x21);	 // Gray Scale Level 25
-		DATA(0x23);	 // Gray Scale Level 26
-		DATA(0x25);	 // Gray Scale Level 27
-		DATA(0x27);	 // Gray Scale Level 28
-		DATA(0x2A);	 // Gray Scale Level 29
-		DATA(0x2D);	 // Gray Scale Level 30
-		DATA(0x30);	 // Gray Scale Level 31
-		DATA(0x33);	 // Gray Scale Level 32
-		DATA(0x36);	 // Gray Scale Level 33
-		DATA(0x39);	 // Gray Scale Level 34
-		DATA(0x3C);	 // Gray Scale Level 35
-		DATA(0x3F);	 // Gray Scale Level 36
-		DATA(0x42);	 // Gray Scale Level 37
-		DATA(0x45);	 // Gray Scale Level 38
-		DATA(0x48);	 // Gray Scale Level 39
-		DATA(0x4C);	 // Gray Scale Level 40
-		DATA(0x50);	 // Gray Scale Level 41
-		DATA(0x54);	 // Gray Scale Level 42
-		DATA(0x58);	 // Gray Scale Level 43
-		DATA(0x5C);	 // Gray Scale Level 44
-		DATA(0x60);	 // Gray Scale Level 45
-		DATA(0x64);	 // Gray Scale Level 46
-		DATA(0x68);	 // Gray Scale Level 47
-		DATA(0x6C);	 // Gray Scale Level 48
-		DATA(0x70);	 // Gray Scale Level 49
-		DATA(0x74);	 // Gray Scale Level 50
-		DATA(0x78);	 // Gray Scale Level 51
-		DATA(0x7D);	 // Gray Scale Level 52
-		DATA(0x82);	 // Gray Scale Level 53
-		DATA(0x87);	 // Gray Scale Level 54
-		DATA(0x8C);	 // Gray Scale Level 55
-		DATA(0x91);	 // Gray Scale Level 56
-		DATA(0x96);	 // Gray Scale Level 57
-		DATA(0x9B);	 // Gray Scale Level 58
-		DATA(0xA0);	 // Gray Scale Level 59
-		DATA(0xA5);	 // Gray Scale Level 60
-		DATA(0xAA);	 // Gray Scale Level 61
-		DATA(0xAF);	 // Gray Scale Level 62
-		DATA(0xB4);	 // Gray Scale Level 63
-		*/
-	/*
-
-	   DATA(0x00);
-	   DATA(0x01);
-	   DATA(0x02);
-	   DATA(0x03);
-	   DATA(0x04);
-	   DATA(0x05);
-	   DATA(0x06);
-	   DATA(0x07);
-	   DATA(0x08);
-	   DATA(0x09);
-	   DATA(0x0a);
-	   DATA(0x0b);
-	   DATA(0x0c);
-	   DATA(0x0d);
-	   DATA(0x0e);
-	   DATA(0x0f);
-	   DATA(0x10);
-	   DATA(0x16);
-	   DATA(0x18);
-	   DATA(0x1a);
-	   DATA(0x1b);
-	   DATA(0x1C);
-	   DATA(0x1D);
-	   DATA(0x1F);
-	   DATA(0x21);
-	   DATA(0x23);
-	   DATA(0x25);
-	   DATA(0x27);
-	   DATA(0x2A);
-	   DATA(0x2D);
-	   DATA(0x30);
-	   DATA(0x33);
-	   DATA(0x36);
-	   DATA(0x39);
-	   DATA(0x3C);
-	   DATA(0x3F);
-	   DATA(0x42);
-	   DATA(0x45);
-	   DATA(0x48);
-	   DATA(0x4C);
-	   DATA(0x50);
-	   DATA(0x54);
-	   DATA(0x58);
-	   DATA(0x5C);
-	   DATA(0x60);
-	   DATA(0x64);
-	   DATA(0x68);
-	   DATA(0x6C);
-	   DATA(0x70);
-	   DATA(0x74);
-	   DATA(0x78);
-	   DATA(0x7D);
-	   DATA(0x82);
-	   DATA(0x87);
-	   DATA(0x8C);
-	   DATA(0x91);
-	   DATA(0x96);
-	   DATA(0x9B);
-	   DATA(0xA0);
-	   DATA(0xA5);
-	   DATA(0xAA);
-	   DATA(0xAF);
-	   DATA(0xB4);
-	   */
 	// Clear screen
 	lcdFillRGB(0,0,0);
 
@@ -485,25 +334,7 @@ void invLedXY(uint8_t x, uint8_t y) {
 	leds[y][x][0] = 255 - leds[y][x][0];
 	leds[y][x][1] = 255 - leds[y][x][1];
 	leds[y][x][2] = 255 - leds[y][x][2];
-/*	ssd1351SetCursor((uint8_t)x, (uint8_t)y);
-
-#ifdef C262K
-	DATA((leds[y][x][0]&0xFC)>>2);
-	DATA((leds[y][x][1]&0xFC)>>2);
-	DATA((leds[y][x][2]&0xFC)>>2);
-#endif
-#ifndef C262K
-	DATA( (leds[y][x][0]&0xF8) | (leds[y][x][1]>>5) );
-	DATA( (leds[y][x][2]>>3) | ((leds[y][x][1]>>2)<<5) );
-#endif*/
 }
-
-
-/**************************************************************************/
-/*! 
-  @brief  Draws a single pixel at the specified X/Y location
-  */
-/**************************************************************************/
 
 void setLedXY(uint8_t x, uint8_t y, uint8_t r,uint8_t g, uint8_t b)
 {
@@ -513,18 +344,6 @@ void setLedXY(uint8_t x, uint8_t y, uint8_t r,uint8_t g, uint8_t b)
 	leds[y][x][0] = r;
 	leds[y][x][1] = g;
 	leds[y][x][2] = b;
-/*
-	ssd1351SetCursor((uint8_t)x, (uint8_t)y);
-
-#ifdef C262K
-	DATA((r&0xFC)>>2);
-	DATA((g&0xFC)>>2);
-	DATA((b&0xFC)>>2);
-#endif
-#ifndef C262K
-	DATA( (r&0xF8) | (g>>5) );
-	DATA( (b>>3) | ((g>>2)<<5) );
-#endif*/
 }
 
 
@@ -544,10 +363,13 @@ void lcdFillRGB(uint8_t r,uint8_t g,uint8_t b)
 	for (x=0; x<ssd1351Properties.width ;x++)
 	{
 		for (y=0; y< ssd1351Properties.height;y++)
-		{
-			sendBy(r2);
-			sendBy(g2);
-			sendBy(b2);
+		{	
+			DATA(r2);
+			DATA(g2);
+			DATA(b2);
+			//sendBy(r2);
+			//sendBy(g2);
+			//sendBy(b2);
 			leds[y][x][0] = r;
 			leds[y][x][1] = g;
 			leds[y][x][2] = b;
@@ -582,6 +404,13 @@ void lcdFlush(void)
 	{
 		for(int x = 0; x < LED_WIDTH; x++) 
 		{
+#if LUN1K_VERSION >= 11
+			DATA(leds[y][x][0]>>2);
+			DATA(leds[y][x][1]>>2);
+			DATA(leds[y][x][2]>>2);
+#endif
+
+#if LUN1K_VERSION == 10
 			GPIOC->BSRRL = (1<<7);
 			GPIOC->BSRR = portc_map[leds[y][x][0]>>2];
 			GPIOB->BSRR = portb_map[leds[y][x][0]>>2];
@@ -604,6 +433,7 @@ void lcdFlush(void)
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<7);
+#endif
 		}
 	}
 }
