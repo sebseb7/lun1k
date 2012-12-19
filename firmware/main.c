@@ -133,8 +133,6 @@ int main(void)
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	
 
-#ifdef lun1k
-#warning lunic_main
 	
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_9;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
@@ -160,10 +158,6 @@ int main(void)
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_6;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-#if LUN1K_VERSION >= 11
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_1;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-#endif
 
 	//leds
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_2;       
@@ -206,42 +200,6 @@ int main(void)
 	// 12V power
 	GPIOA->ODR           |=       1<<1;
 
-#else
-#warning non-lunic_main
-
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_14;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_15;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_6;       
-	GPIO_Init(GPIOC, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_7;       
-	GPIO_Init(GPIOC, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_8;       
-	GPIO_Init(GPIOC, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_12;       
-	GPIO_Init(GPIOC, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_8;       
-	GPIO_Init(GPIOA, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_3;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_4;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_6;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_7;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_8;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-	
-
-	// LEDs
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_13;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_12;       
-	GPIO_Init(GPIOB, &GPIO_InitStructure);  
-#endif
-
 
 	lcdInit();
 //	n35p112_init();
@@ -259,25 +217,17 @@ int main(void)
 		loopcount++;
 		if((loopcount == 55)||(loopcount == 57))
 		{
-#ifdef lun1k
 			GPIOC->ODR           |=       1<<1;
 			GPIOD->ODR           |=       1<<2;
 			GPIOB->ODR           |=       1<<3;
 			GPIOC->ODR           |=       1<<3;
-#else
-			GPIOB->ODR           &=       ~(1<<13);
-#endif
 		}
 		if((loopcount == 56)||(loopcount == 58))
 		{
-#ifdef lun1k
 			GPIOC->ODR           &=       ~(1<<1);
 			GPIOD->ODR           &=       ~(1<<2);
 			GPIOB->ODR           &=       ~(1<<3);
 			GPIOC->ODR           &=       ~(1<<3);
-#else
-			GPIOB->ODR           |=       1<<13;
-#endif
 			if(loopcount==58)
 				loopcount = 0;
 		}
@@ -286,17 +236,8 @@ int main(void)
 
 		animations[current_animation].tick_fp();
 
-#ifdef lun1k
-#else
-		GPIOB->ODR           |=       1<<12;
-#endif
 
 		lcdFlush();
-
-#ifdef lun1k
-#else
-		GPIOB->ODR           &=       ~(1<<12);
-#endif
 
 
 		tick_count++;
