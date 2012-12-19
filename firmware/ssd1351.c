@@ -219,6 +219,10 @@ void lcdInit(void)
 {
 
 	//Reset the LCD
+#if LUN1K_VERSION >= 11
+	GPIO_SetBits(GPIOA,GPIO_Pin_1);
+	Delay(100);
+#endif
 
 	SET_RST;
 	Delay(20);

@@ -5,6 +5,8 @@ LSCRIPT=core/stm32f4xx_flash.ld
 
 OPTIMIZATION = -O2
 
+LUN1K_VERSION = 11
+
 #########################################################################
 
 SRC=$(wildcard  *.c libs/*.c) \
@@ -28,7 +30,7 @@ LSTFILES= $(SRC:.c=.lst)
 HEADERS=$(wildcard core/*.h *.h)
 
 #  Compiler Options
-GCFLAGS = -DSTM32F=4 -ffreestanding -std=gnu99 -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -I. -Icore -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVER 
+GCFLAGS = -DSTM32F=4 -DLUN1K_VERSION=$(LUN1K_VERSION) -ffreestanding -std=gnu99 -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -I. -Icore -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVER 
 GCFLAGS+= -Dlun1k=1 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16 
 GCFLAGS+=-ISTM32_USB_Device_Library/Class/cdc/inc
 GCFLAGS+=-ISTM32_USB_OTG_Driver/inc

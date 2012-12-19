@@ -160,7 +160,11 @@ int main(void)
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_6;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	
+#if LUN1K_VERSION >= 11
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_1;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+#endif
+
 	//leds
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_2;       
 	GPIO_Init(GPIOD, &GPIO_InitStructure);  
