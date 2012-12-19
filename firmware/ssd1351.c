@@ -2,24 +2,14 @@
 
 
 const uint32_t portc_map[64]= {
-#ifdef lun1k
 	3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,
 	2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,
 	1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,
 	48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48,3145728,
 	2097168,1048608,48,3145728,2097168,1048608,48,3145728,2097168,1048608,48
-#else
-	29360128,12583168,20971648,4194688,25165888,8388928,16777408,448,29360128,12583168,20971648,
-	4194688,25165888,8388928,16777408,448,29360128,12583168,20971648,4194688,25165888,8388928,
-	16777408,448,29360128,12583168,20971648,4194688,25165888,8388928,16777408,448,29360128,
-	12583168,20971648,4194688,25165888,8388928,16777408,448,29360128,12583168,20971648,4194688,
-	25165888,8388928,16777408,448,29360128,12583168,20971648,4194688,25165888,8388928,16777408,
-	448,29360128,12583168,20971648,4194688,25165888,8388928,16777408,448,
-#endif
 };
 
 const uint32_t portb_map[64]= {
-#ifdef lun1k
 	3221422080,3221422080,3221422080,3221422080,3221356545,3221356545,3221356545,3221356545,
 	3221291010,3221291010,3221291010,3221291010,3221225475,3221225475,3221225475,3221225475,
 	1073971200,1073971200,1073971200,1073971200,1073905665,1073905665,1073905665,1073905665,
@@ -28,35 +18,20 @@ const uint32_t portb_map[64]= {
 	2147565570,2147565570,2147565570,2147565570,2147500035,2147500035,2147500035,2147500035,
 	245760,245760,245760,245760,180225,180225,180225,180225,114690,114690,114690,114690,
 	49155,49155,49155,49155
-#else
-	5767168,5767168,5767168,5767168,5767168,5767168,5767168,5767168,5242888,5242888,5242888,
-	5242888,5242888,5242888,5242888,5242888,4718608,4718608,4718608,4718608,4718608,4718608,
-	4718608,4718608,4194328,4194328,4194328,4194328,4194328,4194328,4194328,4194328,1572928,
-	1572928,1572928,1572928,1572928,1572928,1572928,1572928,1048648,1048648,1048648,1048648,
-	1048648,1048648,1048648,1048648,524368,524368,524368,524368,524368,524368,524368,524368,
-	88,88,88,88,88,88,88,88
-#endif
 };
 
 
 static void sendBy(uint8_t byte)
 {
-#ifdef lun1k
 	GPIOC->BSRRL = (1<<7);
-#else
-	GPIOC->BSRRL = (1<<12);
-#endif
 
 	GPIOC->BSRR = portc_map[byte];
 	GPIOB->BSRR = portb_map[byte];
 
 	__ASM volatile ("nop");
 	__ASM volatile ("nop");
-#ifdef lun1k
+
 	GPIOC->BSRRH = (1<<7);
-#else
-	GPIOC->BSRRH = (1<<12);
-#endif
 }
 
 
@@ -69,8 +44,8 @@ uint8_t leds[LED_HEIGHT][LED_WIDTH][3] CCM_ATTRIBUTES;
 /* Private Methods                               */
 /*************************************************/
 
-#define CMD(c)        do {   CLR_CS;CLR_DC; ssd1351SendByte( c );SET_CS;  } while (0)
-#define DATA(c)       do {  CLR_CS;SET_DC; ssd1351SendByte( c ); SET_CS; } while (0);
+#define CMD(c)        do {  CLR_DC; ssd1351SendByte( c ); } while (0)
+#define DATA(c)       do {  SET_DC; ssd1351SendByte( c ); } while (0);
 
 void ssd1351SendByte(uint8_t byte)
 {
@@ -287,71 +262,71 @@ void lcdInit(void)
 	DATA(0x01);//was 0x01
 	CMD(SSD1351_CMD_SETDISPLAYMODE_RESET);
 
-    CMD(SSD1351_CMD_GRAYSCALELOOKUP);
+	CMD(SSD1351_CMD_GRAYSCALELOOKUP);
 	
-    DATA(0x05);
-    DATA(0x06);
-    DATA(0x07);
-    DATA(0x08);
-    DATA(0x09);
-    DATA(0x0a);
-    DATA(0x0b);
-    DATA(0x0c);
-    DATA(0x0D);
-    DATA(0x0E);
-    DATA(0x0F);
-    DATA(0x10);
-    DATA(0x11);
-    DATA(0x12);
-    DATA(0x13);
-    DATA(0x14);
-    DATA(0x15);
-    DATA(0x16);
-    DATA(0x18);
-    DATA(0x1a);
-    DATA(0x1b);
-    DATA(0x1C);
-    DATA(0x1D);
-    DATA(0x1F);
-    DATA(0x21);
-    DATA(0x23);
-    DATA(0x25);
-    DATA(0x27);
-    DATA(0x2A);
-    DATA(0x2D);
-    DATA(0x30);
-    DATA(0x33);
-    DATA(0x36);
-    DATA(0x39);
-    DATA(0x3C);
-    DATA(0x3F);
-    DATA(0x42);
-    DATA(0x45);
-    DATA(0x48);
-    DATA(0x4C);
-    DATA(0x50);
-    DATA(0x54);
-    DATA(0x58);
-    DATA(0x5C);
-    DATA(0x60);
-    DATA(0x64);
-    DATA(0x68);
-    DATA(0x6C);
-    DATA(0x70);
-    DATA(0x74);
-    DATA(0x78);
-    DATA(0x7D);
-    DATA(0x82);
-    DATA(0x87);
-    DATA(0x8C);
-    DATA(0x91);
-    DATA(0x96);
-    DATA(0x9B);
-    DATA(0xA0);
-    DATA(0xA5);
-    DATA(0xAA);
-    DATA(0xAF);
-    DATA(0xB4);
+	DATA(0x05);
+	DATA(0x06);
+	DATA(0x07);
+	DATA(0x08);
+	DATA(0x09);
+	DATA(0x0a);
+	DATA(0x0b);
+	DATA(0x0c);
+	DATA(0x0D);
+	DATA(0x0E);
+	DATA(0x0F);
+	DATA(0x10);
+	DATA(0x11);
+	DATA(0x12);
+	DATA(0x13);
+	DATA(0x14);
+	DATA(0x15);
+	DATA(0x16);
+	DATA(0x18);
+	DATA(0x1a);
+	DATA(0x1b);
+	DATA(0x1C);
+	DATA(0x1D);
+	DATA(0x1F);
+	DATA(0x21);
+	DATA(0x23);
+	DATA(0x25);
+	DATA(0x27);
+	DATA(0x2A);
+	DATA(0x2D);
+	DATA(0x30);
+	DATA(0x33);
+	DATA(0x36);
+	DATA(0x39);
+	DATA(0x3C);
+	DATA(0x3F);
+	DATA(0x42);
+	DATA(0x45);
+	DATA(0x48);
+	DATA(0x4C);
+	DATA(0x50);
+	DATA(0x54);
+	DATA(0x58);
+	DATA(0x5C);
+	DATA(0x60);
+	DATA(0x64);
+	DATA(0x68);
+	DATA(0x6C);
+	DATA(0x70);
+	DATA(0x74);
+	DATA(0x78);
+	DATA(0x7D);
+	DATA(0x82);
+	DATA(0x87);
+	DATA(0x8C);
+	DATA(0x91);
+	DATA(0x96);
+	DATA(0x9B);
+	DATA(0xA0);
+	DATA(0xA5);
+	DATA(0xAA);
+	DATA(0xAF);
+	DATA(0xB4);
 
 	// Use default grayscale for now to save flash space (1k), but here are
 	// the values if someone wants to change them ...
@@ -568,7 +543,6 @@ void lcdFillRGB(uint8_t r,uint8_t g,uint8_t b)
 	uint8_t g2 = g>>2;
 	uint8_t b2 = b>>2;
 
-	CLR_CS;
 	SET_DC; 
 
 	for (x=0; x<ssd1351Properties.width ;x++)
@@ -606,60 +580,34 @@ void lcdFillRGB(uint8_t r,uint8_t g,uint8_t b)
 void lcdFlush(void)
 {
 	ssd1351SetCursor(0, 0);
-	CLR_CS;
 	SET_DC; 
 
-    for(int y = 0; y < LED_HEIGHT; y++) 
-    {
-        for(int x = 0; x < LED_WIDTH; x++) 
-        {
-#ifdef lun1k
+	for(int y = 0; y < LED_HEIGHT; y++) 
+	{
+		for(int x = 0; x < LED_WIDTH; x++) 
+		{
 			GPIOC->BSRRL = (1<<7);
-#else
-			GPIOC->BSRRL = (1<<12);
-#endif
 			GPIOC->BSRR = portc_map[leds[y][x][0]>>2];
 			GPIOB->BSRR = portb_map[leds[y][x][0]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
-#ifdef lun1k
 			GPIOC->BSRRH = (1<<7);
-#else
-			GPIOC->BSRRH = (1<<12);
-#endif
 
 
-#ifdef lun1k
 			GPIOC->BSRRL = (1<<7);
-#else
-			GPIOC->BSRRL = (1<<12);
-#endif
 			GPIOC->BSRR = portc_map[leds[y][x][1]>>2];
 			GPIOB->BSRR = portb_map[leds[y][x][1]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
-#ifdef lun1k
 			GPIOC->BSRRH = (1<<7);
-#else
-			GPIOC->BSRRH = (1<<12);
-#endif
 
 
-#ifdef lun1k
 			GPIOC->BSRRL = (1<<7);
-#else
-			GPIOC->BSRRL = (1<<12);
-#endif
 			GPIOC->BSRR = portc_map[leds[y][x][2]>>2];
 			GPIOB->BSRR = portb_map[leds[y][x][2]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
-#ifdef lun1k
 			GPIOC->BSRRH = (1<<7);
-#else
-			GPIOC->BSRRH = (1<<12);
-#endif
-        }
-    }
-	SET_CS;
+		}
+	}
 }
