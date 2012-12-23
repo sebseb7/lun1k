@@ -158,7 +158,7 @@ uint32_t getSysTick(void)
 }
 
 
-void fillRGB(uint8_t r,uint8_t g , uint8_t b)
+void lcdFillRGB(uint8_t r,uint8_t g , uint8_t b)
 {
 	int x, y;
 
@@ -175,7 +175,7 @@ void fillRGB(uint8_t r,uint8_t g , uint8_t b)
 
 int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unused__))) {
 
-	fillRGB(0,0,0);
+	lcdFillRGB(0,0,0);
 
 	srand(time(NULL));
 
@@ -294,7 +294,7 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 			}
 			tick_count=0;
 
-			fillRGB(0,0,0);
+			lcdFillRGB(0,0,0);
 
 			animations[current_animation].init_fp();
 
