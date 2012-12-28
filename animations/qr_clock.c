@@ -14,17 +14,32 @@ int qr_code(struct zint_symbol *symbol, unsigned char source[], int length);
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
+int8_t colors[7][3] = {
+    { 255, 0, 0 },
+    { 0, 0, 255 },
+    { 0, 255, 0 },
+    { 127, 127, 0 },
+    { 0, 127, 127 },
+    { 127, 0, 127 },
+    { 0, 0, 0 }
+};
+int color = 0;
+
 static void init(void) {
     lcdFillRGB(255, 255, 255);
+    color = 0;
 }
 
 static void deinit(void) {
 }
 
 static uint8_t tick(void) {
-    int time = getSysTick() / 10000;
+    int time = getSysTick() / 1000;
     char text[128];
-    snprintf(text, 127, "Time: %i", time);
+    snprintf(text, 127, "%i", time);
+    color++;
+    if (colors[color][0] == 0 && (colors[color][1] == 0) && (colors[color][2] == 0))
+        color = 0;
 
     struct zint_symbol zs;
     memset(&zs, 0, sizeof(zs));
@@ -45,7 +60,7 @@ static uint8_t tick(void) {
             for(int y1 = y * zoom; y1 < (y + 1) * zoom; y1++) {
                 for(int x1 = x * zoom; x1 < (x + 1) * zoom; x1++) {
                     if (module_is_set(&zs, x, y)) {
-                        setLedXY(x0 + x1, y0 + y1, 0, 0, 0);
+                        setLedXY(x0 + x1, y0 + y1, colors[color][0], colors[color][1], colors[color][2]);
                     } else {
                         setLedXY(x0 + x1, y0 + y1, 255, 255, 255);
                     }
