@@ -103,14 +103,15 @@ static uint8_t tick(void) {
         float a = 2 * M_PI * sin(2 * M_PI * time / 2000.0f);
         float sin_f = sin(a);
         float cos_f = cos(a);
+        float sin_time = sin(2 * M_PI * time / 200.0f);
         for(int y = 0; y < LED_HEIGHT; y++) {
                 for(int x = 0; x < LED_WIDTH; x++) {
                         /* Rotate */
                         float px = (float)x * cos_f - (float)y * sin_f;
                         float py = (float)x * sin_f + (float)y * cos_f;
                         /* Scale */
-                        px *= 1.3 + 0.7 * sin(2 * M_PI * time / 200.0f);
-                        py *= 1.3 + 0.6 * sin(2 * M_PI * time / 200.0f);
+                        px *= 1 + 0.4 * sin_time;
+                        py *= 1 + 0.3 * sin_time;
                         int p = ((int)px & 0x3f) + ((int)py & 0x3f) * LED_WIDTH / 2;
 			setLedXY(x, y, 
 				sini(time*50+50*t_bzr_a[p])>>8,
