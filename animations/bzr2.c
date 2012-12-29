@@ -15,6 +15,9 @@
 static uint8_t *bzr_a, *bzr_b, *bzr_c;
 static uint8_t *t_bzr_a, *t_bzr_b, *t_bzr_c;
 
+static uint32_t second_start;
+static uint32_t second_frames;
+static uint16_t fps = 0;
 
 static void init(void) {
 	bzr_a = malloc(LED_WIDTH * LED_HEIGHT * sizeof(*bzr_a) / 4);
@@ -31,6 +34,9 @@ static void init(void) {
 			bzr_c[p] = rand() & 0xFF;
 		}
 	}
+
+        second_start = 0;
+        second_frames = 0;
 }
 
 static void deinit(void) {
@@ -91,14 +97,17 @@ static uint8_t tick(void) {
 	time++;
 
         uint32_t start = getSysTick();
+        if (start - 10000 >= second_start) {
+            fps = second_frames;
+            second_frames = 0;
+            second_start = start;
+        }
+        second_frames++;
 
-        int part = time & 1;
-        int part_h = LED_HEIGHT / 4;
-        if (part == 0)
-                bzr_sync();
-	for(int y = part * part_h; y < (part + 1) * part_h; y++) {
+	for(int y = 0; y < LED_HEIGHT / 2; y++) {
                 bzr_line(y);
 	}    
+        bzr_sync();
 
         float a = 2 * M_PI * sin(2 * M_PI * time / 2000.0f);
         float sin_f = sin(a);
@@ -121,9 +130,8 @@ static uint8_t tick(void) {
                 }
         }
 
-        uint32_t end = getSysTick();
         char frametime[16];
-        snprintf(frametime, 15, "%.1fms", (float)(end - start) / 10);
+        snprintf(frametime, 15, "%i F/s", fps);
         draw_text_8x6(LED_WIDTH - 6 * strlen(frametime), LED_HEIGHT - 12, frametime, 255, 255, 255);
 
 	return 0;
