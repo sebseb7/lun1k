@@ -8,6 +8,7 @@
 #D4    B14
 #D5    B13
 
+# todo for version 1.2 : clear B12
 
 
 use strict;
