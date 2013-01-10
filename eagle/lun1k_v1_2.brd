@@ -36,8 +36,8 @@
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="27" name="tValues" color="14" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
-<layer number="29" name="tStop" color="4" fill="9" visible="no" active="yes"/>
-<layer number="30" name="bStop" color="9" fill="1" visible="no" active="yes"/>
+<layer number="29" name="tStop" color="4" fill="9" visible="yes" active="yes"/>
+<layer number="30" name="bStop" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
 <layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
 <layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
@@ -222,8 +222,8 @@
 <text x="2.375" y="-14.075" size="1.778" layer="21" font="vector" rot="SR270">A</text>
 <text x="4.575" y="-19.8" size="1.778" layer="21" font="vector" rot="SR270">B</text>
 <text x="6.3" y="-23.4" size="1.778" layer="21" font="vector" rot="SR270">ESC</text>
-<text x="-6.5" y="-17.8" size="0.8" layer="21" font="vector" ratio="12" rot="SR180">wakeup</text>
-<text x="-2.8" y="-28.6" size="0.8" layer="21" font="vector" ratio="12" rot="SR180">bootloader</text>
+<text x="-6.4" y="-17" size="0.9" layer="21" font="vector" ratio="12" rot="SR180">wakeup</text>
+<text x="-2.2" y="-28.3" size="0.9" layer="21" font="vector" ratio="12" rot="SR180">bootloader</text>
 <text x="23.35" y="14.3" size="0.8" layer="21" font="vector" ratio="13" rot="SR270">STM32F4</text>
 <polygon width="0.2032" layer="21">
 <vertex x="-14.8" y="-17.4"/>
@@ -290,8 +290,8 @@
 <wire x1="35.6" y1="7.5" x2="35.3" y2="7.5" width="0.15" layer="21"/>
 <wire x1="35.3" y1="7.5" x2="35" y2="7.5" width="0.15" layer="21"/>
 <wire x1="10.1" y1="16" x2="9.7" y2="16" width="0.2286" layer="21"/>
-<text x="-15.375" y="27.575" size="1.2" layer="21" font="vector" ratio="12" rot="SR270">lun1k v1.2</text>
-<text x="-13.4" y="28.225" size="1.1" layer="21" font="vector" ratio="12" rot="SR270">seb@exse.net</text>
+<text x="-16.375" y="27.575" size="1.2" layer="21" font="vector" ratio="12" rot="SR270">lun1k v1.2</text>
+<text x="-14.3" y="28.325" size="1.1" layer="21" font="vector" ratio="12" rot="SR270">seb@exse.net</text>
 </plain>
 <libraries>
 <library name="SparkFun">
@@ -1990,10 +1990,10 @@ design rules under a new name.</description>
 <contactref element="U$1" pad="1@1"/>
 <via x="-7" y="28.625" extent="1-16" drill="0.4"/>
 <via x="3.15" y="-25.175" extent="1-16" drill="0.4"/>
-<via x="-7.1" y="-28" extent="1-16" drill="0.4"/>
+<via x="-6.9" y="-27.4" extent="1-16" drill="0.4"/>
 <via x="9.2" y="27.6" extent="1-16" drill="0.4"/>
 <via x="9" y="-15.7" extent="1-16" drill="0.4"/>
-<via x="-7.9" y="-17.2" extent="1-16" drill="0.4"/>
+<via x="-11.8" y="-17" extent="1-16" drill="0.4"/>
 <via x="-18" y="-17" extent="1-16" drill="0.4"/>
 <via x="-21.6" y="-20.7" extent="1-16" drill="0.4"/>
 <via x="11.6" y="-26.575" extent="1-16" drill="0.4"/>
@@ -2024,10 +2024,9 @@ design rules under a new name.</description>
 <via x="38.2" y="15.3" extent="1-16" drill="0.4"/>
 <via x="-3.3" y="13.9" extent="1-16" drill="0.4"/>
 <via x="-9.4" y="16.6" extent="1-16" drill="0.4"/>
-<via x="-16.175" y="16.975" extent="1-16" drill="0.4"/>
-<via x="-16.55" y="19.975" extent="1-16" drill="0.4"/>
-<via x="-16.675" y="22.4" extent="1-16" drill="0.4"/>
-<via x="-16.5" y="24.9" extent="1-16" drill="0.4"/>
+<via x="-16.175" y="16.875" extent="1-16" drill="0.4"/>
+<via x="-20.65" y="21.075" extent="1-16" drill="0.4"/>
+<via x="-20.8" y="25.9" extent="1-16" drill="0.4"/>
 <via x="-11.125" y="24.95" extent="1-16" drill="0.4"/>
 <via x="-4.9" y="28.175" extent="1-16" drill="0.4"/>
 <via x="-5.3" y="22.4" extent="1-16" drill="0.4"/>
