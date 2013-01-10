@@ -140,20 +140,23 @@ int main(void)
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 /*
- *      10   11
+ *      10   11   12
  *
- * E    C7   C5
- * DC   A7   A7
- * RW   C9   C9
- * RST  A6   A6
- * D0   C4   B15
- * D1   C5   B0
- * D2   B0   B1
- * D3   B1   B2
- * D4   B15  B14
- * D5   B14  B13
- * D6   B13  B12
- * D7   B12  C6
+ * E    C7   C5   B12
+ * DC   A7   A7   A7
+ * RW   C9   C9   C9
+ * RST  A6   A6   A6
+ * D0   C4   B15  B15
+ * D1   C5   B0   B0
+ * D2   B0   B1   B1
+ * D3   B1   B2   B2
+ * D4   B15  B14  B14
+ * D5   B14  B13  B13
+ * D6   B13  B12  C5
+ * D7   B12  C6   C6
+ *
+ * v11 : E,D0..D7 swapped
+ * v12 : E and D6 swapped
  *
  */
 

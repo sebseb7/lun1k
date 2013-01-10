@@ -65,8 +65,14 @@ typedef struct
 
 
 #ifdef I6800
+#if LUN1K_VERSION == 11
 #define SET_E	(GPIO_SetBits(GPIOC,GPIO_Pin_5)); 
 #define CLR_E (GPIO_ResetBits(GPIOC,GPIO_Pin_5)); 
+#endif
+#if LUN1K_VERSION >= 12
+#define SET_E	(GPIO_SetBits(GPIOB,GPIO_Pin_12)); 
+#define CLR_E (GPIO_ResetBits(GPIOB,GPIO_Pin_12)); 
+#endif
 #define SET_D2	(GPIO_SetBits(GPIOB,GPIO_Pin_1)); 
 #define CLR_D2 (GPIO_ResetBits(GPIOB,GPIO_Pin_1)); 
 #define SET_D3	(GPIO_SetBits(GPIOB,GPIO_Pin_2)); 
@@ -75,8 +81,14 @@ typedef struct
 #define CLR_D4 (GPIO_ResetBits(GPIOB,GPIO_Pin_14)); 
 #define SET_D5	(GPIO_SetBits(GPIOB,GPIO_Pin_13)); 
 #define CLR_D5 (GPIO_ResetBits(GPIOB,GPIO_Pin_13)); 
+#if LUN1K_VERSION == 11
 #define SET_D6	(GPIO_SetBits(GPIOB,GPIO_Pin_12)); 
 #define CLR_D6 (GPIO_ResetBits(GPIOB,GPIO_Pin_12)); 
+#endif
+#if LUN1K_VERSION >= 12
+#define SET_D6	(GPIO_SetBits(GPIOC,GPIO_Pin_5)); 
+#define CLR_D6 (GPIO_ResetBits(GPIOC,GPIO_Pin_5)); 
+#endif
 #define SET_D7	(GPIO_SetBits(GPIOC,GPIO_Pin_6)); 
 #define CLR_D7 (GPIO_ResetBits(GPIOC,GPIO_Pin_6)); 
 #endif

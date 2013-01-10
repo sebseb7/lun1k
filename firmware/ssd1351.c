@@ -21,7 +21,7 @@ const uint32_t portb_map[64]= {
 };
 #endif
 
-#if LUN1K_VERSION >= 11
+#if LUN1K_VERSION == 11
 const uint32_t portb_map[64]= {
 	3758555136,1611104256,3758489601,1611038721,3758424066,1610973186,3758358531,1610907651,
 	3758292996,1610842116,3758227461,1610776581,3758161926,1610711046,3758096391,1610645511,
@@ -32,6 +32,12 @@ const uint32_t portb_map[64]= {
 	2147966976,516096,2147901441,450561,2147835906,385026,2147770371,319491,2147704836,
 	253956,2147639301,188421,2147573766,122886,2147508231,57351
 };
+#endif
+
+#if LUN1K_VERSION >= 12
+
+#error unimplemented
+
 #endif
 
 
@@ -384,7 +390,12 @@ void lcdFillRGB(uint8_t r,uint8_t g,uint8_t b)
 			//sendBy(r2);
 			//sendBy(g2);
 			//sendBy(b2);
-#if LUN1K_VERSION >= 11
+#if LUN1K_VERSION >= 12
+
+#error unimplemended
+
+#endif
+#if LUN1K_VERSION == 11
 			GPIOC->BSRRL = (1<<5);
 			GPIOB->BSRR = port_r;
 			__ASM volatile ("nop");
@@ -449,7 +460,13 @@ void lcdFlush(void)
 			//DATA(leds[y][x][0]>>2);
 			//DATA(leds[y][x][1]>>2);
 			//DATA(leds[y][x][2]>>2);
-#if LUN1K_VERSION >= 11
+#if LUN1K_VERSION >= 12
+
+#error unimplemended
+
+#endif
+
+#if LUN1K_VERSION == 11
 			GPIOC->BSRRL = (1<<5);
 			GPIOB->BSRR = portb_map[leds[y][x][0]>>2];
 			__ASM volatile ("nop");
