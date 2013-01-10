@@ -18,12 +18,12 @@
 
 #ifndef NOMALLOCWRAP
 
-#define MAX_HEAP_SIZE 198304 //96k
+#define MAX_HEAP_SIZE 114688 //112k
 
 static size_t gnCurrentMemory = 0;
 static size_t gnPeakMemory    = 0;
 
-void *malloc (size_t nSize)
+void *xmalloc (size_t nSize)
 {
 	void *(*libc_malloc)(size_t) = dlsym(RTLD_NEXT, "malloc");
 	void *pMem = libc_malloc(nSize + sizeof(size_t));
@@ -51,7 +51,7 @@ void *malloc (size_t nSize)
 	return NULL;
 }
 
-void  free (void *pMem)
+void  xfree (void *pMem)
 {
 	if(pMem)
 	{

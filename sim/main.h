@@ -2,6 +2,7 @@
 #define _MAIN_H
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #define LED_WIDTH	128
 #define LED_HEIGHT	128
@@ -19,6 +20,11 @@
 uint16_t get_key_press( uint16_t key_mask );
 uint16_t get_key_state( uint16_t key_mask );
 
+#define malloc xmalloc
+#define free xfree
+
+void *xmalloc (size_t nSize);
+void  xfree (void *pMem);
 
 typedef void (*init_fun)(void);
 typedef void (*deinit_fun)(void);

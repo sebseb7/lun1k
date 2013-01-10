@@ -372,17 +372,45 @@ void lcdFillRGB(uint8_t r,uint8_t g,uint8_t b)
 	uint8_t b2 = b>>2;
 
 	SET_DC; 
-
+#if LUN1K_VERSION >= 11
+	uint32_t port_r = portb_map[r2];
+	uint32_t port_g = portb_map[g2];
+	uint32_t port_b = portb_map[b2];
+#endif
 	for (x=0; x<ssd1351Properties.width ;x++)
 	{
 		for (y=0; y< ssd1351Properties.height;y++)
 		{	
-			DATA(r2);
-			DATA(g2);
-			DATA(b2);
 			//sendBy(r2);
 			//sendBy(g2);
 			//sendBy(b2);
+#if LUN1K_VERSION >= 11
+			GPIOC->BSRRL = (1<<5);
+			GPIOB->BSRR = port_r;
+			__ASM volatile ("nop");
+			__ASM volatile ("nop");
+			GPIOC->BSRRH = (1<<5);
+
+
+			GPIOC->BSRRL = (1<<5);
+			GPIOB->BSRR = port_g;
+			__ASM volatile ("nop");
+			__ASM volatile ("nop");
+			GPIOC->BSRRH = (1<<5);
+
+
+			GPIOC->BSRRL = (1<<5);
+			GPIOB->BSRR = port_b;
+			__ASM volatile ("nop");
+			__ASM volatile ("nop");
+			GPIOC->BSRRH = (1<<5);
+#endif
+
+#if LUN1K_VERSION == 10
+			DATA(r2);
+			DATA(g2);
+			DATA(b2);
+#endif
 			leds[y][x][0] = r;
 			leds[y][x][1] = g;
 			leds[y][x][2] = b;

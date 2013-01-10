@@ -28,14 +28,23 @@ uint32_t buttonsInitialized = 0;
 void TimingDelay_Decrement(void)
 {
 	static uint16_t ct0, ct1;
+	static uint8_t button_sample = 0;
 	uint16_t i;
+
 
 	if (TimingDelay != 0x00)
 	{ 
 		TimingDelay--;
 	}
+	tick++;
 	if(buttonsInitialized)
 	{
+		button_sample++;
+		if(button_sample < 100)
+			return;
+
+		button_sample = 0;
+
 		uint16_t key_curr = ((GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8)^1)<<1)|
 							(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13)<<2)|
 							(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_4)<<3)|
@@ -48,7 +57,6 @@ void TimingDelay_Decrement(void)
 		key_state ^= i;
 		key_press |= key_state & i;
 	}
-	tick++;
 }
 uint32_t getSysTick(void)
 {

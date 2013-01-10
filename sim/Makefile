@@ -8,8 +8,8 @@ LDFLAGS=
 BINEXT=
 
 ifeq ($(UNAME), Darwin)
-	COMPILER = clang
-	FLAGS   += -Qunused-arguments
+#	COMPILER = clang
+#	FLAGS   += -Qunused-arguments
 	
 	FLAGS   += `sdl-config --cflags` 
 	LDFLAGS += `sdl-config --libs` -lSDL_image 
