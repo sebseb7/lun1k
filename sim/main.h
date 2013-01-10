@@ -39,5 +39,6 @@ void registerAnimation(init_fun init,tick_fun tick,deinit_fun deinit, uint16_t t
 void setLedXY(uint8_t x,uint8_t  y, uint8_t r,uint8_t g,uint8_t b);
 void invLedXY(uint8_t x,uint8_t  y);
 void getLedXY(uint8_t x, uint8_t y, uint8_t* red,uint8_t* green, uint8_t* blue);
+void lcdFillRGB(uint8_t r,uint8_t g , uint8_t b);
 #endif
 
