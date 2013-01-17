@@ -82,7 +82,7 @@ static void bzr_line(int y) {
         }
 }
 
-static void bzr_sync() {
+static void bzr_sync(void) {
 	for(int y = 0, p = 0; y < LED_HEIGHT / 2; y++) {
 		for (int x = 0; x < LED_WIDTH / 2; x++, p++) {
 			bzr_a[p] = t_bzr_a[p];

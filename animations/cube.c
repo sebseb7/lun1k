@@ -132,7 +132,7 @@ void rasterize_triangle(float vertices[3][3], int colors[3][3]) {
 
 float projMat[4][4];
 
-void matInit() {
+void matInit(void) {
     for(int i = 0; i < 4; i++)
         for(int j = 0; j < 4; j++)
             projMat[i][j] = (i == j) ? 1 : 0;
