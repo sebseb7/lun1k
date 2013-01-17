@@ -39,7 +39,7 @@ static int isWhitespace(char c) {
 
 void draw_char_8x6(int x,int y, char text, uint8_t r,uint8_t g, uint8_t b);
 
-/* #ifdef DARM_MATH_CM4 */
+#ifndef SIMULATOR
 extern uint8_t leds[LED_HEIGHT][LED_WIDTH][3] CCM_ATTRIBUTES;
 static void fillLeds(uint8_t r, uint8_t g, uint8_t b) {
     uint8_t *l = leds;
@@ -49,11 +49,11 @@ static void fillLeds(uint8_t r, uint8_t g, uint8_t b) {
         *(l++) = b;
     }
 }
-/* #else */
-/* static void fillLeds(uint8_t r, uint8_t g, uint8_t b) { */
-/*     lcdFillRGB(r, g, b); */
-/* } */
-/* #endif */
+#else
+static void fillLeds(uint8_t r, uint8_t g, uint8_t b) {
+    lcdFillRGB(r, g, b);
+}
+#endif
 
 static void init(void) {
     snprintf(text, sizeof(text), "NOT MY DEPARTMENT 29C3 ");
@@ -68,7 +68,7 @@ static uint8_t tick(void) {
     time++;
 
     int flash = ((time >> 1) & 0x7) == 0;
-    uint8_t *color = colors[(time >> 4) % 6];
+    int8_t *color = colors[(time >> 4) % 6];
 
     if (flash)
         fillLeds(color[0], color[1], color[2]);
@@ -101,7 +101,7 @@ static uint8_t tick(void) {
     *o = '\0';
 
     o = outputText;
-    uint8_t *rgb = flash ? background : color;
+    int8_t *rgb = flash ? background : color;
     for(int y = ty; y < LED_HEIGHT; y += 11) {
         for(int x = 1; x < LED_WIDTH; x += 8) {
             if (x == 1 && y == 0 && o == outputText)
