@@ -101,7 +101,7 @@ static void deinit(void) {
 }
 
 
-int f = 0;
+static int f = 0;
 
 
 uint32_t fpsin(uint16_t x) {

@@ -100,7 +100,7 @@ static void deinit(void) {
 }
 
 
-int f = 0;
+static int f = 0;
 
 static uint8_t tick(void) {
     float xRot = sinf((float)(getSysTick() % 100000) / 100000 * M_PI * 2) * 0.4
