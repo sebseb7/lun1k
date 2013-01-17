@@ -24,7 +24,7 @@ static void deinit(void) {
 
 static uint8_t tick(void) {
     float time = getSysTick() / 10000.0f;
-    unsigned char text[128];
+    char text[128];
     snprintf(text, 127, "Device Time: %.1fs", time);
 
     struct zint_symbol zs;
@@ -32,7 +32,7 @@ static uint8_t tick(void) {
     zs.input_mode = DATA_MODE;
     zs.option_1 = 3;
     /* zs.option_2 = 2; */
-    int qr_res = qr_code(&zs, text, strlen(text));
+    int qr_res = qr_code(&zs, (unsigned char *)text, strlen(text));
     if (qr_res) {
         /* printf("Error: %i\n", qr_res); */
     }
