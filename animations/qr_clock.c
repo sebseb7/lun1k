@@ -24,7 +24,7 @@ static void deinit(void) {
 
 static uint8_t tick(void) {
     float time = getSysTick() / 10000.0f;
-    char text[128];
+    unsigned char text[128];
     snprintf(text, 127, "Device Time: %.1fs", time);
 
     struct zint_symbol zs;
