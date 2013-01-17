@@ -158,7 +158,7 @@ int estimate_binary_length(char mode[], int length, int gs1)
 void qr_binary(int datastream[], int version, int target_binlen, char mode[], int jisdata[], int length, int gs1, int est_binlen)
 {
 	/* Convert input data to a binary stream and add padding */
-	int position = 0, debug = 0;
+	int position = 0;
 	int short_data_block_length, i, scheme = 1;
 	char data_block, padbits;
 	int current_binlen, current_bytes;
@@ -398,7 +398,7 @@ void add_ecc(int fullstream[], int datastream[], int version, int data_cw, int b
 	int qty_long_blocks = data_cw % blocks;
 	int qty_short_blocks = blocks - qty_long_blocks;
 	int ecc_block_length = ecc_cw / blocks;
-	int i, j, length_this_block, posn, debug = 0;
+	int i, j, length_this_block, posn;
 
 
 	unsigned char data_block[short_data_block_length + 2];
@@ -920,7 +920,7 @@ int qr_code(struct zint_symbol *symbol, unsigned char source[], int length)
 					int j = 0;
 					glyph = 0;
 					do {
-						if(sjis_lookup[j * 2] == utfdata[i]) {
+						if(sjis_lookup[j * 2] == (unsigned int)utfdata[i]) {
 							glyph = sjis_lookup[(j * 2) + 1];
 						}
 						j++;
@@ -1046,7 +1046,7 @@ int micro_qr_intermediate(char binary[], int jisdata[], char mode[], int length,
 {
 	/* Convert input data to an "intermediate stage" where data is binary encoded but
 	   control information is not */
-	int position = 0, debug = 0;
+	int position = 0;
 	int short_data_block_length, i;
 	char data_block;
 	char buffer[2];
@@ -1873,7 +1873,7 @@ int microqr(struct zint_symbol *symbol, unsigned char source[], int length)
 					int j = 0;
 					glyph = 0;
 					do {
-						if(sjis_lookup[j * 2] == utfdata[i]) {
+						if(sjis_lookup[j * 2] == (unsigned int)utfdata[i]) {
 							glyph = sjis_lookup[(j * 2) + 1];
 						}
 						j++;
@@ -2001,7 +2001,7 @@ int microqr(struct zint_symbol *symbol, unsigned char source[], int length)
 		if(binary_count[1] <= 32) { ecc_level = LEVEL_M; }
 	}
 
-	strcpy(full_stream, "");
+	//strcpy(full_stream, "");
 	microqr_expand_binary(binary_stream, full_stream, version);
 
 	switch(version) {

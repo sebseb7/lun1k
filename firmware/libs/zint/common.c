@@ -54,7 +54,7 @@ void concat(char dest[], const char source[])
 
 void uconcat(unsigned char dest[], const unsigned char source[])
 { /* Concatinates dest[] with the contents of source[], copying /0 as well */
-	unsigned int i, j;
+	int i, j;
 
 	j = ustrlen(dest);
 	for(i = 0; i <= ustrlen(source); i++) {
@@ -94,7 +94,7 @@ int is_sane(char test_string[], unsigned char source[], int length)
 	unsigned int latch;
 	unsigned int lt = strlen(test_string);
 
-	for(unsigned int i = 0; i < length; i++) {
+	for(int i = 0; i < length; i++) {
 		latch = FALSE;
 		for(unsigned int j = 0; j < lt; j++) {
 			if (source[i] == test_string[j]) {
