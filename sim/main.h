@@ -20,11 +20,15 @@
 uint16_t get_key_press( uint16_t key_mask );
 uint16_t get_key_state( uint16_t key_mask );
 
+#ifndef NOMALLOCWRAP
+
 #define malloc xmalloc
 #define free xfree
 
 void *xmalloc (size_t nSize);
 void  xfree (void *pMem);
+
+#endif
 
 typedef void (*init_fun)(void);
 typedef void (*deinit_fun)(void);
