@@ -2,6 +2,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 #include "libs/armmath.h"
 //#include "lib/sektor.h"
 
@@ -52,7 +53,6 @@ static void mandel(uint8_t xin, uint8_t yin, uint8_t *r, uint8_t *g, uint8_t *b)
 								k++;
 								if ( (x*x+y*y)>RADIUS ) break;  // Break condition
 				}                      // End each pixel loop
-
 				uint8_t color = k;
 				if (color>15) color=color%15;
 				if (k>MAXITER) {
@@ -71,6 +71,8 @@ static uint8_t tick(void) {
 				dx=(Maxx-Minx)/LED_HEIGHT;
 				dy=(Maxy-Miny)/LED_WIDTH;
 
+				time_t start = clock();
+				
 				uint8_t x,y,r,g,b;
 				uint8_t *rp = &r; 
 				uint8_t *gp = &g;
@@ -88,6 +90,8 @@ static uint8_t tick(void) {
 				Maxy=Maxy*ZOOMSPEED+PoIy*(1-ZOOMSPEED);
 				Miny=Miny*ZOOMSPEED+PoIy*(1-ZOOMSPEED);
 
+				time_t end=clock();
+				printf("%ld\n",(long)(end-start));
 				return 0;
 }
 
