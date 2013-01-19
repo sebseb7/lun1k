@@ -9,12 +9,17 @@
 #define MAXITER 150
 #define RADIUS 4
 #define ZOOMSPEED 0.99
-static float Maxx=0.5;             // Rightmost Real point of plane to be displayed
-static float Minx=-2;            // Leftmost Real point
-static float Maxy=1.25;             // Uppermost Imaginary point
-static float Miny=-1.25;            // Lowermost Imaginary point
-static float PoIx=-0.74977879167273;
-static float PoIy=0.061208886981615;
+#define INTERESTINGPOINTS 2
+static float Maxx;             // Rightmost Real point of plane to be displayed
+static float Minx;            // Leftmost Real point
+static float Maxy;             // Uppermost Imaginary point
+static float Miny;            // Lowermost Imaginary point
+static uint8_t PoI_num;
+static uint32_t zoomlevel;
+static float PoI[INTERESTINGPOINTS][2]={
+				{-1.7864402559762,0},
+				{-0.74977879167273,0.061208886981615}
+};
 float dx=0;
 float dy=0;
 
@@ -36,6 +41,15 @@ static int colors[15][3] = {
 				{255,255,255}
 };
 
+static void init(void)
+{
+				Maxx=0.5;             // Rightmost Real point of plane to be displayed
+				Minx=-2;            // Leftmost Real point
+				Maxy=1.25;             // Uppermost Imaginary point
+				Miny=-1.25;            // Lowermost Imaginary point
+				PoI_num=200;
+				zoomlevel = 0;
+}
 static void mandel(uint8_t xin, uint8_t yin, uint8_t *r, uint8_t *g, uint8_t *b)
 {
 				float x=0;
@@ -44,15 +58,15 @@ static void mandel(uint8_t xin, uint8_t yin, uint8_t *r, uint8_t *g, uint8_t *b)
 				uint8_t k=0;
 				float offsetx = xin*dx+Minx;
 				float offsety = Maxy-yin*dy;
-				while(k<=MAXITER)  // Each pixel loop
-				{
+				while(k<=MAXITER) {
 								//The Mandelbrot Function Z=Z*Z+c into x and y parts
 								xnew=x*x-y*y + offsetx;
 								y=2*x*y   + offsety;
 								x=xnew;
 								k++;
-								if ( (x*x+y*y)>RADIUS ) break;  // Break condition
-				}                      // End each pixel loop
+								if ( (x*x+y*y)>RADIUS ) break; 
+				} 
+
 				uint8_t color = k;
 				if (color>15) color=color%15;
 				if (k>MAXITER) {
@@ -65,14 +79,22 @@ static void mandel(uint8_t xin, uint8_t yin, uint8_t *r, uint8_t *g, uint8_t *b)
 								*b=colors[color][2];
 				}
 }
-
+static void PoI_gen() {
+				if(PoI_num >= INTERESTINGPOINTS){
+								srand(time(NULL));
+								PoI_num = rand() % INTERESTINGPOINTS;
+				}
+				if (zoomlevel>1042) {
+								init();
+				}
+}
 static uint8_t tick(void) {
-
+				PoI_gen();
 				dx=(Maxx-Minx)/LED_HEIGHT;
 				dy=(Maxy-Miny)/LED_WIDTH;
 
 				time_t start = clock();
-				
+
 				uint8_t x,y,r,g,b;
 				uint8_t *rp = &r; 
 				uint8_t *gp = &g;
@@ -85,22 +107,19 @@ static uint8_t tick(void) {
 												setLedXY(x,y,r,g,b);
 								}
 				}
-				Maxx=Maxx*ZOOMSPEED+PoIx*(1-ZOOMSPEED);
-				Minx=Minx*ZOOMSPEED+PoIx*(1-ZOOMSPEED);
-				Maxy=Maxy*ZOOMSPEED+PoIy*(1-ZOOMSPEED);
-				Miny=Miny*ZOOMSPEED+PoIy*(1-ZOOMSPEED);
-
+				Maxx=Maxx*ZOOMSPEED+PoI[PoI_num][0]*(1-ZOOMSPEED);
+				Minx=Minx*ZOOMSPEED+PoI[PoI_num][0]*(1-ZOOMSPEED);
+				Maxy=Maxy*ZOOMSPEED+PoI[PoI_num][1]*(1-ZOOMSPEED);
+				Miny=Miny*ZOOMSPEED+PoI[PoI_num][1]*(1-ZOOMSPEED);
+				printf("Zoomlevel: %d\t",zoomlevel++);
 				time_t end=clock();
-				printf("%ld\n",(long)(end-start));
+				printf("Rechenzeit: %ld\n",(end-start));
 				return 0;
 }
 
 
 
 
-static void init(void)
-{
-}
 static void deinit(void)
 {
 }
