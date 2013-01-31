@@ -1,7 +1,7 @@
 #ifndef _RNG_H
 #define _RNG_H
 
-#include <stdint.h>
+#include "main.h"
 
 typedef struct 
 {
@@ -12,7 +12,7 @@ typedef struct
 } SIGNATURE_TypeDef;
 
 #define SIGNATURE_BASE           ((uint32_t )0x1FFF7A10)
-#define SIGNATURE              ((SIGNATRUE_TypeDef *) SIGNATURE_BASE)
+#define SIGNATURE              ((SIGNATURE_TypeDef *) SIGNATURE_BASE)
 
 uint32_t RNG_Get(void);
 void RNG_Enable(void);
