@@ -21,52 +21,12 @@ static void dla_plot(int x, int y, uint8_t r,uint8_t g , uint8_t b, float br)
 
 }
 
-
-// uncompleted
-/*#define swap_(a, b) do{ __typeof__(a) tmp;  tmp = a; a = b; b = tmp; }while(0)
-void draw_filledCircleSlice(
-	unsigned int x, unsigned int y,
-	float rad,
-	uint8_t r,
-	uint8_t g,
-	uint8_t b,
-	uint16_t slice_begin,
-	uint16_t slice_end)
-{
-
-	uint8_t i,j;
-
-
-	if(slice_begin > slice_end)
-	{
-		swap_(slice_begin,slice_end);
-	}
-
-	for(i=0;i<(rad*2);i++)
-	{
-		for(j=0;j<(rad*2);j++)
-		{
-	
-			float dist = pythagorasf( j,i );
-
-			if(dist <= rad-1)
-			{
-				setLedXY(y-j,x+i,r,g,b);
-			}else if(dist < rad)
-			{
-			//	dla_plot(y-j,x+i,r,g,b,1-(dist-rad+1));
-			}
-		}
-	}
-}
-#undef swap_
-*/
 void draw_filledCircle(
-	unsigned int x, unsigned int y,
-	float rad,
-	uint8_t r,
-	uint8_t g,
-	uint8_t b )
+		unsigned int x, unsigned int y,
+		float rad,
+		uint8_t r,
+		uint8_t g,
+		uint8_t b )
 {
 
 	float i,j;
@@ -94,7 +54,7 @@ void draw_filledCircle(
 				dla_plot(y+j,x+i,r,g,b,1-(dist-rad+1));
 				dla_plot(y+j,x-i,r,g,b,1-(dist-rad+1));
 				dla_plot(y-j,x-i,r,g,b,1-(dist-rad+1));
-				
+
 				dla_plot(y-i,x+j,r,g,b,1-(dist-rad+1));
 				dla_plot(y+i,x+j,r,g,b,1-(dist-rad+1));
 				dla_plot(y+i,x-j,r,g,b,1-(dist-rad+1));
@@ -115,13 +75,13 @@ void onEllipsePoint(int xCenter,int yCenter,float x,float y,uint8_t r , uint8_t 
 	setLedXY((xCenter - x),( yCenter - y),r,g,b);
 }
 
-	  void draw_filledEllipse(
-			  unsigned int xcenter, unsigned int ycenter,
-			  float a,
-			  float b,
-			  uint8_t r,
-			  uint8_t g,
-			  uint8_t b2 )
+void draw_filledEllipse(
+		unsigned int xcenter, unsigned int ycenter,
+		float a,
+		float b,
+		uint8_t r,
+		uint8_t g,
+		uint8_t b2 )
 {
 	float x,y,d;
 	x = 0;
