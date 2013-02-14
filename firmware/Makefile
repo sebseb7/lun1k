@@ -11,6 +11,7 @@ LUN1K_VERSION = 10
 
 SRC=$(wildcard  *.c libs/*.c libs/zint/*.c) \
 	core/syscalls.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
+	../animations/kaleidoscope.c \
 	../animations/29c3.c \
 	../animations/qr_clock.c \
 	../animations/fleatron.c \
