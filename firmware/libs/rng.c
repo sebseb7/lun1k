@@ -1,6 +1,8 @@
 #include "rng.h"
 #include "main.h"
 
+#ifndef SIMULATOR
+
 uint32_t RNG_Get(void)
 {
 
@@ -19,4 +21,6 @@ void RNG_Disable(void)
 	RNG_Cmd(DISABLE);
 	RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_RNG, DISABLE);
 }
+
+#endif
 

@@ -3,6 +3,7 @@
 
 #include "main.h"
 
+#ifndef SIMULATOR
 typedef struct 
 {
 	__I uint32_t UID1; 
@@ -17,5 +18,7 @@ typedef struct
 uint32_t RNG_Get(void);
 void RNG_Enable(void);
 void RNG_Disable(void);
+
+#endif
 
 #endif
