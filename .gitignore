@@ -7,4 +7,9 @@
 *.elf
 *.lst
 .DS_Store
+sim/*
+!sim/*.c
+!sim/*.h
+!sim/Makefile
+!sim/hal
 
