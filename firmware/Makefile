@@ -9,14 +9,16 @@ LUN1K_VERSION = 10
 
 #########################################################################
 
-SRC=$(wildcard  *.c libs/*.c libs/zint/*.c) \
+SRC=$(wildcard  *.c libs/*.c libs/sdcard/*.c libs/zint/*.c) \
 	core/syscalls.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/kaleidoscope.c \
 	../animations/29c3.c \
+	../animations/file_example.c \
 	../animations/qr_clock.c \
 	../animations/fleatron.c \
 	../animations/bzr.c \
 	../animations/bzr2.c \
+	../animations/bzr2_seb.c \
 	../animations/voxel.c \
 	../animations/notch.c \
 	../animations/interference.c \
