@@ -43,6 +43,7 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 MEMORY
 {
 	FLASH0 (rx)     : ORIGIN = 0x08000000, LENGTH = 16K
+	EEPROM (rx)     : ORIGIN = 0x08004000, LENGTH = 32K
 	FLASH (rx)      : ORIGIN = 0x0800C000, LENGTH = 976K
 	RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 128K
 	CCMRAM (xrw)    : ORIGIN = 0x10000000, LENGTH = 64K
@@ -60,6 +61,13 @@ SECTIONS
 		. = ALIGN(4);
 	} >FLASH0
 
+	.eeprom :
+	{
+		. = ALIGN(4);
+		*(.eeprom)
+		. = ALIGN(4);
+	} >EEPROM
+	
 	.text0 :
 	{
 		. = ALIGN(4);

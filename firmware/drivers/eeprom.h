@@ -20,6 +20,31 @@
   ******************************************************************************
   */ 
 
+
+
+
+
+
+/*
+ * HOWTO: move eeprom emulation to flash sector 10 & 11
+ *
+ * start addr: 0x080C0000
+ * page size: 0x20000
+ * page0 id :  FLASH_Sector_10
+ * page1 id :  FLASH_Sector_11
+ *
+ * linker script:
+ *
+ *	FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 768K
+ *
+ *
+ *
+ */
+
+
+
+
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __EEPROM_H
 #define __EEPROM_H

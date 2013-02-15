@@ -10,7 +10,7 @@ LUN1K_VERSION = 10
 #########################################################################
 
 SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
-	core/stm32fxxx_it.c core/system_stm32f4xx.c \
+	core/eeprom.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/kaleidoscope.c \
 	../animations/file_example.c \
 	../animations/29c3.c \
@@ -67,7 +67,7 @@ SIZE = arm-none-eabi-size
 #########################################################################
 
 all: STM32F4_drivers/build/libSTM32F4_drivers.a $(PROJECT).bin Makefile 
-	@$(SIZE) $(PROJECT).elf -A | grep 'text\|data\|section\|bss\|ccm'
+	@$(SIZE) $(PROJECT).elf -A | grep 'eeprom\|text\|data\|section\|bss\|ccm'
 
 STM32F4_drivers/build/libSTM32F4_drivers.a:
 	@make -C STM32F4_drivers/build
