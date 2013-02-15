@@ -10,7 +10,7 @@ LUN1K_VERSION = 10
 #########################################################################
 
 SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
-	core/eeprom.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
+	core/eeprom_data.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/kaleidoscope.c \
 	../animations/file_example.c \
 	../animations/29c3.c \
