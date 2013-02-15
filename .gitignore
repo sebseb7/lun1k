@@ -12,4 +12,5 @@ sim/*
 !sim/*.h
 !sim/Makefile
 !sim/hal
+!sim/*.png
 
