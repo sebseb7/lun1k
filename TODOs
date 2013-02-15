@@ -1,6 +1,6 @@
 @astro:
 
-- voxes uses more than the vailable 112k RAM, still works, but may currupt things in the future (please check the return value of malloc if close to 112k)
+- voxel uses more than the vailable 112k RAM, still works, but may currupt things in the future (please check the return value of malloc if close to 112k)
 - fix this warnings in sim build with gcc (no warnings with clang):
 	../animations/gap.c: In function ‘tick’:
 	../animations/gap.c:106: warning: will never be executed
