@@ -12,6 +12,6 @@
 
 
 @seb:
-- hal directory in firmware and sim for file-layer, adc and eeprom emulation 
+- finish hal file-layer, adc and eeprom emulation 
 
 

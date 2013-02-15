@@ -9,9 +9,10 @@ LUN1K_VERSION = 10
 
 #########################################################################
 
-SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c) \
+SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
 	core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/kaleidoscope.c \
+	../animations/file_example.c \
 	../animations/29c3.c \
 	../animations/qr_clock.c \
 	../animations/fleatron.c \
@@ -36,7 +37,7 @@ LSTFILES= $(SRC:.c=.lst)
 HEADERS=$(wildcard core/*.h drivers/*.h *.h)
 
 #  Compiler Options
-GCFLAGS = -DSTM32F=4 -DLUN1K_VERSION=$(LUN1K_VERSION) -ffreestanding -std=gnu99 -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -I.. -I. -Icore -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVER 
+GCFLAGS = -DSTM32F=4 -DLUN1K_VERSION=$(LUN1K_VERSION) -ffreestanding -std=gnu99 -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -I.. -I. -Icore -I../sim/hal/inc -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVER 
 GCFLAGS+= -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16 
 GCFLAGS+=-ISTM32_USB_Device_Library/Class/cdc/inc
 GCFLAGS+=-ISTM32_USB_OTG_Driver/inc
