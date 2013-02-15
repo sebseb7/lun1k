@@ -79,7 +79,7 @@ static void mandel(uint8_t xin, uint8_t yin, uint8_t *r, uint8_t *g, uint8_t *b)
 								*b=colors[color][2];
 				}
 }
-static void PoI_gen() {
+static void PoI_gen(void) {
 				if(PoI_num >= INTERESTINGPOINTS){
 								srand(time(NULL));
 								PoI_num = rand() % INTERESTINGPOINTS;

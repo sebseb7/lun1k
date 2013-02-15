@@ -3,7 +3,7 @@ UNAME := $(shell uname)
 COMPILER = gcc
 
 
-FLAGS= -I. -I../firmware --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  -fsingle-precision-constant
+FLAGS= -I. -I.. --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  -fsingle-precision-constant
 LDFLAGS=
 BINEXT=
 
@@ -29,8 +29,8 @@ endif
 SOURCES=$(wildcard ../animations/*.c)
 BINARIES=$(SOURCES:../animations/%.c=%$(BINEXT))
 
-LIB_SOURCES=$(wildcard ../firmware/libs/*.c ../animations/lib/*.c ../firmware/libs/fgl/*.c  ../firmware/libs/libfixmath/*.c ../firmware/libs/zint/*.c)
-LIB_HEADERS=$(wildcard ../firmware/libs/*.h ../animations/lib/*.h)
+LIB_SOURCES=$(wildcard ../libs/*.c ../animations/lib/*.c ../libs/zint/*.c)
+LIB_HEADERS=$(wildcard ../libs/*.h ../animations/lib/*.h)
 
 all: $(BINARIES) _all_animations
 

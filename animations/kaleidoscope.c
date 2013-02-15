@@ -161,8 +161,10 @@ static uint8_t tick(void) {
         for(x = 0; x < LED_WIDTH; x++) 
         {
             int a = getA(x - LED_WIDTH / 2, y - LED_HEIGHT / 2) + da;
-            if (x > 61 && x < 68 && y > 61 && y < 68)
+#ifdef SIMULATOR
+			if (x > 61 && x < 68 && y > 61 && y < 68)
                 printf("%ix%i\ta=%04X\n", x, y, a);
+#endif
             int slice = a >> 13;
             int v = a >> 9;
             int c = getC(x, y);

@@ -2,7 +2,7 @@
 #define MAIN_H_
 
 #include "stm32f4xx.h"
-#include "ssd1351.h"
+#include "drivers/ssd1351.h"
 
 void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
