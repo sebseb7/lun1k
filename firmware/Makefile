@@ -67,7 +67,7 @@ SIZE = arm-none-eabi-size
 #########################################################################
 
 all: STM32F4_drivers/build/libSTM32F4_drivers.a $(PROJECT).bin Makefile 
-	@$(SIZE) $(PROJECT).elf -A | grep 'eeprom\|text\|data\|section\|bss\|ccm'
+	@$(SIZE) $(PROJECT).elf -A | grep 'text\|data\|section\|bss\|ccm'
 
 STM32F4_drivers/build/libSTM32F4_drivers.a:
 	@make -C STM32F4_drivers/build
