@@ -251,6 +251,9 @@
 #ifndef _ARM_MATH_H
 #define _ARM_MATH_H
 
+
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+
 #define __CMSIS_GENERIC              /* disable NVIC and Systick functions */
 
 #if defined (ARM_MATH_CM4)
