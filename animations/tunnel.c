@@ -88,7 +88,7 @@ static void deinit(void) {
 }
 
 
-static uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
+static inline uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_t z) {
     return texGetRGB(z, a >> 6);
 }
 

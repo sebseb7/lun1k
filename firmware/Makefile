@@ -13,7 +13,6 @@ SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
 	core/eeprom_data.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/kaleidoscope.c \
 	../animations/file_example.c \
-	../animations/29c3.c \
 	../animations/qr_clock.c \
 	../animations/fleatron.c \
 	../animations/bzr.c \

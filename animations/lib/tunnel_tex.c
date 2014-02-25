@@ -10,7 +10,7 @@ struct tex {
 
 static const struct tex tex;
 
-uint32_t __attribute__((always_inline)) texGetRGB(uint8_t x, uint8_t y) {
+inline uint32_t __attribute__((always_inline)) texGetRGB(uint8_t x, uint8_t y) {
   uint32_t i = (y << 8 | x) * tex.bytes_per_pixel;
   uint32_t rgb =
     (tex.pixel_data[i] << 16) |
