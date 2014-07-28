@@ -1,0 +1,23 @@
+- battery icon with pct / voltage
+
+- menu
+  * select animation
+    * ... (mark for loop inclusion)
+	* ... (mark for loop inclusion)
+  * loop animations
+  * settings
+    * joystick calibration
+	* battery display pct
+	* battery display voltage
+	* position lights configuration
+  * debug
+    * i2c errors
+	* battery detail
+
+(buy two more joysticks one for 1.1 one for 1.2 or 1.3)
+
+
+todos for 1.3
+
+ - 160x128 display (4:3.2 or 4:3 with 8 pixel for status) ? (or stick with 128x128?)
+ - better power management (use powersave mode of joystick, dim display on low battery)
