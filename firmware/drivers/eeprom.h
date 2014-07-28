@@ -39,6 +39,10 @@
  *
  *
  *
+ * todo:
+ * - only erase a page on init if really necessary
+ * - drop virtual adresses (create a list of adresses neccessary for page transfer)
+ * - cache variable reads in memory
  */
 
 

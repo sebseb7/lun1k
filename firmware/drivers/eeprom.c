@@ -70,7 +70,8 @@ uint16_t EE_Init(void)
     case ERASED:
       if (PageStatus1 == VALID_PAGE) /* Page0 erased, Page1 valid */
       {
-        /* Erase Page0 */
+//only erase if the page is not completely eraed
+		/* Erase Page0 */
         FlashStatus = FLASH_EraseSector(PAGE0_ID,VOLTAGE_RANGE);
         /* If erase operation was failed, a Flash error code is returned */
         if (FlashStatus != FLASH_COMPLETE)
@@ -191,6 +192,7 @@ uint16_t EE_Init(void)
       }
       else if (PageStatus1 == ERASED) /* Page0 valid, Page1 erased */
       {
+//only erase if the page is not completely erased
         /* Erase Page1 */
         FlashStatus = FLASH_EraseSector(PAGE1_ID, VOLTAGE_RANGE);
         /* If erase operation was failed, a Flash error code is returned */
