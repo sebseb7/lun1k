@@ -24,6 +24,8 @@ void registerAnimation(init_fun init,tick_fun tick,deinit_fun deinit, uint16_t t
 uint16_t get_key_press( uint16_t key_mask );
 uint16_t get_key_state( uint16_t key_mask );
 
+void i2c_error(uint8_t);
+
 #define CONSTRUCTOR_ATTRIBUTES	__attribute__((constructor));
 
 #define CCM_ATTRIBUTES	__attribute__ ((section(".ccm")));

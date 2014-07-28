@@ -179,6 +179,11 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 
 	srand(time(NULL));
 
+	SDL_Init(SDL_INIT_JOYSTICK);
+
+	printf("joysticks: %i",SDL_NumJoysticks());
+	SDL_JoystickOpen(0);
+	SDL_JoystickEventState(SDL_ENABLE);
 
 	int current_animation = 0;
 
@@ -236,7 +241,9 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 
 						default: break;
 					}
-				default: break;
+				default: 
+					printf("unknown type:%i\n",ev.type);
+					break;
 			}
 		}
 

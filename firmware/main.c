@@ -1,5 +1,9 @@
 #include "main.h"
 #include "arm_math.h" 
+#include "libs/circle.h" 
+
+#include "n35p112.h"
+#include "libs/text.h"
 
 //#include "lib/usb_serial.h"
 
@@ -71,6 +75,13 @@ uint16_t get_key_press( uint16_t key_mask )
 uint16_t get_key_state( uint16_t key_mask )
 {
 	return key_mask & key_press;
+}
+
+static uint32_t i2c_e[7] = {0,0,0,0,0,0,0};
+
+void i2c_error(uint8_t error)
+{
+	i2c_e[error-1]++;
 }
 
 
@@ -240,7 +251,8 @@ int main(void)
 
 
 	lcdInit();
-//	n35p112_init();
+	
+	n35p112_init();
 
 	
 	int current_animation = 0;
@@ -274,6 +286,17 @@ int main(void)
 
 		animations[current_animation].tick_fp();
 
+	
+		uint8_t x=0;
+		uint8_t y=0;
+
+		//get_n35p112(&x,&y);
+
+		draw_number_8x6(20,20, x, 3, ' ' ,255,255,255);
+		draw_number_8x6(20,30, y, 3, ' ' ,255,255,255);
+
+		draw_filledCircle(y>>1,x>>1,8,0,0,0);
+		draw_filledCircle(y>>1,x>>1,5,255,255,255);
 
 		lcdFlush();
 
@@ -296,6 +319,7 @@ int main(void)
 
 			animations[current_animation].init_fp();
 
+			//usb_printf("diff: %i , %i (%i) (%i %i %i %i %i %i %i)\n",diff,int_status,i2c_errors,i2c_e[0],i2c_e[1],i2c_e[2],i2c_e[3],i2c_e[4],i2c_e[5],i2c_e[6]);
 
 		}
 	}

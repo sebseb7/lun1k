@@ -3,31 +3,37 @@ PROJECT=template
 
 LSCRIPT=core/stm32f4xx_flash.ld
 
-OPTIMIZATION = -O2
+OPTIMIZATION = -O3
+#OPTIMIZATION = 
 
-LUN1K_VERSION = 10
+LUN1K_VERSION = 11
+
+#test: -mapcs-float
 
 #########################################################################
 
 SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
 	core/eeprom_data.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
-	../animations/kaleidoscope.c \
-	../animations/file_example.c \
-	../animations/qr_clock.c \
-	../animations/fleatron.c \
-	../animations/bzr.c \
 	../animations/bzr2.c \
-	../animations/voxel.c \
-	../animations/notch.c \
 	../animations/interference.c \
-	../animations/linebox.c \
-	../animations/gap.c \
-	../animations/tunnel_no_tex.c \
-	../animations/tetris.c \
-	../animations/lib/tetris.c \
-	../animations/lib/grid.c \
-	../animations/plasma_bigsin.c \
-	../animations/plasma_weed.c
+	../animations/bzr.c 
+
+
+#	../animations/qr_clock.c \
+#	../animations/fleatron.c \
+#	../animations/bzr.c \
+#	../animations/bzr2.c \
+#	../animations/voxel.c \
+#	../animations/notch.c \
+#	../animations/interference.c \
+#	../animations/linebox.c \
+#	../animations/gap.c \
+#	../animations/tunnel_no_tex.c \
+#	../animations/tetris.c \
+#	../animations/lib/tetris.c \
+#	../animations/lib/grid.c \
+#	../animations/plasma_bigsin.c \
+#	../animations/plasma_weed.c
 
 
 ASRC=core/startup_stm32f4xx.s
@@ -36,7 +42,7 @@ LSTFILES= $(SRC:.c=.lst)
 HEADERS=$(wildcard core/*.h drivers/*.h *.h)
 
 #  Compiler Options
-GCFLAGS = -DSTM32F=4 -DLUN1K_VERSION=$(LUN1K_VERSION) -ffreestanding -std=gnu99 -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -I.. -I. -Icore -I../sim/hal/inc -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVER 
+GCFLAGS = -DSTM32F=4 -DLUN1K_VERSION=$(LUN1K_VERSION) -ffreestanding -std=gnu99 -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -Idrivers -I.. -I. -Icore -I../sim/hal/inc -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVER 
 GCFLAGS+= -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16 
 GCFLAGS+=-ISTM32_USB_Device_Library/Class/cdc/inc
 GCFLAGS+=-ISTM32_USB_OTG_Driver/inc
@@ -51,9 +57,10 @@ GCFLAGS += -Wa,-adhlns=$(<:.c=.lst),-gstabs -g
 GCFLAGS+= -ISTM32F4_drivers/inc
 
 
+
 LDFLAGS = -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -T$(LSCRIPT) 
 LDFLAGS+= -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16
-LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc
+LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc -specs=nano.specs -Wl,--gc-section
 
 
 #  Compiler/Assembler Paths

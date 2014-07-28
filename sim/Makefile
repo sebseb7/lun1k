@@ -3,12 +3,12 @@ UNAME := $(shell uname)
 COMPILER = gcc
 
 
-FLAGS= -I. -I.. -Ihal/inc --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  -fsingle-precision-constant
+FLAGS= -I. -I.. -Ihal/inc --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  #-fsingle-precision-constant
 LDFLAGS=
 BINEXT=
 
 ifeq ($(UNAME), Darwin)
-	COMPILER = clang
+	COMPILER = gcc
 	FLAGS   += -Qunused-arguments
 	
 	FLAGS   += `sdl-config --cflags` 
