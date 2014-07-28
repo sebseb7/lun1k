@@ -400,6 +400,7 @@ void lcdFillRGB(uint8_t r,uint8_t g,uint8_t b)
 			GPIOB->BSRR = port_r;
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
+			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<5);
 
 
@@ -407,11 +408,13 @@ void lcdFillRGB(uint8_t r,uint8_t g,uint8_t b)
 			GPIOB->BSRR = port_g;
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
+			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<5);
 
 
 			GPIOC->BSRRL = (1<<5);
 			GPIOB->BSRR = port_b;
+			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<5);
@@ -469,6 +472,7 @@ void lcdFlush(void)
 #if LUN1K_VERSION == 11
 			GPIOC->BSRRL = (1<<5);
 			GPIOB->BSRR = portb_map[leds[y][x][0]>>2];
+			__ASM volatile ("nop"); // gcc 4.8 does a better job optimizing the previous statement, so it needs a third nop to get the timing right
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<5);
@@ -478,11 +482,13 @@ void lcdFlush(void)
 			GPIOB->BSRR = portb_map[leds[y][x][1]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
+			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<5);
 
 
 			GPIOC->BSRRL = (1<<5);
 			GPIOB->BSRR = portb_map[leds[y][x][2]>>2];
+			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<5);
@@ -494,6 +500,7 @@ void lcdFlush(void)
 			GPIOB->BSRR = portb_map[leds[y][x][0]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
+			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<7);
 
 
@@ -502,12 +509,14 @@ void lcdFlush(void)
 			GPIOB->BSRR = portb_map[leds[y][x][1]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
+			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<7);
 
 
 			GPIOC->BSRRL = (1<<7);
 			GPIOC->BSRR = portc_map[leds[y][x][2]>>2];
 			GPIOB->BSRR = portb_map[leds[y][x][2]>>2];
+			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			GPIOC->BSRRH = (1<<7);
