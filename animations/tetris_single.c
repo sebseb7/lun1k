@@ -59,7 +59,9 @@ static uint8_t tick(void) {
 	}
 	fill_8x6(15,5, 3,0,0,0);
 	draw_number_8x6(15,5, lines, 3, ' ' ,255,255,255);
-	draw_number_8x6(15,100, highscore, 3, ' ' ,255,255,255);
+	draw_text_8x6(5, 90, "Highscore",255,255,255);
+	fill_8x6(5,100, 3,0,0,0);
+	draw_number_8x6(5,100, highscore, 3, '0' ,255,255,255);
 
 	return 0;
 }
