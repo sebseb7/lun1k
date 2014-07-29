@@ -15,6 +15,13 @@ static Grid grids[MAX_PLAYERS];
 void tetris_load() {
 	int i;
 	for(i = 0; i < MAX_PLAYERS; i++) init_grid(&grids[i],i);
+	tetris_set_single_mode(0);	
+	
+}
+
+void tetris_load_single() {
+	init_grid(&grids[0],0);
+	tetris_set_single_mode(1);	
 }
 
 void tetris_update() {

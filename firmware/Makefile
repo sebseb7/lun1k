@@ -3,10 +3,10 @@ PROJECT=template
 
 LSCRIPT=core/stm32f4xx_flash.ld
 
-OPTIMIZATION = -O3
+OPTIMIZATION = -O2
 #OPTIMIZATION = 
 
-LUN1K_VERSION = 11
+LUN1K_VERSION = 10
 
 #test: -mapcs-float
 
@@ -14,9 +14,17 @@ LUN1K_VERSION = 11
 
 SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
 	core/eeprom_data.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
-	../animations/bzr2.c \
-	../animations/interference.c \
-	../animations/bzr.c 
+	../animations/tetris_single.c \
+	../animations/tetris.c \
+	../animations/lib/tetris.c \
+	../animations/lib/grid.c \
+	../animations/bzr2.c 
+#	../animations/fleatron.c \
+#	../animations/bzr.c \
+#	../animations/voxel.c \
+#	../animations/notch.c \
+#	../animations/interference.c \
+#	../animations/bzr.c 
 
 
 #	../animations/qr_clock.c \
@@ -104,7 +112,8 @@ clean:
 
 #########################################################################
 
-flash: all
+#flash: all
+flash:
 	dfu-util -a 0 -s 0x08000000 -D $(PROJECT).bin -R
 
 .PHONY : clean all flash

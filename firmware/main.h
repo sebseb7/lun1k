@@ -8,6 +8,8 @@ void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
 uint32_t getSysTick(void);
 
+void get_stick(uint8_t *x,uint8_t *y);
+
 typedef void (*init_fun)(void);
 typedef void (*deinit_fun)(void);
 typedef uint8_t (*tick_fun)(void);

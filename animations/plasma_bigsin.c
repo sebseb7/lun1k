@@ -40,7 +40,7 @@ static uint8_t tick(void) {
 			);
 		}
 	}
-	char* nick = "lun1k";
+	char* nick = "";
 	uint16_t text_width = get_text_width_16pt(nick);
 	draw_text_inv_16pt((LED_WIDTH/2)-(text_width/2),LED_HEIGHT/2-11, nick);
 	a+=1;
@@ -63,7 +63,7 @@ static void deinit(void)
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-	registerAnimation(init,tick,deinit, 4, 1000);
+	registerAnimation(init,tick,deinit, 0, 1000);
 }
 
 

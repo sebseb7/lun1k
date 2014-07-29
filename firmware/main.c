@@ -21,6 +21,18 @@ void Delay(__IO uint32_t nTime)
 
 	while(TimingDelay != 0);
 }
+static void Delay100us(__IO int32_t nTime)
+{
+
+	if(nTime > 0)
+	{
+
+		TimingDelay = nTime;
+
+		while(TimingDelay != 0);
+	}
+}
+
 
 
 static uint16_t key_state;
@@ -96,12 +108,19 @@ struct animation {
 	tick_fun tick_fp;
 	deinit_fun deinit_fp;
 	uint16_t duration;
-	uint16_t timing;
+	int16_t timing;
 };
 
 static struct animation animations[MAX_ANIMATIONS] CCM_ATTRIBUTES;
 
+static uint8_t joy_x=0;
+static 	uint8_t joy_y=0;
 
+void get_stick(uint8_t *x,uint8_t *y)
+{
+	*x = joy_x;
+	*y = joy_y;
+}
 
 void registerAnimation(init_fun init,tick_fun tick, deinit_fun deinit,uint16_t t, uint16_t count)
 {
@@ -282,23 +301,32 @@ int main(void)
 				loopcount = 0;
 		}
 		
+		get_n35p112(&joy_x,&joy_y);
 
+
+
+		uint32_t start_tick = tick;
 
 		animations[current_animation].tick_fp();
 
-	
-		uint8_t x=0;
-		uint8_t y=0;
-
-		//get_n35p112(&x,&y);
-
-		draw_number_8x6(20,20, x, 3, ' ' ,255,255,255);
-		draw_number_8x6(20,30, y, 3, ' ' ,255,255,255);
-
-		draw_filledCircle(y>>1,x>>1,8,0,0,0);
-		draw_filledCircle(y>>1,x>>1,5,255,255,255);
-
 		lcdFlush();
+
+		uint32_t duration = tick - start_tick;
+
+		//draw_number_8x6(20,20, animations[current_animation].timing - duration, 6, ' ' ,255,255,255);
+
+
+		if(animations[current_animation].timing > 0)
+			Delay100us(animations[current_animation].timing - duration);
+	
+
+
+//		draw_number_8x6(20,20, joy_x, 3, ' ' ,255,255,255);
+//		draw_number_8x6(20,30, joy_y, 3, ' ' ,255,255,255);
+
+//		draw_filledCircle(joy_y>>1,joy_x>>1,8,0,0,0);
+//		draw_filledCircle(joy_y>>1,joy_x>>1,5,255,255,255);
+
 
 
 		tick_count++;

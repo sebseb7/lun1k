@@ -3,7 +3,14 @@
 #include <string.h>
 
 #include "grid.h"
+#include "main.h"
 
+static uint8_t single_mode = 0;
+
+void tetris_set_single_mode(uint8_t mode)
+{
+	single_mode = mode;
+}
 
 static int rand_int(int max)
 {
@@ -194,16 +201,58 @@ static void grid_bot(Grid* grid, int* mov, int* rot, int* drop) {
 
 static void get_grid_input(Grid* grid, int* mov, int* rot, int* drop) {
 
-/*	if(is_occupied(grid->nr)) {
-		*mov = button_down(grid->nr, BUTTON_RIGHT)
-				- button_down(grid->nr, BUTTON_LEFT);
-		*rot = button_down(grid->nr, BUTTON_A)
-				- button_down(grid->nr, BUTTON_B);
-		*drop = button_down(grid->nr, BUTTON_DOWN);
+	if(grid->nr == 0) {
+		
+		uint8_t joy_x = 128;
+		uint8_t joy_y = 128;
+
+		get_stick(&joy_x,&joy_y);
+
+		if(joy_x < 70)
+		{
+			*mov = -1;
+		}
+		else if(joy_x > 140)
+		{
+			*mov = 1;
+		}
+		else
+		{
+			*mov=0;
+		}
+
+		if(joy_y > 180)
+		{
+			*drop = -1;
+		}
+		else
+		{
+			*drop= 0;
+		}
+
+		if(get_key_press( KEY_A))
+		{
+			*rot=1;
+		}
+		else if(get_key_press( KEY_B))
+		{
+			*rot=-1;
+		}
+		else
+		{
+			*rot=0;
+		}
+	
+
+		//*mov = button_down(grid->nr, BUTTON_RIGHT)
+		//		- button_down(grid->nr, BUTTON_LEFT);
+		//*rot = button_down(grid->nr, BUTTON_A)
+		//		- button_down(grid->nr, BUTTON_B);
+		//*drop = button_down(grid->nr, BUTTON_DOWN);
 	}
-	else {*/
+	else {
 		grid_bot(grid, mov, rot, drop);
-//	}
+	}
 
 	if(*mov != grid->input_mov) grid->input_rep = 0;
 	grid->input_mov = *mov;
@@ -220,6 +269,11 @@ static void get_grid_input(Grid* grid, int* mov, int* rot, int* drop) {
 
 static void update_grid_normal(Grid* grid) {
 	int i, x, y;
+
+	if((grid->nr > 0) && single_mode)
+	{
+		return;
+	}
 
 	int mov, rot, drop;
 	get_grid_input(grid, &mov, &rot, &drop);
@@ -447,6 +501,20 @@ void update_grid(Grid* grid) {
 
 void draw_grid(Grid* grid) {
 	int x, y;
+		
+
+	if((grid->nr > 0) && single_mode)
+	{
+		return;
+	}
+	uint8_t offset_y = 11;
+	uint8_t offset_x = 0;
+
+	if(single_mode == 1)
+	{
+		offset_y = 0;
+		offset_x = 10;
+	}
 
 	switch(grid->state) {
 	case STATE_FREE:
@@ -459,6 +527,8 @@ void draw_grid(Grid* grid) {
 	case STATE_WAIT:
 	case STATE_CLEARLINES:
 	case STATE_GAMEOVER:
+
+
 
 		// preview
 		for(y = 0; y < 4; y++) {
@@ -480,7 +550,7 @@ void draw_grid(Grid* grid) {
 					STONES[grid->stone][(x - grid->x) * 4 + y - grid->y] & grid->rot) {
 					color = grid->stone + 1;
 				}
-				pixel(grid->nr * 12 + 1 + x, y + 11, PALETTE[color]);
+				pixel(grid->nr * 12 + 1 + x + offset_x, y + offset_y, PALETTE[color]);
 			}
 		}
 		// score

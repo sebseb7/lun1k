@@ -7,6 +7,7 @@ typedef void (*draw_cb)(int,int,int);
 void setDrawCb(draw_cb);
 
 void tetris_load(void);
+void tetris_load_single(void);
 void tetris_update(void);
 
 int add_player(void);

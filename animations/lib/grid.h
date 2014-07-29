@@ -1,6 +1,8 @@
 #ifndef GRID_H_
 #define GRID_H_
 
+#include "main.h"
+
 enum {
 	GRID_WIDTH = 10,
 	GRID_HEIGHT = 20,
@@ -57,5 +59,6 @@ enum {
 
 
 extern void pixel(int x, int y, unsigned char color);
+void tetris_set_single_mode(uint8_t mode);
 
 #endif
