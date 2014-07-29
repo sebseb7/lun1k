@@ -4,6 +4,7 @@
 
 #include "lib/tetris.h"
 #include "libs/text.h"
+#include "flash_db.h"
 
 static void pixeldraw(int x, int y, int color)
 {
@@ -22,9 +23,20 @@ static void pixeldraw(int x, int y, int color)
 	}
 }
 
+static uint16_t highscore = 0;
+
+static void setHighscore(uint16_t lines)
+{
+	highscore = lines;
+
+}
+
+
 static void init(void)
 {
 	setDrawCb(pixeldraw);
+	setHighscoreCb(setHighscore);
+	flash_db_read(ADDR_TETRIS_HIGHSCORE,&highscore);
 	tetris_load(1,1);
 }
 
@@ -38,9 +50,16 @@ static uint8_t tick(void) {
 
 	tetris_update();
 
-		int lines = get_lines(0);
-		fill_8x6(15,5, 3,0,0,0);
-		draw_number_8x6(15,5, lines, 3, ' ' ,255,255,255);
+	int lines = get_lines(0);
+		
+	if(lines > highscore)
+	{
+		flash_db_write(ADDR_TETRIS_HIGHSCORE,lines);
+		highscore = lines;
+	}
+	fill_8x6(15,5, 3,0,0,0);
+	draw_number_8x6(15,5, lines, 3, ' ' ,255,255,255);
+	draw_number_8x6(15,100, highscore, 3, ' ' ,255,255,255);
 
 	return 0;
 }

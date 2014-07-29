@@ -65,14 +65,14 @@ SECTIONS
 	.eeprom1 :
 	{
 		. = ALIGN(4);
-		*(.eeprom1)
+		KEEP(*(.eeprom1))
 		. = ALIGN(4);
 	} >EEPROM1
 
 	.eeprom2 :
 	{
 		. = ALIGN(4);
-		*(.eeprom2)
+		KEEP(*(.eeprom2))
 		. = ALIGN(4);
 	} >EEPROM2
 	

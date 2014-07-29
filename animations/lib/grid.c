@@ -424,6 +424,15 @@ static void update_grid_gameover(Grid* grid) {
 	}
 
 	if(++grid->state_delay > 25) {
+
+
+
+//		if(!grid->bot)
+//		{
+//			flash_db_write(ADDR_TETRIS_HIGHSCORE,grid->lines);
+//		}
+
+
 		init_grid(grid, grid->nr,grid->bot);
 	}
 }

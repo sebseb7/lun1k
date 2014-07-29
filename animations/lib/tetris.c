@@ -38,10 +38,15 @@ int get_lines(int nr)
 
 
 static draw_cb drawfunc;
+static highscore_cb highscorefunc;
 
 void setDrawCb(draw_cb draw_func)
 {
 	drawfunc = draw_func;
+}
+void setHighscoreCb(highscore_cb highscore_func)
+{
+	highscorefunc = highscore_func;
 }
 
 

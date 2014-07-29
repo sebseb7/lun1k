@@ -41,6 +41,8 @@ static uint8_t tick(void) {
 	for(int i = 0; i < 3; i++)
 	{
 		int lines = get_lines(i);
+
+
 		fill_8x6(i * 36 +12,4, 3,0,0,0);
 		draw_number_8x6(i * 36 + 12,4, lines, 3, ' ' ,255,255,255);
 	}

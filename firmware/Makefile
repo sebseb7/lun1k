@@ -113,6 +113,8 @@ clean:
 #########################################################################
 
 flash: all
-	dfu-util -a 0 -s 0x08000000 -D $(PROJECT).bin -R
+	./get_eeprom_data.perl
+	make
+	dfu-util -a 0 -s 0x08000000:leave -D $(PROJECT).bin -R
 
 .PHONY : clean all flash
