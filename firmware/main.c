@@ -6,6 +6,8 @@
 #include "n35p112.h"
 #include "rng.h"
 #include "libs/text.h"
+#include "adc.h"
+
 
 //#include "lib/usb_serial.h"
 
@@ -275,6 +277,8 @@ int main(void)
 	srand(RNG_Get());
 	RNG_Disable();
 
+	adc_a3_init();
+
 	lcdInit();
 	
 	n35p112_init();
@@ -286,6 +290,8 @@ int main(void)
 	
 
 	int loopcount = 0;
+
+	uint8_t count  = 0;
 
 	while(1)
 	{
@@ -313,7 +319,13 @@ int main(void)
 
 		uint32_t start_tick = tick;
 
-		animations[current_animation].tick_fp();
+//		animations[current_animation].tick_fp();
+		int16_t bat_voltage = adc_a3_get();
+
+		fill_8x6(20,20, 5,0,0,0);
+		draw_number_8x6(20,20, bat_voltage-964, 5, ' ' ,255,255,255);
+
+		setLedXY(bat_voltage-2364, count,255,0,0);
 
 		lcdFlush();
 
@@ -326,14 +338,15 @@ int main(void)
 			Delay100us(animations[current_animation].timing - duration);
 	
 
-
-//		draw_number_8x6(20,20, joy_x, 3, ' ' ,255,255,255);
 //		draw_number_8x6(20,30, joy_y, 3, ' ' ,255,255,255);
 
 //		draw_filledCircle(joy_y>>1,joy_x>>1,8,0,0,0);
 //		draw_filledCircle(joy_y>>1,joy_x>>1,5,255,255,255);
 
 
+		count++;
+		if(count > 128)
+			count=0;
 
 		tick_count++;
 

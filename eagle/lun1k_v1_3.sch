@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.4">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -18571,6 +18571,8 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <part name="R26" library="rcl" deviceset="R-EU_" device="R0402" value="15k"/>
 <part name="R32" library="SparkFun-Passives" deviceset="RESISTOR" device="0402-RES" value="15k"/>
 <part name="GND46" library="supply1" deviceset="GND" device=""/>
+<part name="C27" library="SparkFun-Capacitors" deviceset="CAP" device="0402-CAP" value="calculate for good oversampling performance"/>
+<part name="GND47" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -18856,6 +18858,8 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <attribute name="VALUE" x="160.782" y="176.53" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="GND46" gate="1" x="162.56" y="167.64"/>
+<instance part="C27" gate="G$1" x="154.94" y="226.06" rot="R180"/>
+<instance part="GND47" gate="1" x="154.94" y="215.9"/>
 </instances>
 <busses>
 </busses>
@@ -19215,6 +19219,11 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <segment>
 <pinref part="R32" gate="G$1" pin="2"/>
 <pinref part="GND46" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="GND47" gate="1" pin="GND"/>
+<pinref part="C27" gate="G$1" pin="1"/>
+<wire x1="154.94" y1="218.44" x2="154.94" y2="220.98" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+5V" class="1">
@@ -19583,11 +19592,15 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <segment>
 <wire x1="139.7" y1="231.14" x2="139.7" y2="233.68" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="233.68" x2="139.7" y2="236.22" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="233.68" x2="157.48" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="233.68" x2="154.94" y2="233.68" width="0.1524" layer="91"/>
 <junction x="139.7" y="233.68"/>
 <label x="149.86" y="233.68" size="1.778" layer="95"/>
 <pinref part="R7" gate="G$1" pin="2"/>
 <pinref part="R6" gate="G$1" pin="1"/>
+<pinref part="C27" gate="G$1" pin="2"/>
+<wire x1="154.94" y1="233.68" x2="157.48" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="228.6" x2="154.94" y2="233.68" width="0.1524" layer="91"/>
+<junction x="154.94" y="233.68"/>
 </segment>
 <segment>
 <pinref part="IC3" gate="G$1" pin="PA3"/>
