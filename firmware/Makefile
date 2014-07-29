@@ -112,8 +112,7 @@ clean:
 
 #########################################################################
 
-#flash: all
-flash:
+flash: all
 	dfu-util -a 0 -s 0x08000000 -D $(PROJECT).bin -R
 
 .PHONY : clean all flash

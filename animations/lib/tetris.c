@@ -2,53 +2,42 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "grid.h"
 #include "tetris.h"
 
 enum {
-	MAX_PLAYERS = 3
+	MAX_PLAYERS = 8
 };
 
 static Grid grids[MAX_PLAYERS];
+static uint8_t num_players = 0;
 
-
-void tetris_load() {
+void tetris_load(uint8_t players, int8_t human) {
 	int i;
-	for(i = 0; i < MAX_PLAYERS; i++) init_grid(&grids[i],i);
-	tetris_set_single_mode(0);	
-	
+	for(i = 0; i < players; i++) init_grid(&grids[i],i,i+1 == human ? 0 : 1);
+	num_players = players;
+
 }
 
-void tetris_load_single() {
-	init_grid(&grids[0],0);
-	tetris_set_single_mode(1);	
+uint8_t tetris_get_players(void)
+{
+	return num_players;
 }
 
 void tetris_update() {
 	int i;
-	for(i = 0; i < MAX_PLAYERS; i++) {
+	for(i = 0; i < num_players; i++) {
 		update_grid(&grids[i]);
 		draw_grid(&grids[i]);
 	}
 }
 
-int add_player() {
-	int i;
-	for(i = 0; i < MAX_PLAYERS; i++) {
-		if(activate_grid(&grids[i])) return i;
-	}
-
-	return -1;
-}
 int get_lines(int nr)
 {
 	return grids[nr].lines;
 }
-void remove_player(int nr) {
-	init_grid(&grids[nr], nr);
-}
 
-draw_cb drawfunc;
+
+static draw_cb drawfunc;
 
 void setDrawCb(draw_cb draw_func)
 {

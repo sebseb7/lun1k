@@ -18,6 +18,7 @@ enum {
 
 typedef struct Grid {
 	int nr;
+	int bot;
 	int x;
 	int y;
 	int rot;
@@ -39,7 +40,7 @@ typedef struct Grid {
 	int input_rot;
 } Grid;
 
-void init_grid(Grid* grid, int nr);
+void init_grid(Grid* grid, int nr,int bot);
 int activate_grid(Grid* grid);
 void update_grid(Grid* grid);
 void draw_grid(Grid* grid);
@@ -59,6 +60,5 @@ enum {
 
 
 extern void pixel(int x, int y, unsigned char color);
-void tetris_set_single_mode(uint8_t mode);
 
 #endif

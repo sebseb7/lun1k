@@ -7,9 +7,9 @@
 
 static void pixeldraw(int x, int y, int color)
 {
-	uint8_t r[] = {0,145,255,0  ,255,0  ,255,0  ,127,0  ,127,127,0  ,0  ,0  ,255};
+	uint8_t r[] = {0,105,255,0  ,255,0  ,255,0  ,127,0  ,127,127,0  ,0  ,0  ,255};
 	uint8_t g[] = {0,0  ,0  ,0  ,0  ,255,255,255,255,255,127,255,127,127,0  ,255};
-	uint8_t b[] = {0,145 ,0  ,255,255,0  ,0  ,255,127,127,255,0  ,127,0  ,127,255};
+	uint8_t b[] = {0,105 ,0  ,255,255,0  ,0  ,255,127,127,255,0  ,127,0  ,127,255};
 
 	y+=1;
 
@@ -25,12 +25,11 @@ static void pixeldraw(int x, int y, int color)
 static void init(void)
 {
 	setDrawCb(pixeldraw);
-	tetris_load_single();
+	tetris_load(1,1);
 }
 
 static void deinit(void)
 {
-	remove_player(0);
 }
 
 

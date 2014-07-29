@@ -3,14 +3,6 @@
 #include <string.h>
 
 #include "grid.h"
-#include "main.h"
-
-static uint8_t single_mode = 0;
-
-void tetris_set_single_mode(uint8_t mode)
-{
-	single_mode = mode;
-}
 
 static int rand_int(int max)
 {
@@ -198,11 +190,12 @@ static void grid_bot(Grid* grid, int* mov, int* rot, int* drop) {
 	grid->rot = save_rot;
 }
 
+extern uint8_t tetris_is_human(uint8_t player);
 
 static void get_grid_input(Grid* grid, int* mov, int* rot, int* drop) {
 
-	if(grid->nr == 0) {
-		
+	if(! grid->bot)
+	{	
 		uint8_t joy_x = 128;
 		uint8_t joy_y = 128;
 
@@ -269,11 +262,6 @@ static void get_grid_input(Grid* grid, int* mov, int* rot, int* drop) {
 
 static void update_grid_normal(Grid* grid) {
 	int i, x, y;
-
-	if((grid->nr > 0) && single_mode)
-	{
-		return;
-	}
 
 	int mov, rot, drop;
 	get_grid_input(grid, &mov, &rot, &drop);
@@ -436,13 +424,14 @@ static void update_grid_gameover(Grid* grid) {
 	}
 
 	if(++grid->state_delay > 25) {
-		init_grid(grid, grid->nr);
+		init_grid(grid, grid->nr,grid->bot);
 	}
 }
 
 
-void init_grid(Grid* grid, int nr) {
+void init_grid(Grid* grid, int nr,int bot) {
 	grid->nr = nr;
+	grid->bot = bot;
 	grid->ticks_per_drop = 20;
 	grid->level_progress = 0;
 	grid->lines = 0;
@@ -498,19 +487,16 @@ void update_grid(Grid* grid) {
 	}
 }
 
+extern uint8_t tetris_get_players(void);
 
 void draw_grid(Grid* grid) {
 	int x, y;
 		
 
-	if((grid->nr > 0) && single_mode)
-	{
-		return;
-	}
-	uint8_t offset_y = 11;
+	uint8_t offset_y = 10;
 	uint8_t offset_x = 0;
 
-	if(single_mode == 1)
+	if(tetris_get_players() == 1)
 	{
 		offset_y = 0;
 		offset_x = 10;
@@ -537,7 +523,7 @@ void draw_grid(Grid* grid) {
 				if(STONES[grid->next_stone][x * 4 + y] & grid->next_rot) {
 					color = grid->next_stone + 1;
 				}
-				pixel(grid->nr * 12 + x + 7, y + 6, PALETTE[color]);
+				pixel(grid->nr * 12 + x + 7, y + 5, PALETTE[color]);
 			}
 		}
 		// matrix
