@@ -11,19 +11,21 @@ LUN1K_VERSION = 10
 #test: -mapcs-float
 
 #########################################################################
-#	../animations/tetris_single.c \
-#	../animations/tetris.c \
-#	../animations/lib/tetris.c \
-#	../animations/lib/grid.c \
 
 SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
 	core/eeprom_data.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
-	../animations/bzr2.c 
+	../animations/tetris_single.c \
+	../animations/tetris.c \
+	../animations/lib/tetris.c \
+	../animations/lib/grid.c \
+	../animations/bzr2.c \
+	../animations/interference.c \
+	../animations/plasma_bigsin.c \
+	../animations/notch.c \
+	../animations/tunnel_no_tex.c 
 #	../animations/fleatron.c \
 #	../animations/bzr.c \
 #	../animations/voxel.c \
-#	../animations/notch.c \
-#	../animations/interference.c \
 #	../animations/bzr.c 
 
 
@@ -36,11 +38,9 @@ SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
 #	../animations/interference.c \
 #	../animations/linebox.c \
 #	../animations/gap.c \
-#	../animations/tunnel_no_tex.c \
 #	../animations/tetris.c \
 #	../animations/lib/tetris.c \
 #	../animations/lib/grid.c \
-#	../animations/plasma_bigsin.c \
 #	../animations/plasma_weed.c
 
 
