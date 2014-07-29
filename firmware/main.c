@@ -1,8 +1,10 @@
-#include "main.h"
-#include "arm_math.h" 
-#include "libs/circle.h" 
+#include <stdlib.h>
 
+#include "main.h"
+#include "libs/circle.h" 
+#include "arm_math.h" 
 #include "n35p112.h"
+#include "rng.h"
 #include "libs/text.h"
 
 //#include "lib/usb_serial.h"
@@ -268,6 +270,10 @@ int main(void)
 	// 12V power
 	GPIOA->ODR           |=       1<<1;
 
+
+	RNG_Enable();
+	srand(RNG_Get());
+	RNG_Disable();
 
 	lcdInit();
 	
