@@ -1,6 +1,11 @@
 // from newlib_stubs.c
 
+#if STM32F == 2
+#include "stm32f2xx.h"
+#endif
+#if STM32F == 4
 #include "stm32f4xx.h"
+#endif
 #include <sys/types.h>
 #include <errno.h>
 
@@ -15,8 +20,9 @@ caddr_t _sbrk(int incr) {
 	}
 	prev_heap_end = heap_end;
 
-	char * stack = (char*) __get_MSP();
-	if (heap_end + incr >  stack)
+	//todo: check consumtion
+	//char * stack = (char*) __get_MSP();
+	if (heap_end + incr >  (char*)0x20020000)
 	{
 		//_write (STDERR_FILENO, "Heap and stack collision\n", 25);
 		errno = ENOMEM;
@@ -34,3 +40,4 @@ void _exit(void) {
 		// Loop until reset
 	}
 }
+

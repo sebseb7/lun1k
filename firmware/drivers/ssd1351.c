@@ -22,7 +22,7 @@ const uint32_t portb_map[64]= {
 #endif
 
 #if LUN1K_VERSION == 11
-const uint32_t portb_map[64]= {
+const uint32_t portb_map[64] = {
 	3758555136,1611104256,3758489601,1611038721,3758424066,1610973186,3758358531,1610907651,
 	3758292996,1610842116,3758227461,1610776581,3758161926,1610711046,3758096391,1610645511,
 	2684829696,537378816,2684764161,537313281,2684698626,537247746,2684633091,537182211,
@@ -31,7 +31,7 @@ const uint32_t portb_map[64]= {
 	3221430276,1073979396,3221364741,1073913861,3221299206,1073848326,3221233671,1073782791,
 	2147966976,516096,2147901441,450561,2147835906,385026,2147770371,319491,2147704836,
 	253956,2147639301,188421,2147573766,122886,2147508231,57351
-};
+}; 
 #endif
 
 #if LUN1K_VERSION >= 12
@@ -44,6 +44,11 @@ const uint32_t portb_map[64]= {
 static const lcdProperties_t ssd1351Properties = { 128, 128 };
 
 uint8_t leds[LED_HEIGHT][LED_WIDTH][3] CCM_ATTRIBUTES; 
+
+#if LUN1K_VERSION == 10
+uint32_t portc_cache[64] CCM_ATTRIBUTES; 
+#endif
+uint32_t portb_cache[64] CCM_ATTRIBUTES; 
 
 
 /*************************************************/
@@ -332,6 +337,14 @@ void lcdInit(void)
 
 	// Clear screen
 	lcdFillRGB(0,0,0);
+	
+	for (int i=0; i<64 ;i++)
+	{
+#if LUN1K_VERSION == 10
+		portc_cache[i] = portc_map[i]; 
+#endif
+		portb_cache[i] = portb_map[i]; 
+	}
 
 	// Turn the display on
 	CMD(SSD1351_CMD_SLEEPMODE_DISPLAYON);  
@@ -471,7 +484,7 @@ void lcdFlush(void)
 
 #if LUN1K_VERSION == 11
 			GPIOC->BSRRL = (1<<5);
-			GPIOB->BSRR = portb_map[leds[y][x][0]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][0]>>2];
 			__ASM volatile ("nop"); // gcc 4.8 does a better job optimizing the previous statement, so it needs a third nop to get the timing right
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -479,7 +492,7 @@ void lcdFlush(void)
 
 
 			GPIOC->BSRRL = (1<<5);
-			GPIOB->BSRR = portb_map[leds[y][x][1]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][1]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -487,7 +500,7 @@ void lcdFlush(void)
 
 
 			GPIOC->BSRRL = (1<<5);
-			GPIOB->BSRR = portb_map[leds[y][x][2]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][2]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -496,8 +509,8 @@ void lcdFlush(void)
 
 #if LUN1K_VERSION == 10
 			GPIOC->BSRRL = (1<<7);
-			GPIOC->BSRR = portc_map[leds[y][x][0]>>2];
-			GPIOB->BSRR = portb_map[leds[y][x][0]>>2];
+			GPIOC->BSRR = portc_cache[leds[y][x][0]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][0]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -505,8 +518,8 @@ void lcdFlush(void)
 
 
 			GPIOC->BSRRL = (1<<7);
-			GPIOC->BSRR = portc_map[leds[y][x][1]>>2];
-			GPIOB->BSRR = portb_map[leds[y][x][1]>>2];
+			GPIOC->BSRR = portc_cache[leds[y][x][1]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][1]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -514,8 +527,8 @@ void lcdFlush(void)
 
 
 			GPIOC->BSRRL = (1<<7);
-			GPIOC->BSRR = portc_map[leds[y][x][2]>>2];
-			GPIOB->BSRR = portb_map[leds[y][x][2]>>2];
+			GPIOC->BSRR = portc_cache[leds[y][x][2]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][2]>>2];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");

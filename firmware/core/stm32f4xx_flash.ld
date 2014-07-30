@@ -33,11 +33,12 @@
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = 0x20020000;    /* end of 128K RAM on AHB bus*/
+/*_estack = 0x20020000;*/    /* end of 128K RAM on AHB bus*/
+_estack = 0x10010000;    /* end of 64K CCMRAM (which gives 1-4% more frames in bzr2) */ 
 
 /* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0;      /* required amount of heap  */
-_Min_Stack_Size = 0x400; /* required amount of stack */
+_Min_Heap_Size = 0x1F000;      /* required amount of heap  */
+_Min_Stack_Size = 0x3E00; /* required amount of stack */
 
 /* Specify the memory areas */
 MEMORY
@@ -81,7 +82,7 @@ SECTIONS
 		. = ALIGN(4);
 		*(.text0)
 		*(.text0*)
-		. = ALIGN(4);
+		/. = ALIGN(4);
 	} >FLASH0
 
 	/* The program code and other data goes into FLASH */
@@ -164,13 +165,12 @@ SECTIONS
 	} >RAM
 
 	/* User_heap_stack section, used to check that there is enough RAM left */
-	._user_heap_stack :
+	._user_heap :
 	{
 		. = ALIGN(4);
 		PROVIDE ( end = . );
 		PROVIDE ( _end = . );
 		. = . + _Min_Heap_Size;
-		. = . + _Min_Stack_Size;
 		. = ALIGN(4);
 	} >RAM
 
@@ -189,6 +189,15 @@ SECTIONS
 	{
 		. = ALIGN(4);
 		*(.ccm)
+		. = ALIGN(4);
+	} >CCMRAM
+	
+	._user_stack :
+	{
+		. = ALIGN(4);
+		PROVIDE ( ccmend = . );
+		PROVIDE ( _ccm_end = . );
+		. = . + _Min_Stack_Size;
 		. = ALIGN(4);
 	} >CCMRAM
 
