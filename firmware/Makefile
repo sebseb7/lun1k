@@ -13,7 +13,7 @@ LUN1K_VERSION = 10
 #########################################################################
 
 SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
-	core/eeprom_data.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
+	core/syscalls.c  core/eeprom_data.c core/stm32fxxx_it.c core/system_stm32f4xx.c \
 	../animations/tetris_single.c \
 	../animations/tetris.c \
 	../animations/lib/tetris.c \
