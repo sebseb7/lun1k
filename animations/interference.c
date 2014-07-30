@@ -15,13 +15,18 @@ static uint8_t tick(void) {
 	float x1 = sini(a*40)/512.0f;
 	float y1 = sini((a*80)+0x2000)/512.0f;
 	uint8_t x, y;
+	
+	uint8_t joy_x = 128;
+	uint8_t joy_y = 128;
+
+	get_stick(&joy_x,&joy_y);
 
 	for(y = 0; y < LED_HEIGHT; y++) 
 	{
 		for(x = 0; x < LED_WIDTH; x++) 
 		{
-			int dist = sini(pythagorasf(x0-x,y0-y)*(  215+ (sini(a*300)>>7)   ))>>9;
-			int dist2 = sini(pythagorasf(x1-x,y1-y)*512)>>9 ;
+			int dist = sini(pythagorasf(x0-x,y0-y)*(  (joy_x*2)+ (sini(a*300)>>7)   ))>>9;
+			int dist2 = sini(pythagorasf(x1-x,y1-y)*(joy_y*4))>>9 ;
 				// sini((dist*dist2*dist2)+a*300)>>8, -> noise
 
 

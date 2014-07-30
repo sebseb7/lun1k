@@ -18,6 +18,12 @@ static uint8_t tick(void) {
 	float x1 = (float)sini(a*5)/128-128;
 	float y1 = (float)sini((a*5)+0x1000)/128-128;
 		
+		
+	uint8_t joy_x = 128;
+	uint8_t joy_y = 128;
+
+	get_stick(&joy_x,&joy_y);
+		
 	for(y = 0; y < LED_HEIGHT; y++) 
 	{
 		uint16_t y_part =  sini(sin1+y*20);
@@ -30,8 +36,8 @@ static uint8_t tick(void) {
 			float dist2 = pythagorasf(y1-x,x1-y);
 
 
-			uint16_t h = sini(sin1+x*20)+ y_part + sini(dist*500) + sini(dist2*300);
-			uint16_t h2 = sini(sin1+x*30)+ y_part + sini(dist*200) + sini(dist2*350);
+			uint16_t h = sini(sin1+x*20)+ y_part + sini(dist*500) + sini(dist2*joy_y*2);
+			uint16_t h2 = sini(sin1+x*30)+ y_part + sini(dist*joy_x*2) + sini(dist2*350);
 			setLedXY(
 				x,y,
 				sini((h>>2)+a*500)>>8,

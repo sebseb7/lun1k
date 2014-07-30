@@ -18,7 +18,9 @@ SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
 	../animations/tetris.c \
 	../animations/lib/tetris.c \
 	../animations/lib/grid.c \
+	../animations/bzr.c \
 	../animations/bzr2.c \
+	../animations/bzr2_seb.c \
 	../animations/interference.c \
 	../animations/plasma_bigsin.c \
 	../animations/notch.c \

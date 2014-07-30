@@ -23,6 +23,29 @@
 static size_t gnCurrentMemory = 0;
 static size_t gnPeakMemory    = 0;
 
+void flash_db_write(uint16_t addr,uint16_t data)
+{
+}
+
+
+void flash_db_read(uint16_t addr,uint16_t *data)
+{
+
+	uint16_t read_data=0;
+	*data = read_data;
+
+}
+
+static uint8_t joy_x=128;
+static 	uint8_t joy_y=128;
+
+void get_stick(uint8_t *x,uint8_t *y)
+{
+	*x = joy_x;
+	*y = joy_y;
+}
+
+
 void *xmalloc (size_t nSize)
 {
 	void *(*libc_malloc)(size_t) = dlsym(RTLD_NEXT, "malloc");

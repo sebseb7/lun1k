@@ -115,7 +115,7 @@ struct animation {
 	int16_t timing;
 };
 
-static struct animation animations[MAX_ANIMATIONS] CCM_ATTRIBUTES;
+static struct animation animations[MAX_ANIMATIONS] ;
 
 static uint8_t joy_x=0;
 static 	uint8_t joy_y=0;
@@ -292,6 +292,10 @@ int main(void)
 	int loopcount = 0;
 
 	uint8_t count  = 0;
+		
+	int16_t bat_voltage = adc_a3_get();
+
+	float voltagesample = bat_voltage;
 
 	while(1)
 	{
@@ -313,19 +317,28 @@ int main(void)
 				loopcount = 0;
 		}
 		
-		get_n35p112(&joy_x,&joy_y);
-
-
-
 		uint32_t start_tick = tick;
 
-//		animations[current_animation].tick_fp();
-		int16_t bat_voltage = adc_a3_get();
+		get_n35p112(&joy_x,&joy_y);
+
+		animations[current_animation].tick_fp();
+/*		int16_t bat_voltage = adc_a3_get();
 
 		fill_8x6(20,20, 5,0,0,0);
-		draw_number_8x6(20,20, bat_voltage-964, 5, ' ' ,255,255,255);
+		fill_8x6(20,30, 5,0,0,0);
+		draw_number_8x6(20,20, bat_voltage, 5, ' ' ,255,255,255);
 
-		setLedXY(bat_voltage-2364, count,255,0,0);
+		voltagesample = voltagesample * 0.98f;
+		voltagesample += bat_voltage * 0.02f;
+
+
+		float tmp2 = voltagesample / (4096.0f / 3.3f);
+
+		float tmp3 = tmp2 * 2.14f;
+
+		draw_number_8x6(20,30, tmp3*1000, 5, ' ' ,255,255,255);
+
+		setLedXY(bat_voltage-2364, count,255,0,0);*/
 
 		lcdFlush();
 
