@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "lib/tetris.h"
-#include "libs/text.h"
+#include "mcugui/text.h"
 #include "flash_db.h"
 
 static void pixeldraw(int x, int y, int color)
@@ -69,6 +69,6 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-	registerAnimation(init,tick,deinit, 280, 3000);
+	registerAnimation("Tetris",init,tick,deinit, 280, 3000);
 }
 

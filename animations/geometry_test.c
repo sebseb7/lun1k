@@ -2,9 +2,9 @@
 #include "main.h"
 #include <stdio.h>
 
-#include "libs/wuline.h"
-#include "libs/circle.h"
-#include "libs/text.h"
+#include "mcugui/line.h"
+#include "mcugui/circle.h"
+#include "mcugui/text.h"
 #include "libs/armmath.h"
 
 
@@ -30,6 +30,6 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-	registerAnimation(init,tick,deinit, 0, 300);
+	registerAnimation("Geometry Test",init,tick,deinit, 0, 300);
 }
 

@@ -373,9 +373,9 @@ void setLedXY(uint8_t x, uint8_t y, uint8_t r,uint8_t g, uint8_t b)
 	if ((x >= ssd1351Properties.width) || (y >= ssd1351Properties.height))
 		return;
 	
-	leds[y][x][0] = r;
-	leds[y][x][1] = g;
-	leds[y][x][2] = b;
+	leds[y][x][0] = r>>2;
+	leds[y][x][1] = g>>2;
+	leds[y][x][2] = b>>2;
 }
 
 
@@ -484,7 +484,7 @@ void lcdFlush(void)
 
 #if LUN1K_VERSION == 11
 			GPIOC->BSRRL = (1<<5);
-			GPIOB->BSRR = portb_cache[leds[y][x][0]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][0]];
 			__ASM volatile ("nop"); // gcc 4.8 does a better job optimizing the previous statement, so it needs a third nop to get the timing right
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -492,7 +492,7 @@ void lcdFlush(void)
 
 
 			GPIOC->BSRRL = (1<<5);
-			GPIOB->BSRR = portb_cache[leds[y][x][1]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][1]];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -500,7 +500,7 @@ void lcdFlush(void)
 
 
 			GPIOC->BSRRL = (1<<5);
-			GPIOB->BSRR = portb_cache[leds[y][x][2]>>2];
+			GPIOB->BSRR = portb_cache[leds[y][x][2]];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -509,8 +509,8 @@ void lcdFlush(void)
 
 #if LUN1K_VERSION == 10
 			GPIOC->BSRRL = (1<<7);
-			GPIOC->BSRR = portc_cache[leds[y][x][0]>>2];
-			GPIOB->BSRR = portb_cache[leds[y][x][0]>>2];
+			GPIOC->BSRR = portc_cache[leds[y][x][0]];
+			GPIOB->BSRR = portb_cache[leds[y][x][0]];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -518,8 +518,8 @@ void lcdFlush(void)
 
 
 			GPIOC->BSRRL = (1<<7);
-			GPIOC->BSRR = portc_cache[leds[y][x][1]>>2];
-			GPIOB->BSRR = portb_cache[leds[y][x][1]>>2];
+			GPIOC->BSRR = portc_cache[leds[y][x][1]];
+			GPIOB->BSRR = portb_cache[leds[y][x][1]];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
@@ -527,8 +527,8 @@ void lcdFlush(void)
 
 
 			GPIOC->BSRRL = (1<<7);
-			GPIOC->BSRR = portc_cache[leds[y][x][2]>>2];
-			GPIOB->BSRR = portb_cache[leds[y][x][2]>>2];
+			GPIOC->BSRR = portc_cache[leds[y][x][2]];
+			GPIOB->BSRR = portb_cache[leds[y][x][2]];
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");
 			__ASM volatile ("nop");

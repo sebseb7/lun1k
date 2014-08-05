@@ -108,6 +108,7 @@ static int animationcount;
 
 
 struct animation {
+	char* name;
 	init_fun init_fp;
 	tick_fun tick_fp;
 	deinit_fun deinit_fp;
@@ -126,7 +127,7 @@ void get_stick(uint8_t *x,uint8_t *y)
 	*y = joy_y;
 }
 
-void registerAnimation(init_fun init,tick_fun tick, deinit_fun deinit,uint16_t t, uint16_t count)
+void registerAnimation(char* name,init_fun init,tick_fun tick, deinit_fun deinit,uint16_t t, uint16_t count)
 {
 
 	// this is for initialization, probably registerAnimation gets called bevore global variables are initialized
@@ -146,6 +147,7 @@ void registerAnimation(init_fun init,tick_fun tick, deinit_fun deinit,uint16_t t
 	animations[animationcount].deinit_fp = deinit;
 	animations[animationcount].duration = count;
 	animations[animationcount].timing = t;
+	animations[animationcount].name = name;
 
 	animationcount++;
 }

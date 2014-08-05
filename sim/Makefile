@@ -3,7 +3,7 @@ UNAME := $(shell uname)
 COMPILER = gcc
 
 
-FLAGS= -I. -I.. -Ihal/inc --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  #-fsingle-precision-constant
+FLAGS= -I. -I.. -I../libs -Ihal/inc --std=gnu99 -Wall  -funsigned-char -Wundef -Wsign-compare -Wunreachable-code  -Wstrict-prototypes  #-fsingle-precision-constant
 LDFLAGS=
 BINEXT=
 
@@ -29,8 +29,8 @@ endif
 SOURCES=$(wildcard ../animations/*.c)
 BINARIES=$(SOURCES:../animations/%.c=%$(BINEXT))
 
-LIB_SOURCES=$(wildcard ../libs/*.c ../animations/lib/*.c ../libs/zint/*.c hal/src/*.c)
-LIB_HEADERS=$(wildcard ../libs/*.h ../animations/lib/*.h)
+LIB_SOURCES=$(wildcard ../libs/*.c ../libs/mcugui/*.c ../animations/lib/*.c ../libs/zint/*.c hal/src/*.c)
+LIB_HEADERS=$(wildcard ../libs/*.h ../libs/mcugui/*.c ../animations/lib/*.h)
 
 all: $(BINARIES) _all_animations
 

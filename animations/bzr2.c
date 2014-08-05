@@ -6,7 +6,7 @@
 
 #include "main.h"
 #include "libs/armmath.h"
-#include "libs/text.h"
+#include "mcugui/text.h"
 
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -97,7 +97,7 @@ static uint8_t tick(void) {
 	time++;
 
         uint32_t start = getSysTick();
-        if (start - 10000 >= second_start) {
+        if (start - 100000 >= second_start) {
             fps = second_frames;
             second_frames = 0;
             second_start = start;
@@ -139,5 +139,5 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 	void constructor(void) {
-	registerAnimation(init,tick,deinit, 0, 2000);
+	registerAnimation("Belousov-Zhabotinsky 2",init,tick,deinit, 0, 2000);
 }

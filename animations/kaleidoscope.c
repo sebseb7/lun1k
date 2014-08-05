@@ -12,7 +12,7 @@
 #include <math.h>
 
 #include "main.h"
-#include "libs/text.h"
+#include "mcugui/text.h"
 #include "libs/armmath.h"
 
 
@@ -185,7 +185,7 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-    registerAnimation(init,tick,deinit, 0, 1000);
+    registerAnimation("Kaleidoscope",init,tick,deinit, 0, 1000);
 }
 
 

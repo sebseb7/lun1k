@@ -12,7 +12,7 @@
 #include <math.h>
 
 #include "main.h"
-#include "libs/text.h"
+#include "mcugui/text.h"
 #include "libs/armmath.h"
 
 #include "lib/tunnel_tex.h"
@@ -57,7 +57,7 @@ static uint16_t getA(uint16_t x,uint16_t y)
                 x1 = x - LED_WIDTH,
                 y1 = y - LED_HEIGHT;
             float angle = atan2f(x1, y1);
-            return 0x1fff + (angle * 0x1fff) / 3.1514f;
+            return 0x1e20 + (angle * 0x1e20) / 3.1514f;
 
 }
 
@@ -98,20 +98,25 @@ static inline uint32_t __attribute__((always_inline)) getTex(uint16_t a, uint16_
 static uint8_t tick(void) {
     static uint16_t t = 0;
     t++;
-    int16_t shiftLookX = LED_WIDTH * (uint32_t)sini(49 * t + 0x0fff) / 0xffff;
-    int16_t shiftLookY = LED_HEIGHT * (uint32_t)sini(31 * t + 0x0fff) / 0xffff;
+   // int16_t shiftLookX = LED_WIDTH * (uint32_t)sini(49 * t + 0x0fff) / 0xffff;
+   // int16_t shiftLookY = LED_HEIGHT * (uint32_t)sini(31 * t + 0x0fff) / 0xffff;
 	
     uint16_t x, y;
+	
+	uint8_t joy_x = 128;
+	uint8_t joy_y = 128;
+
+	get_stick(&joy_x,&joy_y);
 
     for(y = 0; y < LED_HEIGHT; y++) 
     {
         for(x = 0; x < LED_WIDTH; x++) 
         {
-            uint8_t x1 = x + shiftLookX;
-            uint8_t y1 = y + shiftLookY;
+            uint8_t x1 = x + joy_x - 64;
+            uint8_t y1 = y + joy_y - 64;
             uint16_t z = getZ(x1,y1);
             uint16_t a = getA(x1,y1);
-            uint32_t texel = getTex(a + t * 0x7, z + t * 2);
+            uint32_t texel = getTex(a + t * 0x41, z + t * 1);
             uint8_t r = ((texel & 0xff0000) >> 16);
             uint8_t g = ((texel & 0xff00) >> 8);
             uint8_t b = (texel & 0xff);
@@ -130,7 +135,7 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-    registerAnimation(init,tick,deinit, 0, 1000);
+    registerAnimation("Tunnel",init,tick,deinit, 0, 1000);
 }
 
 

@@ -6,7 +6,7 @@ LSCRIPT=core/stm32f4xx_flash.ld
 OPTIMIZATION = -O2
 #OPTIMIZATION = 
 
-LUN1K_VERSION = 10
+LUN1K_VERSION = 11
 
 #test: -mapcs-float
 
@@ -24,6 +24,8 @@ SRC=$(wildcard  *.c drivers/*.c ../libs/*.c ../libs/zint/*.c hal/*.c) \
 	../animations/interference.c \
 	../animations/plasma_bigsin.c \
 	../animations/notch.c \
+	../animations/tunnel.c \
+	../animations/lib/tunnel_tex.c \
 	../animations/tunnel_no_tex.c 
 #	../animations/fleatron.c \
 #	../animations/bzr.c \

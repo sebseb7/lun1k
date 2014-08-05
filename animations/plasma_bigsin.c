@@ -2,7 +2,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <math.h>
-#include "libs/text.h"
+#include "mcugui/text.h"
 #include "libs/armmath.h"
 
 static uint16_t a = 0;
@@ -69,7 +69,7 @@ static void deinit(void)
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-	registerAnimation(init,tick,deinit, 0, 1000);
+	registerAnimation("Plasma",init,tick,deinit, 0, 1000);
 }
 
 

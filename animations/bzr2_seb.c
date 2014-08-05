@@ -6,7 +6,7 @@
 
 #include "main.h"
 #include "libs/armmath.h"
-#include "libs/text.h"
+#include "mcugui/text.h"
 
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -46,6 +46,11 @@ static void deinit(void) {
 static uint8_t tick(void) {
 	static int time = 0;
 	time++;
+	
+	uint8_t joy_x = 128;
+	uint8_t joy_y = 128;
+
+	get_stick(&joy_x,&joy_y);
 
 
 	for(int y = 0, p = 0; y < LED_HEIGHT; y++) {
@@ -77,8 +82,8 @@ static uint8_t tick(void) {
 			//setLedXY(x, y, bzr_a[p], bzr_b[p], bzr_c[p]);
 			setLedXY(x, y, 
 					sini(time*50+50*t_bzr_a[p])>>8  ,
-					sini(0x1555+time*70+30*t_bzr_b[p])>>8  ,
-					sini(0x2aaa+time*30+20*t_bzr_c[p])>>8
+					sini(0x1555+time*(joy_x>>1)+30*t_bzr_b[p])>>8  ,
+					sini(0x2aaa+time*(joy_y>>2)+20*t_bzr_c[p])>>8
 
 					);
 		}
@@ -98,5 +103,5 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-	registerAnimation(init,tick,deinit, 0, 2000);
+	registerAnimation("Belousov-Zhabotinsky 3",init,tick,deinit, 0, 2000);
 }

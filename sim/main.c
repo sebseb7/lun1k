@@ -149,7 +149,7 @@ void getLedXY(uint8_t x, uint8_t y, uint8_t* red,uint8_t* green, uint8_t* blue) 
 	*blue = leds[y][x][2];
 }
 
-void registerAnimation(init_fun init,tick_fun tick, deinit_fun deinit,uint16_t t, uint16_t count)
+void registerAnimation(char * name,init_fun init,tick_fun tick, deinit_fun deinit,uint16_t t, uint16_t count)
 {
 	if(animationcount == MAX_ANIMATIONS)
 		return;
