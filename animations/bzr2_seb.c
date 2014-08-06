@@ -82,8 +82,8 @@ static uint8_t tick(void) {
 			//setLedXY(x, y, bzr_a[p], bzr_b[p], bzr_c[p]);
 			setLedXY(x, y, 
 					sini(time*50+50*t_bzr_a[p])>>8  ,
-					sini(0x1555+time*(joy_x>>1)+30*t_bzr_b[p])>>8  ,
-					sini(0x2aaa+time*(joy_y>>2)+20*t_bzr_c[p])>>8
+					sini(0x1555+time*(joy_x>>1)+30*t_bzr_a[p])>>8  ,
+					sini(0x2aaa+time*(joy_y>>2)+20*t_bzr_a[p])>>8
 
 					);
 		}
