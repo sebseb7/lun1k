@@ -12,7 +12,7 @@
 #include <math.h>
 
 #include "main.h"
-#include "mcugui/text.h"
+#include "libs/mcugui/text.h"
 #include "libs/armmath.h"
 
 #include "lib/tunnel_tex.h"

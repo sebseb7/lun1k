@@ -2,7 +2,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <math.h>
-#include "mcugui/text.h"
+#include "libs/mcugui/text.h"
 #include "libs/armmath.h"
 
 static uint16_t a = 0;

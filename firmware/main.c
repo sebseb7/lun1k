@@ -1,11 +1,11 @@
 #include <stdlib.h>
 
 #include "main.h"
-#include "libs/circle.h" 
+#include "libs/mcugui/circle.h"
 #include "arm_math.h" 
 #include "n35p112.h"
 #include "rng.h"
-#include "libs/text.h"
+#include "libs/mcugui/text.h"
 #include "adc.h"
 
 

@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "lib/tetris.h"
-#include "mcugui/text.h"
+#include "libs/mcugui/text.h"
 
 static void pixeldraw(int x, int y, int color)
 {

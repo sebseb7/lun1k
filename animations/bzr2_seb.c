@@ -6,7 +6,7 @@
 
 #include "main.h"
 #include "libs/armmath.h"
-#include "mcugui/text.h"
+#include "libs/mcugui/text.h"
 
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
