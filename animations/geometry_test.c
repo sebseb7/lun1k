@@ -2,11 +2,11 @@
 #include "main.h"
 #include <stdio.h>
 
-#include "mcugui/line.h"
-#include "mcugui/circle.h"
-#include "mcugui/text.h"
-#include "mcugui/rect.h"
-#include "mcugui/button.h"
+#include "libs/mcugui/line.h"
+#include "libs/mcugui/circle.h"
+#include "libs/mcugui/text.h"
+#include "libs/mcugui/rect.h"
+#include "libs/mcugui/button.h"
 #include "libs/armmath.h"
 
 

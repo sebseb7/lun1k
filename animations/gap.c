@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string.h>
 #include "main.h"
-#include "mcugui/text.h"
+#include "libs/mcugui/text.h"
 #include "libs/armmath.h"
 
 
