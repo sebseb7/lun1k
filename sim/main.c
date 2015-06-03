@@ -194,6 +194,43 @@ void lcdFillRGB(uint8_t r,uint8_t g , uint8_t b)
 		}
 	}
 }
+static int hatposition=SDL_HAT_CENTERED;
+
+
+int joy_is_up(void)
+{
+	if(hatposition&SDL_HAT_UP)
+	{
+		return 1;
+	}
+	return 0;
+}
+int joy_is_down(void)
+{
+	if(hatposition&SDL_HAT_DOWN)
+	{
+		return 1;
+	}
+	return 0;
+}
+int joy_is_left(void)
+{
+	if(hatposition&SDL_HAT_LEFT)
+	{
+		return 1;
+	}
+	return 0;
+}
+int joy_is_right(void)
+{
+	if(hatposition&SDL_HAT_RIGHT)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+
 
 
 int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unused__))) {
@@ -232,6 +269,9 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 			switch(ev.type) {
 				case SDL_QUIT:
 					running = 0;
+					break;
+				case SDL_JOYHATMOTION:
+					hatposition = ev.jhat.value;
 					break;
 				case SDL_KEYUP:
 					break;
