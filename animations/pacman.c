@@ -61,6 +61,8 @@ static struct bot_t player;
 
 static int door = 0;
 static int pupmode = 0;
+static int hurt = 0;
+static int lives = 3;
 
 static void init(void)
 {
@@ -272,6 +274,85 @@ static void eat(struct pos_t pos)
 	}
 }
 
+static int check_collision(struct bot_t *bot,struct bot_t *player)
+{
+	if((bot->pos.x == player->pos.x)&&(bot->pos.y == player->pos.y))
+	{
+		return 1;
+	}
+	return 0;
+}
+
+
+static void collision_check(void)
+{
+	if(check_collision(&bot1,&player))
+	{
+		if(pupmode)
+		{
+			bot1.pos.x=9;
+			bot1.pos.y=9;
+		}
+		else
+		{
+			if(hurt==0)
+			{
+				lives--;
+				hurt = 30;
+			}
+		}
+	}
+	if(check_collision(&bot2,&player))
+	{
+		if(pupmode)
+		{
+			bot2.pos.x=9;
+			bot2.pos.y=9;
+		}
+		else
+		{
+			if(hurt==0)
+			{
+				lives--;
+				hurt = 30;
+			}
+		}
+	}
+	if(check_collision(&bot3,&player))
+	{
+		if(pupmode)
+		{
+			bot3.pos.x=9;
+			bot3.pos.y=9;
+		}
+		else
+		{
+			if(hurt==0)
+			{
+				lives--;
+				hurt = 30;
+			}
+		}
+	}
+	if(check_collision(&bot4,&player))
+	{
+		if(pupmode)
+		{
+			bot4.pos.x=9;
+			bot4.pos.y=9;
+		}
+		else
+		{
+			if(hurt==0)
+			{
+				lives--;
+				hurt = 30;
+			}
+		}
+	}
+
+}
+
 static int x = 0;
 
 static uint8_t tick(void) {
@@ -333,7 +414,19 @@ static uint8_t tick(void) {
 		set_block(bot4.pos.x,bot4.pos.y,0,128,255);
 	}
 
-	set_block(player.pos.x,player.pos.y,255,255,0);
+	if(hurt%2)
+	{
+		set_block(player.pos.x,player.pos.y,128,128,0);
+	}
+	else
+	{
+		set_block(player.pos.x,player.pos.y,255,255,0);
+	}
+
+	for(int i = 0;i<lives;i++)
+	{
+		set_block(11,1+i,255,255,0);
+	}
 
 
 	if((pupmode > 1)&&(x%2))
@@ -341,11 +434,15 @@ static uint8_t tick(void) {
 	}
 	else
 	{
-		if((x%8) == 0) movebot(&bot1);
-		if((x%9) == 0) movebot(&bot2);
-		if((x%10) == 0) movebot(&bot3);
-		if((x%12) == 0) movebot(&bot4);
+		if((x%7) == 0) movebot(&bot1);
+		if((x%8) == 0) movebot(&bot2);
+		if((x%9) == 0) movebot(&bot3);
+		if((x%10) == 0) movebot(&bot4);
 	}
+
+
+	collision_check();
+
 	if((x%5) == 0)
 	{
 		
@@ -391,9 +488,12 @@ static uint8_t tick(void) {
 	}
 	//	movebot(&player);
 
+	collision_check();
 
 	if(pupmode > 0)
-		if((x%5)==0)	pupmode--;
+		if((x%2)==0)	pupmode--;
+	if(hurt > 0)
+		if((x%2)==0)	hurt--;
 
 	
 	if((x%100) == 0) door = 1;
