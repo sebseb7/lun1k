@@ -73,7 +73,7 @@ GCFLAGS+= -ISTM32F4_drivers/inc
 LDFLAGS = -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -T$(LSCRIPT) 
 LDFLAGS+= -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16
 #LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc -specs=nano.specs -Wl,--gc-section
-LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc -Wl,--gc-section
+LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc -Wl,--gc-section -Wl,-Map,memory.map 
 
 
 #  Compiler/Assembler Paths
