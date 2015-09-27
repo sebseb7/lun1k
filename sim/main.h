@@ -28,9 +28,9 @@ uint16_t get_key_state( uint16_t key_mask );
 void *xmalloc (size_t nSize);
 void  xfree (void *pMem);
 
-void get_stick(uint8_t *x,uint8_t *y);
-
 #endif
+
+void get_stick(uint8_t *x,uint8_t *y);
 
 typedef void (*init_fun)(void);
 typedef void (*deinit_fun)(void);
