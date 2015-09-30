@@ -141,6 +141,8 @@ void registerAnimation(char * name,init_fun init,tick_fun tick, deinit_fun deini
 }
 
 static uint16_t key_press;
+static uint16_t key_dir;
+
 uint16_t get_key_press( uint16_t key_mask )
 {
 	key_mask &= key_press;                          // read key(s)
@@ -187,7 +189,7 @@ static int hatposition=SDL_HAT_CENTERED;
 
 int joy_is_up(void)
 {
-	if(hatposition&SDL_HAT_UP)
+	if((hatposition&SDL_HAT_UP)||(key_dir&KEY_UP))
 	{
 		return 1;
 	}
@@ -195,7 +197,7 @@ int joy_is_up(void)
 }
 int joy_is_down(void)
 {
-	if(hatposition&SDL_HAT_DOWN)
+	if((hatposition&SDL_HAT_DOWN)||(key_dir&KEY_DOWN))
 	{
 		return 1;
 	}
@@ -203,7 +205,7 @@ int joy_is_down(void)
 }
 int joy_is_left(void)
 {
-	if(hatposition&SDL_HAT_LEFT)
+	if((hatposition&SDL_HAT_LEFT)||(key_dir&KEY_LEFT))
 	{
 		return 1;
 	}
@@ -211,7 +213,7 @@ int joy_is_left(void)
 }
 int joy_is_right(void)
 {
-	if(hatposition&SDL_HAT_RIGHT)
+	if((hatposition&SDL_HAT_RIGHT)||(key_dir&KEY_RIGHT))
 	{
 		return 1;
 	}
@@ -275,6 +277,22 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 					hatposition = ev.jhat.value;
 					break;
 				case SDL_KEYUP:
+					switch(ev.key.keysym.sym) {
+						case SDLK_LEFT:
+							key_dir &= ~KEY_LEFT;
+							break;
+						case SDLK_RIGHT:
+							key_dir &= ~KEY_RIGHT;
+							break;
+						case SDLK_UP:
+							key_dir &= ~KEY_UP;
+							break;
+						case SDLK_DOWN:
+							key_dir &= ~KEY_DOWN;
+							break;
+
+						default: break;
+					}
 					break;
 				case SDL_KEYDOWN:
 					switch(ev.key.keysym.sym) {
@@ -302,9 +320,22 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 						case SDLK_4:
 							key_press |= KEY_STICK;
 							break;
+						case SDLK_LEFT:
+							key_dir |= KEY_LEFT;
+							break;
+						case SDLK_RIGHT:
+							key_dir |= KEY_RIGHT;
+							break;
+						case SDLK_UP:
+							key_dir |= KEY_UP;
+							break;
+						case SDLK_DOWN:
+							key_dir |= KEY_DOWN;
+							break;
 
 						default: break;
 					}
+					break;
 				default: 
 					printf("unknown type:%i\n",ev.type);
 					break;

@@ -17,6 +17,11 @@
 #define KEY_STICK (1<<2)
 #define KEY_B (1<<3)
 
+#define KEY_LEFT (1<<4)
+#define KEY_RIGHT (1<<5)
+#define KEY_UP (1<<6)
+#define KEY_DOWN (1<<7)
+
 uint16_t get_key_press( uint16_t key_mask );
 uint16_t get_key_state( uint16_t key_mask );
 
