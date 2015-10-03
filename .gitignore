@@ -6,6 +6,7 @@
 *.bin
 *.elf
 *.lst
+memory.map
 .DS_Store
 sim/*
 !sim/*.c

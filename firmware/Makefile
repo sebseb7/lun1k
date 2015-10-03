@@ -3,7 +3,7 @@ PROJECT=template
 
 LSCRIPT=core/stm32f4xx_flash.ld
 
-OPTIMIZATION = -O2
+OPTIMIZATION = -O3
 #OPTIMIZATION = 
 
 LUN1K_VERSION = 11
@@ -24,9 +24,9 @@ SRC=$(wildcard  *.c drivers/*.c ../libs/mcugui/*.c ../libs/*.c ../libs/zint/*.c 
 	../animations/interference.c \
 	../animations/plasma_bigsin.c \
 	../animations/notch.c \
-	../animations/tunnel.c \
-	../animations/lib/tunnel_tex.c \
-	../animations/tunnel_no_tex.c 
+#	../animations/tunnel.c \
+#	../animations/lib/tunnel_tex.c \
+#	../animations/tunnel_no_tex.c 
 #	../animations/fleatron.c \
 #	../animations/bzr.c \
 #	../animations/voxel.c \
@@ -72,7 +72,8 @@ GCFLAGS+= -ISTM32F4_drivers/inc
 
 LDFLAGS = -mcpu=cortex-m4 -mthumb $(OPTIMIZATION) -T$(LSCRIPT) 
 LDFLAGS+= -mfpu=fpv4-sp-d16 -mfloat-abi=hard -falign-functions=16
-LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc -specs=nano.specs -Wl,--gc-section
+#LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc -specs=nano.specs -Wl,--gc-section
+LDFLAGS+= -LSTM32F4_drivers/build -lSTM32F4xx_drivers -lm -lnosys -lc -Wl,--gc-section -Wl,-Map,memory.map 
 
 
 #  Compiler/Assembler Paths

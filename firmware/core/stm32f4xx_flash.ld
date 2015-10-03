@@ -37,7 +37,7 @@ ENTRY(Reset_Handler)
 _estack = 0x10010000;    /* end of 64K CCMRAM (which gives 1-4% more frames in bzr2) */ 
 
 /* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0x1F000;      /* required amount of heap  */
+_Min_Heap_Size = 0x1e000;      /* required amount of heap  */
 _Min_Stack_Size = 0x3E00; /* required amount of stack */
 
 /* Specify the memory areas */
