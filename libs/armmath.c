@@ -64,9 +64,9 @@ float pythagorasf( float side1, float side2 )
 
 uint16_t randr(uint16_t start,uint16_t end)
 {
-	int n = end-start;
-	int x;
+	const int n = end-start;
 	const int R_MAX = (RAND_MAX / n) * n;
+	int x;
 
 	do
 	{
