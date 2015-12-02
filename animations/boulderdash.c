@@ -7,31 +7,33 @@
 #include "libs/mcugui/text.h"
 
 
-int getkey(int key)
+static void getjoy(void)
 {
 	uint8_t joy_x = 128;
 	uint8_t joy_y = 128;
 
 	get_stick(&joy_x,&joy_y);
 
+	int key;
+
 	if(joy_y < 70)
 	{
-		if(key==0)return 1;
+		if(key==0)return ;
 	}
 	else if(joy_y > 140)
 	{
-		if(key==2)return 1;
+		if(key==2)return ;
 	}
 
 	if(joy_x < 70)
 	{
-		if(key==3)return 1;
+		if(key==3)return ;
 	}
 	else if(joy_x > 140)
 	{
-		if(key==1)return 1;
+		if(key==1)return ;
 	}
-	return 0;
+	return ;
 }
 
 
@@ -55,13 +57,60 @@ static void deinit(void)
 static int rendertick;
 static int x_offset=0;
 
+static int keymap;
+static int releasemap;
+static int ackmap;
+
+int getkey(int key)
+{
+	if((keymap >> key) & 1)
+	{
+		ackmap |= (1 << key);
+		return 1;
+	}
+	return 0;
+}
+
+void release_upped_keys(void)
+{
+	for(int i = 0; i < 8;i++)
+	{
+		if(releasemap & (1<<i))
+		{
+			keymap &= ~(1 << i);
+		}
+	}
+	releasemap = 0;
+}
+static void keyup(int key)
+{
+	if(ackmap & (1<<key))
+	{
+		keymap &= ~(1 << key);
+	}
+	else
+	{
+		releasemap |= (1 << key);
+	}
+}
+
+static void keydown(int key)
+{
+	keymap = 1 << key;
+	ackmap &= ~(1 << key);
+}
+
+
 static uint8_t tick(void) {
+
+	getjoy();
 
 	a++;
 	if(a > 2)
 	{
 		a=0;
 		bd_game_process(&bd_game,getkey);
+		release_upped_keys();
 	}
 
 	int zoom=5;
