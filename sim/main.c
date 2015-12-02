@@ -284,15 +284,19 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 					switch(ev.key.keysym.sym) {
 						case SDLK_LEFT:
 							key_dir &= ~KEY_LEFT;
+							joy_x=128;
 							break;
 						case SDLK_RIGHT:
+							joy_x=128;
 							key_dir &= ~KEY_RIGHT;
 							break;
 						case SDLK_UP:
+							joy_y=128;
 							key_dir &= ~KEY_UP;
 							break;
 						case SDLK_DOWN:
 							key_dir &= ~KEY_DOWN;
+							joy_y=128;
 							break;
 
 						default: break;
@@ -326,15 +330,19 @@ int main(int argc __attribute__((__unused__)), char *argv[] __attribute__((__unu
 							break;
 						case SDLK_LEFT:
 							key_dir |= KEY_LEFT;
+							joy_x=0;
 							break;
 						case SDLK_RIGHT:
 							key_dir |= KEY_RIGHT;
+							joy_x=255;
 							break;
 						case SDLK_UP:
 							key_dir |= KEY_UP;
+							joy_y=0;
 							break;
 						case SDLK_DOWN:
 							key_dir |= KEY_DOWN;
+							joy_y=255;
 							break;
 
 						default: break;

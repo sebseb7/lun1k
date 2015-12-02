@@ -29,8 +29,8 @@ endif
 SOURCES=$(wildcard ../animations/*.c)
 BINARIES=$(SOURCES:../animations/%.c=%$(BINEXT))
 
-LIB_SOURCES=$(wildcard ../libs/*.c ../libs/mcugui/*.c ../animations/lib/*.c ../libs/zint/*.c hal/src/*.c)
-LIB_HEADERS=$(wildcard ../libs/*.h ../libs/mcugui/*.c ../animations/lib/*.h)
+LIB_SOURCES=$(wildcard ../libs/*.c ../libs/mcugui/*.c ../animations/bd/*.c ../animations/lib/*.c ../libs/zint/*.c hal/src/*.c)
+LIB_HEADERS=$(wildcard ../libs/*.h ../libs/mcugui/*.c ../animations/bd/*.h ../animations/lib/*.h)
 
 all: $(BINARIES) _all_animations
 
