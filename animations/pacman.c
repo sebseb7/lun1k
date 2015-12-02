@@ -384,10 +384,20 @@ static uint8_t tick(void) {
 
 	if(pupmode>20)
 	{
-		set_block(bot1.pos.x,bot1.pos.y,64,32,148);
-		set_block(bot2.pos.x,bot2.pos.y,64,32,148);
-		set_block(bot3.pos.x,bot3.pos.y,64,32,148);
-		set_block(bot4.pos.x,bot4.pos.y,64,32,148);
+		if(pupmode%2)
+		{
+			set_block(bot1.pos.x,bot1.pos.y,64,32,148);
+			set_block(bot2.pos.x,bot2.pos.y,64,32,148);
+			set_block(bot3.pos.x,bot3.pos.y,64,32,148);
+			set_block(bot4.pos.x,bot4.pos.y,64,32,148);
+		}
+		else
+		{
+			set_block(bot1.pos.x,bot1.pos.y,32,64,148);
+			set_block(bot2.pos.x,bot2.pos.y,32,64,148);
+			set_block(bot3.pos.x,bot3.pos.y,32,64,148);
+			set_block(bot4.pos.x,bot4.pos.y,32,64,148);
+		}
 	}
 	else if(pupmode)
 	{
