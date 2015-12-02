@@ -359,18 +359,18 @@ static uint8_t tick(void) {
 
 	x++;
 
-	lcdFillRGB(0,0,0);
+	lcdFillRGB2(0,0,0);
 
 	for(int x =0;x<21;x++)
 		for(int y=0;y<21;y++)
 		{
 			if(field_dots[x][y]==1)
 			{
-				set_block(x,y,32,32,32);
+				set_block(x,y,90,90,90);
 			}
 			if(field_pups[x][y]==1)
 			{
-				set_block(x,y,64,64,64);
+				set_block(x,y,164,164,164);
 			}
 			if(initial_field[x][y]==0)
 			{
@@ -445,8 +445,12 @@ static uint8_t tick(void) {
 
 	if((x%5) == 0)
 	{
-		
-		if(joy_is_up())
+		uint8_t joy_x = 128;
+		uint8_t joy_y = 128;
+
+		get_stick(&joy_x,&joy_y);
+
+		if(joy_y < 70)
 		{
 			if(check(player.pos,2))
 			{
@@ -455,7 +459,7 @@ static uint8_t tick(void) {
 				player.pos = target;
 			}
 		}
-		if(joy_is_down())
+		else if(joy_y > 140)
 		{
 			if(check(player.pos,0))
 			{
@@ -464,7 +468,8 @@ static uint8_t tick(void) {
 				player.pos = target;
 			}
 		}
-		if(joy_is_left())
+
+		if(joy_x < 70)
 		{
 			if(check(player.pos,3))
 			{
@@ -473,7 +478,7 @@ static uint8_t tick(void) {
 				player.pos = target;
 			}
 		}
-		if(joy_is_right())
+		else if(joy_x > 140)
 		{
 			if(check(player.pos,1))
 			{
@@ -482,7 +487,7 @@ static uint8_t tick(void) {
 				player.pos = target;
 			}
 		}
-
+		
 
 
 	}
@@ -508,6 +513,6 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-	registerAnimation("PacMan",init,tick,deinit, 0, 3000);
+	registerAnimation("PacMan",init,tick,deinit, 200, 3000);
 }
 
