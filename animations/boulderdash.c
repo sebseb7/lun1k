@@ -4,6 +4,8 @@
 
 
 #include "bd/bd_game.h"
+#include "libs/mcugui/text.h"
+
 
 int getkey(int key)
 {
@@ -35,13 +37,11 @@ int getkey(int key)
 
 
 static struct bd_game_struct_t* bd_game;
-static unsigned int* pixelbuffer;
 static int a;
 
 static void init(void)
 {
 	bd_game = bd_game_initialize(0,0);
-	pixelbuffer = malloc(CAVE_WIDTH*(INFO_HEIGHT+CAVE_HEIGHT)*sizeof(uint32_t));
 
 
 }
@@ -49,42 +49,105 @@ static void init(void)
 static void deinit(void)
 {
 	free(bd_game);
-	free(pixelbuffer);
 }
 
+
+static int rendertick;
+static int x_offset=0;
 
 static uint8_t tick(void) {
 
 	a++;
-	if(a < 3) return 0;
-
-	a=0;
-
-	bd_game_process(&bd_game,getkey);
-	bd_game_render(bd_game,pixelbuffer,1);
-
-	int zoom=3;
-
-	for(int y = 0; y < (INFO_HEIGHT+CAVE_HEIGHT); y++) 
+	if(a > 2)
 	{
-		for(int x = 0; x < CAVE_WIDTH; x++) 
+		a=0;
+		bd_game_process(&bd_game,getkey);
+	}
+
+	int zoom=5;
+
+
+/*	if(bd_game->Tick < BD_UNCOVER_LOOP)
+	{
+		for(int line=0;line < CAVE_HEIGHT;line++)
 		{
-			int col = pixelbuffer[((y)*CAVE_WIDTH)+x];
-			uint8_t red = (col&0x00ff0000)>>16;
-			uint8_t green = (col&0x0000ff00)>>8;
-			uint8_t blue = (col&0x000000ff)>>0;
+			int pos = rand()%CAVE_WIDTH;
+			bd_game->covered[pos][line] = 0;
+			pos = rand()%CAVE_WIDTH;
+			bd_game->covered[pos][line] = 0;
+			pos = rand()%CAVE_WIDTH;
+			bd_game->covered[pos][line] = 0;
+			pos = rand()%CAVE_WIDTH;
+			bd_game.covered[pos][line] = 0;
+		}
+	}
+*/
+
+	//cave part:
+
+	rendertick++;
+	rendertick++;
+	
+	if(bd_game->Player_X > 32)
+	{
+		x_offset = 15;
+	}
+	else if(bd_game->Player_X < 6)
+	{
+		x_offset = 0;
+	}
+	else if(bd_game->Player_X-x_offset < 6)
+	{
+		if(x_offset > 0)x_offset--;
+	}
+	else if(bd_game->Player_X-x_offset > 17)
+	{
+		if(x_offset < 15)x_offset++;
+	}
+
+	for(int y = 0; y < CAVE_HEIGHT; y++) 
+	{
+		for(int x = 0; x < 25 /*CAVE_WIDTH*/; x++) 
+		{
+			int field = bd_game->cavemap[x+x_offset][y];
+
+		/*	if(bd_game->Tick < BD_START_DELAY)
+				if(field == BD_INBOX)
+					if(bd_game->Tick % 20 < 10)
+						field = BD_STEELWALL;
 
 
+			if(bd_game->Tick < BD_UNCOVER_LOOP)
+			{
+				if(bd_game->covered[x][y])
+				{
+					field=BD_STEELWALL;
+				}
+			}
+	*/
+			int colors[3];	
+			get_colors(field,rendertick,colors);
+			
 			for(int a = 0; a < zoom;a++)
 			{
 				for(int b = 0;b < zoom;b++)
 				{
-					setLedXY(x*zoom+a,y*zoom+b,red,green,blue);
+					if(x*zoom+a < 128)
+						if(y*zoom+b < 128)
+							setLedXY(x*zoom+a,y*zoom+b,colors[0],colors[1],colors[2]);
 				}
 			}
+
 		}
 	}
 
+	fill_8x6(10,110, 3,0,0,0);
+	if( bd_game->DiamondsRequired - bd_game->DiamondsCollected > 0)
+		draw_number_8x6(10,110,bd_game->DiamondsRequired - bd_game->DiamondsCollected,3,32,200,10,200);
+	
+	fill_8x6(100,110, 3,0,0,0);
+	if((bd_game->CaveTime - (bd_game->Tick / 8)) > 0)
+		draw_number_8x6(100,110,bd_game->CaveTime - (bd_game->Tick / 8),3,32,255,255,255);
 
 
 	return 0;
@@ -93,7 +156,7 @@ static uint8_t tick(void) {
 
 static void constructor(void) CONSTRUCTOR_ATTRIBUTES
 void constructor(void) {
-	registerAnimation("Boulderdash",init,tick,deinit, 130, 3000);
+	registerAnimation("Boulderdash",init,tick,deinit, 130, 30000);
 }
 
 
