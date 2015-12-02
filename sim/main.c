@@ -171,6 +171,10 @@ uint32_t getSysTick(void)
 }
 
 
+void lcdFillRGB2(uint8_t r,uint8_t g , uint8_t b)
+{
+	lcdFillRGB(r,g,b);
+}
 void lcdFillRGB(uint8_t r,uint8_t g , uint8_t b)
 {
 	int x, y;
