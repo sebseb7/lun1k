@@ -6,57 +6,6 @@
 #include "bd/bd_game.h"
 #include "libs/mcugui/text.h"
 
-
-static void getjoy(void)
-{
-	uint8_t joy_x = 128;
-	uint8_t joy_y = 128;
-
-	get_stick(&joy_x,&joy_y);
-
-	int key;
-
-	if(joy_y < 70)
-	{
-		if(key==0)return ;
-	}
-	else if(joy_y > 140)
-	{
-		if(key==2)return ;
-	}
-
-	if(joy_x < 70)
-	{
-		if(key==3)return ;
-	}
-	else if(joy_x > 140)
-	{
-		if(key==1)return ;
-	}
-	return ;
-}
-
-
-
-static struct bd_game_struct_t* bd_game;
-static int a;
-
-static void init(void)
-{
-	bd_game = bd_game_initialize(0,0);
-
-
-}
-
-static void deinit(void)
-{
-	free(bd_game);
-}
-
-
-static int rendertick;
-static int x_offset=0;
-
 static int keymap;
 static int releasemap;
 static int ackmap;
@@ -99,6 +48,64 @@ static void keydown(int key)
 	keymap = 1 << key;
 	ackmap &= ~(1 << key);
 }
+
+static void getjoy(void)
+{
+	uint8_t joy_x = 128;
+	uint8_t joy_y = 128;
+
+	get_stick(&joy_x,&joy_y);
+
+	if(joy_y < 70)
+	{
+		keydown(0);
+	}
+	else if(joy_y > 140)
+	{
+		keydown(2);
+	}
+	else
+	{
+		keyup(0);
+		keyup(2);
+	}
+
+	if(joy_x < 70)
+	{
+		keydown(3);
+	}
+	else if(joy_x > 140)
+	{
+		keydown(1);
+	}
+	else
+	{
+		keyup(1);
+		keyup(3);
+	}
+}
+
+
+
+static struct bd_game_struct_t* bd_game;
+static int a;
+
+static void init(void)
+{
+	bd_game = bd_game_initialize(0,0);
+
+
+}
+
+static void deinit(void)
+{
+	free(bd_game);
+}
+
+
+static int rendertick;
+static int x_offset=0;
+
 
 
 static uint8_t tick(void) {
