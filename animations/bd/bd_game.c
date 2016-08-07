@@ -37,6 +37,7 @@ struct bd_game_struct_t* bd_game_initialize(int level,int difficulty)
 	bd_game->SlimeSeed2=0;
 	bd_game->DiamondsCollected=0;
 	bd_game->Player_X=0;
+	bd_game->Player_Y=0;
 	bd_game->Cave=level;
 	bd_game->Difficulty=difficulty;
 	bd_game->DiamonValue=cavedata->DiamonValue;
@@ -267,6 +268,7 @@ void bd_game_process(struct bd_game_struct_t** bd_game_ptr,int getkey(int))
 					break;
 				case BD_INBOX:
 					bd_game->Player_X=x;
+					bd_game->Player_Y=y;
 					if(bd_game->Tick == BD_START_DELAY)
 						new_cavemap[x][y]=BD_ROCKFORD;
 
@@ -318,6 +320,7 @@ void bd_game_process(struct bd_game_struct_t** bd_game_ptr,int getkey(int))
 								new_cavemap[x+move_x(direction)][y+move_y(direction)]=BD_ROCKFORD;
 								new_cavemap[x][y]=BD_SPACE;
 								bd_game->Player_X = x+move_x(direction);
+								bd_game->Player_Y = y+move_y(direction);
 							}
 							if(
 									new_cavemap[x+move_x(direction)][y+move_y(direction)] == BD_OUTBOXactive
@@ -326,6 +329,7 @@ void bd_game_process(struct bd_game_struct_t** bd_game_ptr,int getkey(int))
 								new_cavemap[x+move_x(direction)][y+move_y(direction)]=BD_ROCKFORD;
 								new_cavemap[x][y]=BD_SPACE;
 								bd_game->Player_X = x+move_x(direction);
+								bd_game->Player_Y = y+move_y(direction);
 								bd_game->Won=1;
 							}
 							else if(
@@ -336,6 +340,7 @@ void bd_game_process(struct bd_game_struct_t** bd_game_ptr,int getkey(int))
 								new_cavemap[x+move_x(direction)][y+move_y(direction)] = BD_ROCKFORD;
 								new_cavemap[x][y] = BD_SPACE;
 								bd_game->Player_X = x+move_x(direction);
+								bd_game->Player_Y = y+move_y(direction);
 								bd_game->DiamondsCollected++;
 							}
 							else if(
@@ -350,6 +355,7 @@ void bd_game_process(struct bd_game_struct_t** bd_game_ptr,int getkey(int))
 										new_cavemap[x+move_x(direction)*2][y] = BD_BOULDER;
 										new_cavemap[x+move_x(direction)][y] = BD_ROCKFORD;
 										bd_game->Player_X = x+move_x(direction);
+										bd_game->Player_Y = y+move_y(direction);
 										new_cavemap[x][y]=BD_SPACE;
 									}
 								}
