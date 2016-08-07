@@ -105,6 +105,7 @@ static void deinit(void)
 
 static int rendertick;
 static int x_offset=0;
+static int y_offset=0;
 
 
 
@@ -120,7 +121,7 @@ static uint8_t tick(void) {
 		release_upped_keys();
 	}
 
-	int zoom=5;
+	int zoom=8;
 
 
 /*	if(bd_game->Tick < BD_UNCOVER_LOOP)
@@ -146,7 +147,7 @@ static uint8_t tick(void) {
 	
 	if(bd_game->Player_X > 32)
 	{
-		x_offset = 15;
+		x_offset = 40-16;
 	}
 	else if(bd_game->Player_X < 6)
 	{
@@ -156,16 +157,32 @@ static uint8_t tick(void) {
 	{
 		if(x_offset > 0)x_offset--;
 	}
-	else if(bd_game->Player_X-x_offset > 17)
+	else if(bd_game->Player_X-x_offset > (40-16))
 	{
-		if(x_offset < 15)x_offset++;
+		if(x_offset <= (40-16))x_offset++;
+	}
+	if(bd_game->Player_Y > 14)
+	{
+		y_offset = 22-16;
+	}
+	else if(bd_game->Player_Y < 6)
+	{
+		y_offset = 0;
+	}
+	else if(bd_game->Player_Y-y_offset < 6)
+	{
+		if(y_offset > 0)y_offset--;
+	}
+	else if(bd_game->Player_Y-y_offset > (22-16))
+	{
+		if(y_offset <= (22-16))y_offset++;
 	}
 
-	for(int y = 0; y < CAVE_HEIGHT; y++) 
+	for(int y = 0; y < 16 /*CAVE_HEIGHT*/; y++) 
 	{
-		for(int x = 0; x < 25 /*CAVE_WIDTH*/; x++) 
+		for(int x = 0; x < 16 /*CAVE_WIDTH*/; x++) 
 		{
-			int field = bd_game->cavemap[x+x_offset][y];
+			int field = bd_game->cavemap[x+x_offset][y+y_offset];
 
 		/*	if(bd_game->Tick < BD_START_DELAY)
 				if(field == BD_INBOX)
