@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.2">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -18569,6 +18569,8 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <part name="D3" library="diode" deviceset="DIODE-" device="SOD323-R"/>
 <part name="Q3" library="microbuilder" deviceset="MOSFET-P" device=""/>
 <part name="R26" library="rcl" deviceset="R-EU_" device="R0402" value="15k"/>
+<part name="C27" library="SparkFun-Capacitors" deviceset="CAP" device="0402-CAP" value="22pF"/>
+<part name="GND46" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -18849,6 +18851,11 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <instance part="D3" gate="G$1" x="53.34" y="76.2"/>
 <instance part="Q3" gate="G$1" x="162.56" y="-17.78"/>
 <instance part="R26" gate="G$1" x="152.4" y="-10.16" rot="R90"/>
+<instance part="C27" gate="G$1" x="152.4" y="228.6" smashed="yes" rot="R180">
+<attribute name="NAME" x="149.479" y="222.504" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="157.099" y="222.504" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="GND46" gate="1" x="152.4" y="215.9"/>
 </instances>
 <busses>
 </busses>
@@ -19204,6 +19211,11 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <segment>
 <pinref part="SW4" gate="G$1" pin="2"/>
 <pinref part="GND44" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C27" gate="G$1" pin="1"/>
+<wire x1="152.4" y1="223.52" x2="152.4" y2="218.44" width="0.1524" layer="91"/>
+<pinref part="GND46" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="+5V" class="1">
@@ -19572,11 +19584,15 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <segment>
 <wire x1="139.7" y1="231.14" x2="139.7" y2="233.68" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="233.68" x2="139.7" y2="236.22" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="233.68" x2="157.48" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="233.68" x2="152.4" y2="233.68" width="0.1524" layer="91"/>
 <junction x="139.7" y="233.68"/>
 <label x="149.86" y="233.68" size="1.778" layer="95"/>
 <pinref part="R7" gate="G$1" pin="2"/>
 <pinref part="R6" gate="G$1" pin="1"/>
+<pinref part="C27" gate="G$1" pin="2"/>
+<wire x1="152.4" y1="233.68" x2="157.48" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="231.14" x2="152.4" y2="233.68" width="0.1524" layer="91"/>
+<junction x="152.4" y="233.68"/>
 </segment>
 <segment>
 <pinref part="IC3" gate="G$1" pin="PA3"/>
